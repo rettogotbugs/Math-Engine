@@ -1,0 +1,256 @@
+import { MathTool } from "../mathTools";
+import { numberSystemSolver } from "../solvers/numberSystemSolver";
+import { solveCombinatorics } from "../solvers/advancedSolver";
+
+export const arithmeticTools: MathTool[] = [
+  {
+    id: "prime_checker",
+    name: "Prime Number Checker",
+    category: "Arithmetic & Number System",
+    description: "Check if a given number is prime.",
+    inputs: [
+      { id: "n", label: "Number", type: "number", placeholder: "17" },
+    ],
+    calculate: (values) => {
+      const n = parseInt(values.n);
+      if (isNaN(n)) return { result: "Invalid input" };
+      return numberSystemSolver.isPrime(n);
+    },
+  },
+  {
+    id: "factors_multiples",
+    name: "Factors & Multiples",
+    category: "Arithmetic & Number System",
+    description: "Find factors and first few multiples of a number.",
+    inputs: [
+      { id: "n", label: "Number", type: "number", placeholder: "12" },
+      { id: "count", label: "Multiples Count", type: "number", placeholder: "5" },
+    ],
+    calculate: (values) => {
+      const n = parseInt(values.n);
+      const count = parseInt(values.count) || 5;
+      if (isNaN(n)) return { result: "Invalid input" };
+      
+      const factors = [];
+      for (let i = 1; i <= Math.abs(n); i++) {
+        if (n % i === 0) factors.push(i);
+      }
+      
+      const multiples = [];
+      for (let i = 1; i <= count; i++) {
+        multiples.push(n * i);
+      }
+      
+      return {
+        result: `Factors: ${factors.join(", ")} | Multiples: ${multiples.join(", ")}`,
+        steps: [
+          `Find factors of ${n}: Numbers that divide ${n} evenly.`,
+          `Factors: ${factors.join(", ")}`,
+          `Find first ${count} multiples of ${n}: Multiply ${n} by 1, 2, ..., ${count}.`,
+          `Multiples: ${multiples.join(", ")}`
+        ]
+      };
+    },
+  },
+  {
+    id: "factorial",
+    name: "Factorial Calculator",
+    category: "Arithmetic & Number System",
+    description: "Calculate the factorial of a non-negative integer (n!).",
+    inputs: [
+      { id: "n", label: "Number (n)", type: "number", placeholder: "5" },
+    ],
+    calculate: (values) => {
+      const n = parseInt(values.n);
+      if (isNaN(n)) return { result: "Invalid input" };
+      return numberSystemSolver.factorial(n);
+    },
+  },
+  {
+    id: "divisibility_rules",
+    name: "Divisibility Rules Checker",
+    category: "Arithmetic & Number System",
+    description: "Check if a number is divisible by 2, 3, 4, 5, 6, 8, 9, 10.",
+    inputs: [
+      { id: "n", label: "Number", type: "number", placeholder: "120" },
+    ],
+    calculate: (values) => {
+      const n = parseInt(values.n);
+      if (isNaN(n)) return { result: "Invalid input" };
+      
+      const rules = [2, 3, 4, 5, 6, 8, 9, 10];
+      const divisibleBy = rules.filter(d => n % d === 0);
+      
+      return {
+        result: `Divisible by: ${divisibleBy.join(", ")}`,
+        steps: [
+          `Check divisibility of ${n} by common numbers:`,
+          ...rules.map(d => `${n} ÷ ${d} = ${n / d} ${n % d === 0 ? '(Yes)' : '(No)'}`)
+        ]
+      };
+    },
+  },
+  {
+    id: "base_converter",
+    name: "Base Converter",
+    category: "Arithmetic & Number System",
+    description: "Convert a number from one base to another (e.g., Binary to Decimal).",
+    inputs: [
+      { id: "num", label: "Number", type: "text", placeholder: "1010" },
+      { id: "fromBase", label: "From Base", type: "number", placeholder: "2" },
+      { id: "toBase", label: "To Base", type: "number", placeholder: "10" },
+    ],
+    calculate: (values) => {
+      const fromBase = parseInt(values.fromBase);
+      const toBase = parseInt(values.toBase);
+      if (isNaN(fromBase) || isNaN(toBase) || !values.num) return { result: "Invalid input" };
+      return numberSystemSolver.baseConverter(values.num, fromBase, toBase);
+    },
+  },
+  {
+    id: "combinatorics",
+    name: "Combinatorics (nCr / nPr)",
+    category: "Arithmetic & Number System",
+    description: "Calculate Permutations and Combinations.",
+    inputs: [
+      { id: "n", label: "Total items (n)", type: "number", placeholder: "5" },
+      {
+        id: "op",
+        label: "Operation",
+        type: "select",
+        options: [
+          { label: "Combination (nCr)", value: "nCr" },
+          { label: "Permutation (nPr)", value: "nPr" },
+        ],
+      },
+      {
+        id: "r",
+        label: "Selected items (r)",
+        type: "number",
+        placeholder: "2",
+      },
+    ],
+    calculate: (values) => {
+      const n = parseInt(values.n);
+      const r = parseInt(values.r);
+      if (isNaN(n) || isNaN(r)) return { result: "Invalid input" };
+      return solveCombinatorics(n, r, values.op as "nCr" | "nPr");
+    },
+  },
+  {
+    id: "perfect_square",
+    name: "Perfect Square Checker",
+    category: "Arithmetic & Number System",
+    description: "Check if a number is a perfect square.",
+    inputs: [
+      { id: "n", label: "Number", type: "number", placeholder: "e.g., 16" },
+    ],
+    calculate: (values) => {
+      const n = parseInt(values.n);
+      if (isNaN(n) || n < 0) return { result: "Invalid input (n >= 0)" };
+      const root = Math.sqrt(n);
+      const isPerfect = Number.isInteger(root);
+      return {
+        result: isPerfect ? "Yes, it is a perfect square" : "No, it is not a perfect square",
+        steps: [
+          `Find the square root of ${n}`,
+          `√${n} = ${root}`,
+          isPerfect ? `${root} is an integer, so ${n} is a perfect square.` : `${root} is not an integer, so ${n} is not a perfect square.`
+        ]
+      };
+    },
+  },
+  {
+    id: "logarithm_calc",
+    name: "Logarithm Calculator",
+    category: "Arithmetic & Number System",
+    description: "Calculate the logarithm of a number to a specific base.",
+    inputs: [
+      { id: "num", label: "Number (x)", type: "number", placeholder: "e.g., 100" },
+      { id: "base", label: "Base (b)", type: "number", placeholder: "e.g., 10" },
+    ],
+    calculate: (values) => {
+      const num = parseFloat(values.num);
+      const base = parseFloat(values.base);
+      if (isNaN(num) || isNaN(base) || num <= 0 || base <= 0 || base === 1) return { result: "Invalid input" };
+      
+      const result = Math.log(num) / Math.log(base);
+      
+      return {
+        result: result.toFixed(4),
+        steps: [
+          `Calculate log base ${base} of ${num}`,
+          `Formula: log_b(x) = ln(x) / ln(b)`,
+          `log_${base}(${num}) = ln(${num}) / ln(${base})`,
+          `log_${base}(${num}) = ${Math.log(num).toFixed(4)} / ${Math.log(base).toFixed(4)}`,
+          `Result: ${result.toFixed(4)}`
+        ]
+      };
+    },
+  },
+  {
+    id: "perfect_cube",
+    name: "Perfect Cube Checker",
+    category: "Arithmetic & Number System",
+    description: "Check if a number is a perfect cube.",
+    inputs: [
+      { id: "n", label: "Number", type: "number", placeholder: "e.g., 27" },
+    ],
+    calculate: (values) => {
+      const n = parseInt(values.n);
+      if (isNaN(n)) return { result: "Invalid input" };
+      const root = Math.cbrt(n);
+      const isPerfect = Number.isInteger(root);
+      return {
+        result: isPerfect ? "Yes, it is a perfect cube" : "No, it is not a perfect cube",
+        steps: [
+          `Find the cube root of ${n}`,
+          `∛${n} = ${root}`,
+          isPerfect ? `${root} is an integer, so ${n} is a perfect cube.` : `${root} is not an integer, so ${n} is not a perfect cube.`
+        ]
+      };
+    },
+  },
+  {
+    id: "square_root",
+    name: "Square Root Calculator",
+    category: "Arithmetic & Number System",
+    description: "Calculate the square root of a number.",
+    inputs: [
+      { id: "n", label: "Number", type: "number", placeholder: "e.g., 25" },
+    ],
+    calculate: (values) => {
+      const n = parseFloat(values.n);
+      if (isNaN(n) || n < 0) return { result: "Invalid input (n >= 0)" };
+      const root = Math.sqrt(n);
+      return {
+        result: root.toString(),
+        steps: [
+          `Calculate √${n}`,
+          `Result: ${root}`
+        ]
+      };
+    },
+  },
+  {
+    id: "cube_root",
+    name: "Cube Root Calculator",
+    category: "Arithmetic & Number System",
+    description: "Calculate the cube root of a number.",
+    inputs: [
+      { id: "n", label: "Number", type: "number", placeholder: "e.g., 64" },
+    ],
+    calculate: (values) => {
+      const n = parseFloat(values.n);
+      if (isNaN(n)) return { result: "Invalid input" };
+      const root = Math.cbrt(n);
+      return {
+        result: root.toString(),
+        steps: [
+          `Calculate ∛${n}`,
+          `Result: ${root}`
+        ]
+      };
+    },
+  }
+];

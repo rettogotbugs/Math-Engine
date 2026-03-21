@@ -1,0 +1,5 @@
+{
+  "name": "Math Engine",
+  "description": "A fast, clean, non-AI math-solving website with formulas, logic, and step-by-step calculations.",
+  "requestFramePermissions": []
+}
