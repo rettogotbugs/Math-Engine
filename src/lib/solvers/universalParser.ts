@@ -7,10 +7,76 @@ import {
   solveMatrixOperations,
   solveVectorOperations,
 } from "./advancedSolver";
+import * as math from "mathjs";
+import React from "react";
+import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from "recharts";
 
 export const universalParser = {
   parseAndSolve: (input: string) => {
     const trimmed = input.trim().toLowerCase();
+
+    // Check for Data Input Mode (list of numbers)
+    const isNumberList = /^[-0-9.,\s]+$/.test(trimmed) && trimmed.includes(",");
+    if (isNumberList) {
+      const data = trimmed.split(",").map(n => parseFloat(n.trim())).filter(n => !isNaN(n));
+      if (data.length >= 2) {
+        const mean = math.mean(data);
+        const median = math.median(data);
+        
+        let modeStr = "";
+        try {
+          const mode = math.mode(data);
+          modeStr = mode.join(", ");
+        } catch (e) {
+          modeStr = "N/A";
+        }
+
+        const sum = math.sum(data);
+        
+        const chartData = data.map((val, i) => ({ name: `Item ${i+1}`, value: val }));
+        
+        const resultNode = React.createElement(
+          "div",
+          { className: "space-y-4 w-full" },
+          React.createElement("div", { className: "grid grid-cols-2 md:grid-cols-4 gap-4" },
+            React.createElement("div", { className: "bg-white/5 p-3 rounded-xl" }, 
+              React.createElement("div", { className: "text-xs text-zinc-400 uppercase" }, "Count"),
+              React.createElement("div", { className: "text-xl font-bold text-white" }, data.length)
+            ),
+            React.createElement("div", { className: "bg-white/5 p-3 rounded-xl" }, 
+              React.createElement("div", { className: "text-xs text-zinc-400 uppercase" }, "Sum"),
+              React.createElement("div", { className: "text-xl font-bold text-white" }, sum)
+            ),
+            React.createElement("div", { className: "bg-white/5 p-3 rounded-xl" }, 
+              React.createElement("div", { className: "text-xs text-zinc-400 uppercase" }, "Mean"),
+              React.createElement("div", { className: "text-xl font-bold text-white" }, mean.toFixed(2))
+            ),
+            React.createElement("div", { className: "bg-white/5 p-3 rounded-xl" }, 
+              React.createElement("div", { className: "text-xs text-zinc-400 uppercase" }, "Median"),
+              React.createElement("div", { className: "text-xl font-bold text-white" }, median)
+            )
+          ),
+          React.createElement("div", { className: "h-48 w-full mt-4" },
+            React.createElement(ResponsiveContainer, { width: "100%", height: "100%" },
+              React.createElement(BarChart, { data: chartData },
+                React.createElement(XAxis, { dataKey: "name", hide: true }),
+                React.createElement(YAxis, { hide: true }),
+                React.createElement(Tooltip, { contentStyle: { backgroundColor: '#18181b', border: 'none', borderRadius: '8px', color: '#fff' } }),
+                React.createElement(Bar, { dataKey: "value", fill: "#818cf8", radius: [4, 4, 0, 0] })
+              )
+            )
+          )
+        );
+
+        return {
+          result: resultNode,
+          steps: [
+            `Detected data set: [${data.join(", ")}]`,
+            `Calculated statistics and generated visualization.`
+          ]
+        };
+      }
+    }
 
     // Check for differentiation
     if (trimmed.startsWith("differentiate") || trimmed.startsWith("d/dx")) {
@@ -49,9 +115,14 @@ export const universalParser = {
       return trigSolver.evaluateTrig(func, angle, unit);
     }
 
-    // Check for linear equations
+    // Check for linear/quadratic equations
     if (trimmed.includes("=")) {
-      return algebraSolver.solveLinear(trimmed);
+      return algebraSolver.solveEquation(trimmed);
+    }
+
+    // Check for inequalities
+    if (trimmed.match(/(<=|>=|<|>)/)) {
+      return algebraSolver.solveInequality(trimmed);
     }
 
     // Check for LCM/GCD

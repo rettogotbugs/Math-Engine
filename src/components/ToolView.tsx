@@ -1,5 +1,5 @@
 import { ArrowLeft, Copy, Check, Star, RefreshCw, Play, AlertCircle, ChevronRight } from "lucide-react";
-import { useState } from "react";
+import React, { useState } from "react";
 import { MathTool, ToolResult, mathTools } from "../lib/mathTools";
 import { useAppStore } from "../lib/store";
 import { cn } from "../lib/utils";
@@ -47,8 +47,11 @@ export function ToolView({ tool, onBack, onSelectTool }: ToolViewProps) {
     try {
       const res = tool.calculate(inputs);
       
-      if (res.result.toString().toLowerCase().includes("error") || res.result.toString().toLowerCase().includes("invalid")) {
-        setError(res.result.toString());
+      const isError = !React.isValidElement(res.result) && 
+        (String(res.result).toLowerCase().includes("error") || String(res.result).toLowerCase().includes("invalid"));
+
+      if (isError) {
+        setError(String(res.result));
         setResult(null);
       } else {
         setResult(res);
@@ -57,7 +60,7 @@ export function ToolView({ tool, onBack, onSelectTool }: ToolViewProps) {
           toolId: tool.id,
           toolName: tool.name,
           inputs,
-          result: String(res.result),
+          result: React.isValidElement(res.result) ? "Interactive Chart/Visualization" : String(res.result),
         });
       }
     } catch (err) {
@@ -286,7 +289,10 @@ export function ToolView({ tool, onBack, onSelectTool }: ToolViewProps) {
               >
                 {activeTab === "solve" && (
                   <div className="relative rounded-2xl border border-indigo-500/30 bg-indigo-500/10 p-8">
-                    <div className="text-3xl font-bold text-white break-words pr-10">
+                    <div className={cn(
+                      "pr-10",
+                      React.isValidElement(result.result) ? "" : "text-3xl font-bold text-white break-words"
+                    )}>
                       {result.result}
                     </div>
                     <button
@@ -319,19 +325,34 @@ export function ToolView({ tool, onBack, onSelectTool }: ToolViewProps) {
                     <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-zinc-500">
                       Step-by-step Solution
                     </h3>
-                    <div className="space-y-4">
+                    <motion.div 
+                      className="space-y-4"
+                      initial="hidden"
+                      animate="visible"
+                      variants={{
+                        visible: {
+                          transition: {
+                            staggerChildren: 0.1
+                          }
+                        }
+                      }}
+                    >
                       {result.steps.map((step, idx) => (
-                        <div
+                        <motion.div
                           key={idx}
+                          variants={{
+                            hidden: { opacity: 0, x: -20 },
+                            visible: { opacity: 1, x: 0 }
+                          }}
                           className="flex items-start gap-4 rounded-xl bg-white/5 p-5 text-sm text-zinc-300 border border-white/5"
                         >
                           <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-indigo-500/20 text-xs font-bold text-indigo-400">
                             {idx + 1}
                           </span>
                           <span className="pt-1 leading-relaxed text-base">{step}</span>
-                        </div>
+                        </motion.div>
                       ))}
-                    </div>
+                    </motion.div>
                   </div>
                 )}
               </motion.div>
