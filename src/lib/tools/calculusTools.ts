@@ -6,6 +6,7 @@ export const calculusTools: MathTool[] = [
     id: "derivative",
     name: "Derivative Calculator",
     category: "Calculus",
+    classLevel: "Class 11-12",
     description: "Find the derivative of a function f(x) to determine its rate of change. Essential for finding slopes, velocities, and optimizing functions.",
     inputs: [
       {
@@ -21,6 +22,7 @@ export const calculusTools: MathTool[] = [
     id: "integral_num",
     name: "Definite Integral",
     category: "Calculus",
+    classLevel: "Class 11-12",
     description: "Calculate the definite integral of a function over a specific interval. Useful for finding the area under a curve, total distance, or accumulated growth.",
     inputs: [
       {
@@ -43,6 +45,7 @@ export const calculusTools: MathTool[] = [
     id: "limit_eval",
     name: "Limit Evaluator",
     category: "Calculus",
+    classLevel: "Class 11-12",
     description: "Evaluate the limit of a function as x approaches a specific value. Crucial for understanding function behavior near undefined points and asymptotes.",
     inputs: [
       {
@@ -111,6 +114,7 @@ export const calculusTools: MathTool[] = [
     id: "second_derivative",
     name: "Second Derivative Calculator",
     category: "Calculus",
+    classLevel: "Class 11-12",
     description: "Find the second derivative of a function. Vital for determining concavity, inflection points, and acceleration in physics.",
     inputs: [
       {
@@ -145,6 +149,7 @@ export const calculusTools: MathTool[] = [
     id: "partial_derivative",
     name: "Partial Derivative Calculator",
     category: "Calculus",
+    classLevel: "Class 11-12",
     description: "Find the partial derivative of a multivariable function. Essential for multivariable calculus, thermodynamics, and machine learning.",
     inputs: [
       {
@@ -183,6 +188,7 @@ export const calculusTools: MathTool[] = [
     id: "limit_infinity",
     name: "Limit at Infinity",
     category: "Calculus",
+    classLevel: "Class 11-12",
     description: "Evaluate the limit of a function as x approaches positive or negative infinity. Helps in finding horizontal asymptotes and end behavior.",
     inputs: [
       {
@@ -254,6 +260,7 @@ export const calculusTools: MathTool[] = [
     id: "tangent_line",
     name: "Tangent Line Equation",
     category: "Calculus",
+    classLevel: "Class 11-12",
     description: "Find the equation of the tangent line to a curve at a given point. Useful for linear approximations of complex functions.",
     inputs: [
       {
@@ -316,6 +323,7 @@ export const calculusTools: MathTool[] = [
     id: "area_between_curves",
     name: "Area Between Curves",
     category: "Calculus",
+    classLevel: "Class 11-12",
     description: "Calculate the area enclosed between two functions over a specific interval. A classic application of definite integrals.",
     inputs: [
       { id: "f", label: "Upper Function f(x)", type: "text", placeholder: "e.g., x^2" },
@@ -335,6 +343,7 @@ export const calculusTools: MathTool[] = [
     id: "critical_points",
     name: "Critical Points",
     category: "Calculus",
+    classLevel: "Class 11-12",
     description: "Find the critical points of a function by setting its derivative to zero. Essential for finding local maxima and minima.",
     inputs: [
       { id: "expr", label: "Function f(x)", type: "text", placeholder: "e.g., x^3 - 3x" },

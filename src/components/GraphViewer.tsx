@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useRef } from "react";
 import {
   LineChart,
   Line,
@@ -10,9 +10,10 @@ import {
   ReferenceLine,
 } from "recharts";
 import * as math from "mathjs";
-import { LineChart as LineChartIcon, Settings2, RefreshCw, Plus, Trash2, ZoomIn, ZoomOut } from "lucide-react";
+import { LineChart as LineChartIcon, Settings2, RefreshCw, Plus, Trash2, ZoomIn, ZoomOut, Download } from "lucide-react";
 import { cn } from "../lib/utils";
 import { motion } from "motion/react";
+import { toPng } from "html-to-image";
 
 const COLORS = ["#818cf8", "#34d399", "#fbbf24", "#f87171", "#a78bfa"];
 
@@ -22,6 +23,21 @@ export function GraphViewer() {
   const [xMax, setXMax] = useState(10);
   const [points, setPoints] = useState(100);
   const [errors, setErrors] = useState<(string | null)[]>([null]);
+  const graphRef = useRef<HTMLDivElement>(null);
+
+  const handleDownload = async () => {
+    if (graphRef.current) {
+      try {
+        const dataUrl = await toPng(graphRef.current, { cacheBust: true, backgroundColor: '#18181b' });
+        const link = document.createElement('a');
+        link.download = 'graph.png';
+        link.href = dataUrl;
+        link.click();
+      } catch (err) {
+        console.error('Failed to download image', err);
+      }
+    }
+  };
 
   const handleReset = () => {
     setExpressions(["sin(x)"]);
@@ -237,13 +253,21 @@ export function GraphViewer() {
         </div>
 
         {/* Graph Area */}
-        <div className="lg:col-span-3 rounded-3xl border border-white/10 bg-zinc-900/50 p-6 shadow-xl backdrop-blur-xl h-[500px]">
-          {data.length > 0 ? (
-            <ResponsiveContainer width="100%" height="100%">
-              <LineChart
-                data={data}
-                margin={{ top: 20, right: 20, bottom: 20, left: 20 }}
-              >
+        <div className="lg:col-span-3 rounded-3xl border border-white/10 bg-zinc-900/50 p-6 shadow-xl backdrop-blur-xl h-[500px] flex flex-col relative">
+          <button
+            onClick={handleDownload}
+            className="absolute top-4 right-4 z-10 flex items-center gap-2 rounded-lg bg-indigo-500/20 px-3 py-1.5 text-xs font-medium text-indigo-300 transition-colors hover:bg-indigo-500/30 hover:text-indigo-200"
+          >
+            <Download className="h-4 w-4" />
+            Export Image
+          </button>
+          <div ref={graphRef} className="flex-1 w-full h-full pt-8">
+            {data.length > 0 ? (
+              <ResponsiveContainer width="100%" height="100%">
+                <LineChart
+                  data={data}
+                  margin={{ top: 20, right: 20, bottom: 20, left: 20 }}
+                >
                 <CartesianGrid
                   strokeDasharray="3 3"
                   stroke="#3f3f46"
@@ -311,6 +335,7 @@ export function GraphViewer() {
               <p>Enter a valid function to see the graph.</p>
             </div>
           )}
+          </div>
         </div>
       </div>
     </div>

@@ -31,6 +31,7 @@ export type MathTool = {
   id: string;
   name: string;
   category: string;
+  classLevel?: "Class 8" | "Class 9-10" | "Class 11-12" | "General";
   description: string;
   inputs: ToolInput[];
   calculate: (values: Record<string, string>) => ToolResult;

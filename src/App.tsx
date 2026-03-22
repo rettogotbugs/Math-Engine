@@ -12,7 +12,7 @@ import { mathTools } from "./lib/mathTools";
 import { useAppStore } from "./lib/store";
 import { motion, AnimatePresence } from "motion/react";
 import { Search, ArrowUpDown } from "lucide-react";
-import { CATEGORIES } from "./lib/constants";
+import { CATEGORIES, CLASSES } from "./lib/constants";
 
 export default function App() {
   const [activeCategory, setActiveCategory] = useState("home");
@@ -41,7 +41,7 @@ export default function App() {
         .map((id) => mathTools.find((t) => t.id === id)!)
         .filter(Boolean);
     } else if (activeCategory !== "all") {
-      tools = mathTools.filter((t) => t.category === activeCategory);
+      tools = mathTools.filter((t) => t.category === activeCategory || t.classLevel === activeCategory);
     }
 
     if (searchQuery.trim()) {
@@ -82,7 +82,7 @@ export default function App() {
     setSearchQuery("");
   };
 
-  const currentCategoryObj = CATEGORIES.find(c => c.id === activeCategory);
+  const currentCategoryObj = CATEGORIES.find(c => c.id === activeCategory) || CLASSES.find(c => c.id === activeCategory);
 
   return (
     <div className="flex h-screen w-full bg-zinc-950 text-zinc-50 overflow-hidden font-sans selection:bg-indigo-500/30">

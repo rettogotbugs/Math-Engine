@@ -2,7 +2,7 @@ import { motion } from "motion/react";
 import { UniversalInput } from "./UniversalInput";
 import { ToolCard } from "./ToolCard";
 import { mathTools } from "../lib/mathTools";
-import { CATEGORIES } from "../lib/constants";
+import { CATEGORIES, CLASSES } from "../lib/constants";
 import { Calculator, Compass, BookOpen } from "lucide-react";
 
 type HomeViewProps = {
@@ -114,9 +114,36 @@ export function HomeView({ onSelectTool, onSelectCategory }: HomeViewProps) {
         </div>
       </section>
 
+      {/* Classes */}
+      <section>
+        <h2 className="text-2xl font-bold text-white tracking-tight mb-6">Classes</h2>
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {CLASSES.map((category) => {
+            const Icon = category.icon;
+            return (
+              <button
+                key={category.id}
+                onClick={() => onSelectCategory(category.id)}
+                className="group flex items-center gap-4 rounded-2xl border border-white/5 bg-white/5 p-5 text-left transition-all hover:bg-white/10 hover:border-white/10"
+              >
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-indigo-500/10 text-indigo-400 transition-colors group-hover:bg-indigo-500 group-hover:text-white">
+                  <Icon className="h-6 w-6" />
+                </div>
+                <div>
+                  <h3 className="font-semibold text-white">{category.name}</h3>
+                  <p className="text-sm text-zinc-400 mt-1">
+                    {mathTools.filter((t) => t.classLevel === category.id).length} tools
+                  </p>
+                </div>
+              </button>
+            );
+          })}
+        </div>
+      </section>
+
       {/* Categories */}
       <section>
-        <h2 className="text-2xl font-bold text-white tracking-tight mb-6">Categories</h2>
+        <h2 className="text-2xl font-bold text-white tracking-tight mb-6">Topics</h2>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {CATEGORIES.map((category) => {
             const Icon = category.icon;

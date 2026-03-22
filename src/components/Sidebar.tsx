@@ -1,4 +1,4 @@
-import { MAIN_MENU, CATEGORIES, EXTRA_MENU } from "../lib/constants";
+import { MAIN_MENU, CATEGORIES, CLASSES, EXTRA_MENU } from "../lib/constants";
 import { cn } from "../lib/utils";
 import { motion } from "motion/react";
 import { useState, useEffect } from "react";
@@ -86,7 +86,40 @@ export function Sidebar({
 
           <div className="space-y-1">
             <div className="text-xs font-semibold text-zinc-500 uppercase tracking-wider mb-2 px-3">
-              Categories
+              Classes
+            </div>
+            {CLASSES.map((category) => {
+              const Icon = category.icon;
+              const isActive = activeCategory === category.id;
+              return (
+                <button
+                  key={category.id}
+                  onClick={() => {
+                    onSelectCategory(category.id);
+                    if (window.innerWidth < 768) setIsOpen(false);
+                  }}
+                  className={cn(
+                    "flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-all duration-200",
+                    isActive
+                      ? "bg-indigo-500/10 text-indigo-400"
+                      : "text-zinc-400 hover:bg-white/5 hover:text-zinc-100",
+                  )}
+                >
+                  <Icon
+                    className={cn(
+                      "h-4 w-4",
+                      isActive ? "text-indigo-400" : "text-zinc-500",
+                    )}
+                  />
+                  {category.name}
+                </button>
+              );
+            })}
+          </div>
+
+          <div className="space-y-1">
+            <div className="text-xs font-semibold text-zinc-500 uppercase tracking-wider mb-2 px-3">
+              Topics
             </div>
             {CATEGORIES.map((category) => {
               const Icon = category.icon;

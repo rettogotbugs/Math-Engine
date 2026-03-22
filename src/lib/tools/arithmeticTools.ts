@@ -7,6 +7,7 @@ export const arithmeticTools: MathTool[] = [
     id: "prime_checker",
     name: "Prime Number Checker",
     category: "Arithmetic & Number System",
+    classLevel: "Class 8",
     description: "Check if a given number is prime. Useful for cryptography, factoring, and number theory problems.",
     inputs: [
       { id: "n", label: "Number", type: "number", placeholder: "17" },
@@ -21,6 +22,7 @@ export const arithmeticTools: MathTool[] = [
     id: "factors_multiples",
     name: "Factors & Multiples",
     category: "Arithmetic & Number System",
+    classLevel: "Class 8",
     description: "Find all factors and the first few multiples of a number. Essential for simplifying fractions and finding common denominators.",
     inputs: [
       { id: "n", label: "Number", type: "number", placeholder: "12" },
@@ -56,6 +58,7 @@ export const arithmeticTools: MathTool[] = [
     id: "factorial",
     name: "Factorial Calculator",
     category: "Arithmetic & Number System",
+    classLevel: "Class 8",
     description: "Calculate the factorial of a non-negative integer (n!). Used widely in combinatorics, probability, and calculus.",
     inputs: [
       { id: "n", label: "Number (n)", type: "number", placeholder: "5" },
@@ -70,6 +73,7 @@ export const arithmeticTools: MathTool[] = [
     id: "divisibility_rules",
     name: "Divisibility Rules Checker",
     category: "Arithmetic & Number System",
+    classLevel: "Class 8",
     description: "Check if a number is divisible by common integers (2, 3, 4, 5, 6, 8, 9, 10). Helpful for quick mental math and factoring.",
     inputs: [
       { id: "n", label: "Number", type: "number", placeholder: "120" },
@@ -94,6 +98,7 @@ export const arithmeticTools: MathTool[] = [
     id: "base_converter",
     name: "Base Converter",
     category: "Arithmetic & Number System",
+    classLevel: "Class 8",
     description: "Convert a number from one base to another (e.g., Binary to Decimal, Hexadecimal to Octal). Essential for computer science.",
     inputs: [
       { id: "num", label: "Number", type: "text", placeholder: "1010" },
@@ -111,6 +116,7 @@ export const arithmeticTools: MathTool[] = [
     id: "combinatorics",
     name: "Combinatorics (nCr / nPr)",
     category: "Arithmetic & Number System",
+    classLevel: "Class 8",
     description: "Calculate Permutations (nPr) and Combinations (nCr). Crucial for probability, statistics, and counting problems.",
     inputs: [
       { id: "n", label: "Total items (n)", type: "number", placeholder: "5" },
@@ -141,6 +147,7 @@ export const arithmeticTools: MathTool[] = [
     id: "perfect_square",
     name: "Perfect Square Checker",
     category: "Arithmetic & Number System",
+    classLevel: "Class 8",
     description: "Check if a number is a perfect square (an integer multiplied by itself). Useful in algebra and geometry.",
     inputs: [
       { id: "n", label: "Number", type: "number", placeholder: "e.g., 16" },
@@ -164,6 +171,7 @@ export const arithmeticTools: MathTool[] = [
     id: "logarithm_calc",
     name: "Logarithm Calculator",
     category: "Arithmetic & Number System",
+    classLevel: "Class 8",
     description: "Calculate the logarithm of a number to a specific base. Essential for solving exponential equations and working with scales (like pH or Richter).",
     inputs: [
       { id: "num", label: "Number (x)", type: "number", placeholder: "e.g., 100" },
@@ -192,6 +200,7 @@ export const arithmeticTools: MathTool[] = [
     id: "perfect_cube",
     name: "Perfect Cube Checker",
     category: "Arithmetic & Number System",
+    classLevel: "Class 8",
     description: "Check if a number is a perfect cube (an integer multiplied by itself twice). Useful in algebra and volume calculations.",
     inputs: [
       { id: "n", label: "Number", type: "number", placeholder: "e.g., 27" },
@@ -215,6 +224,7 @@ export const arithmeticTools: MathTool[] = [
     id: "square_root",
     name: "Square Root Calculator",
     category: "Arithmetic & Number System",
+    classLevel: "Class 8",
     description: "Calculate the principal square root of a non-negative number. Fundamental operation in algebra, geometry, and statistics.",
     inputs: [
       { id: "n", label: "Number", type: "number", placeholder: "e.g., 25" },
@@ -236,6 +246,7 @@ export const arithmeticTools: MathTool[] = [
     id: "cube_root",
     name: "Cube Root Calculator",
     category: "Arithmetic & Number System",
+    classLevel: "Class 8",
     description: "Calculate the cube root of a real number. Important for solving cubic equations and finding dimensions of cubic volumes.",
     inputs: [
       { id: "n", label: "Number", type: "number", placeholder: "e.g., 64" },

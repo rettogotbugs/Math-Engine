@@ -321,7 +321,7 @@ export const algebraSolver = {
       const right = match[3].trim();
 
       const expr = math.parse(`(${left}) - (${right})`);
-      const variables = expr.filter((node) => node.isSymbolNode).map((node: any) => node.name);
+      const variables = expr.filter((node: any) => node.isSymbolNode).map((node: any) => node.name);
       const uniqueVars = Array.from(new Set(variables));
 
       if (uniqueVars.length !== 1) {

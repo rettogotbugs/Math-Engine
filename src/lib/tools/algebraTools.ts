@@ -1,18 +1,57 @@
 import { MathTool } from "../mathTools";
 import { algebraSolver } from "../solvers/algebraSolver";
+import React from 'react';
+import { GraphTablePlotter } from "../../components/GraphTablePlotter";
 
 export const algebraTools: MathTool[] = [
   {
+    id: "graph_plotter",
+    name: "Graph Plotter (Table Method)",
+    category: "Charts & Graphs",
+    classLevel: "Class 8",
+    description: "Plot a graph using the x,y table method. Generates a table of values and plots the corresponding graph.",
+    inputs: [
+      { id: "expr", label: "Function y = f(x)", type: "text", placeholder: "e.g., 2x + 3" },
+      { id: "xStart", label: "Start x", type: "number", placeholder: "-5" },
+      { id: "xEnd", label: "End x", type: "number", placeholder: "5" },
+      { id: "step", label: "Step", type: "number", placeholder: "1" }
+    ],
+    calculate: (values) => {
+      const xStart = parseFloat(values.xStart) || -5;
+      const xEnd = parseFloat(values.xEnd) || 5;
+      const step = parseFloat(values.step) || 1;
+      
+      if (xStart >= xEnd || step <= 0) {
+        return { result: "Invalid range or step" };
+      }
+      
+      return {
+        result: React.createElement(GraphTablePlotter, {
+          expression: values.expr,
+          xStart,
+          xEnd,
+          step
+        }),
+        steps: [
+          `Define the function y = ${values.expr}`,
+          `Calculate y for each x from ${xStart} to ${xEnd} with step ${step}`,
+          `Plot the (x, y) coordinates on the graph`
+        ]
+      };
+    }
+  },
+  {
     id: "linear_eq",
-    name: "Universal Equation Solver",
+    name: "Linear Equation Solver",
     category: "Algebra",
-    description: "Solve linear and quadratic equations step-by-step. Essential for finding unknown values.",
+    classLevel: "Class 8",
+    description: "Solve linear equations step-by-step. Essential for finding unknown values.",
     inputs: [
       {
         id: "eq",
         label: "Equation",
         type: "text",
-        placeholder: "e.g., 2x + 3 = 7 or x^2 - 4 = 0",
+        placeholder: "e.g., 2x + 3 = 7",
       },
     ],
     calculate: (values) => algebraSolver.solveEquation(values.eq),
@@ -21,7 +60,8 @@ export const algebraTools: MathTool[] = [
     id: "quadratic_eq",
     name: "Quadratic Equation Solver",
     category: "Algebra",
-    description: "Find roots of quadratic equations using the discriminant method with detailed steps. Crucial for physics, engineering, and optimization problems.",
+    classLevel: "Class 9-10",
+    description: "Find roots of quadratic equations using the discriminant method with detailed steps.",
     inputs: [
       { id: "a", label: "a", type: "number", placeholder: "1" },
       { id: "b", label: "b", type: "number", placeholder: "-3" },
@@ -39,7 +79,8 @@ export const algebraTools: MathTool[] = [
     id: "expand_expr",
     name: "Expression Expansion",
     category: "Algebra",
-    description: "Expand complex algebraic expressions into their standard polynomial form. Useful for simplifying equations before solving or graphing.",
+    classLevel: "Class 8",
+    description: "Expand complex algebraic expressions into their standard polynomial form.",
     inputs: [
       { id: "expr", label: "Expression", type: "text", placeholder: "(x+2)^2" },
     ],
@@ -49,7 +90,8 @@ export const algebraTools: MathTool[] = [
     id: "system_2x2",
     name: "System of Linear Equations (2x2)",
     category: "Algebra",
-    description: "Solve a system of two linear equations simultaneously. Perfect for finding intersection points of lines and solving multi-variable word problems.",
+    classLevel: "Class 9-10",
+    description: "Solve a system of two linear equations simultaneously.",
     inputs: [
       { id: "a1", label: "a1", type: "number", placeholder: "2" },
       { id: "b1", label: "b1", type: "number", placeholder: "3" },
@@ -73,7 +115,8 @@ export const algebraTools: MathTool[] = [
     id: "polynomial_eval",
     name: "Polynomial Evaluator",
     category: "Algebra",
-    description: "Evaluate a polynomial function for a specific value of x. Helps in plotting graphs and finding function outputs quickly.",
+    classLevel: "Class 9-10",
+    description: "Evaluate a polynomial function for a specific value of x.",
     inputs: [
       { id: "poly", label: "Polynomial P(x)", type: "text", placeholder: "x^2 + 2x + 1" },
       { id: "xVal", label: "Value of x", type: "number", placeholder: "3" },

@@ -6,6 +6,7 @@ export const trigTools: MathTool[] = [
     id: "trig_basic",
     name: "Trigonometry Basics",
     category: "Trigonometry",
+    classLevel: "Class 9-10",
     description: "Calculate sine, cosine, tangent, and their reciprocals for any angle. Essential for analyzing right triangles and periodic functions.",
     inputs: [
       {
@@ -46,6 +47,7 @@ export const trigTools: MathTool[] = [
     id: "inverse_trig",
     name: "Inverse Trigonometry",
     category: "Trigonometry",
+    classLevel: "Class 9-10",
     description: "Calculate arcsin, arccos, and arctan to find an angle given a trigonometric ratio. Crucial for solving triangles when sides are known.",
     inputs: [
       {
@@ -83,6 +85,7 @@ export const trigTools: MathTool[] = [
     id: "angle_conversion",
     name: "Angle Conversion",
     category: "Trigonometry",
+    classLevel: "Class 9-10",
     description: "Convert angles between degrees and radians. A fundamental utility for moving between everyday geometry and advanced calculus.",
     inputs: [
       { id: "angle", label: "Angle", type: "number", placeholder: "180" },
@@ -129,6 +132,7 @@ export const trigTools: MathTool[] = [
     id: "pythagorean_theorem",
     name: "Pythagorean Theorem",
     category: "Trigonometry",
+    classLevel: "Class 9-10",
     description: "Find the missing side of a right-angled triangle using a² + b² = c². The cornerstone of distance calculation in flat spaces.",
     inputs: [
       { id: "a", label: "Side a", type: "number", placeholder: "3" },
@@ -186,6 +190,7 @@ export const trigTools: MathTool[] = [
     id: "law_of_sines",
     name: "Law of Sines",
     category: "Trigonometry",
+    classLevel: "Class 9-10",
     description: "Find a missing side or angle in any triangle using the ratio of sides to the sines of their opposite angles.",
     inputs: [
       { id: "a", label: "Side a", type: "number", placeholder: "e.g., 5" },
@@ -266,6 +271,7 @@ export const trigTools: MathTool[] = [
     id: "law_of_cosines",
     name: "Law of Cosines",
     category: "Trigonometry",
+    classLevel: "Class 9-10",
     description: "Find a missing side or angle in any triangle using a generalized form of the Pythagorean theorem.",
     inputs: [
       { id: "a", label: "Side a", type: "number", placeholder: "e.g., 5" },
@@ -320,6 +326,7 @@ export const trigTools: MathTool[] = [
     id: "double_angle",
     name: "Double Angle Formulas",
     category: "Trigonometry",
+    classLevel: "Class 9-10",
     description: "Calculate trigonometric values for double angles (2θ). Useful for simplifying complex trigonometric expressions.",
     inputs: [
       { id: "angle", label: "Angle θ (deg)", type: "number", placeholder: "e.g., 30" },
@@ -351,6 +358,7 @@ export const trigTools: MathTool[] = [
     id: "half_angle",
     name: "Half Angle Formulas",
     category: "Trigonometry",
+    classLevel: "Class 9-10",
     description: "Calculate trigonometric values for half angles (θ/2). Frequently used in integration and solving trigonometric equations.",
     inputs: [
       { id: "angle", label: "Angle θ (deg)", type: "number", placeholder: "e.g., 60" },
@@ -382,6 +390,7 @@ export const trigTools: MathTool[] = [
     id: "sum_to_product",
     name: "Sum to Product Formulas",
     category: "Trigonometry",
+    classLevel: "Class 9-10",
     description: "Convert sums or differences of sines and cosines into products. Essential for solving equations and analyzing wave interference.",
     inputs: [
       { id: "func", label: "Expression", type: "select", options: [

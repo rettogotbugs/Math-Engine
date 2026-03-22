@@ -349,7 +349,9 @@ export function ToolView({ tool, onBack, onSelectTool }: ToolViewProps) {
                           <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-indigo-500/20 text-xs font-bold text-indigo-400">
                             {idx + 1}
                           </span>
-                          <span className="pt-1 leading-relaxed text-base">{step}</span>
+                          <div className="pt-1 leading-relaxed text-base whitespace-pre-wrap font-mono">
+                            {step.replace(/\*\*/g, '').replace(/```/g, '')}
+                          </div>
                         </motion.div>
                       ))}
                     </motion.div>
