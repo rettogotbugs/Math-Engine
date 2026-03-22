@@ -6,7 +6,7 @@ export const calculusTools: MathTool[] = [
     id: "derivative",
     name: "Derivative Calculator",
     category: "Calculus",
-    description: "Find the derivative of a function f(x).",
+    description: "Find the derivative of a function f(x) to determine its rate of change. Essential for finding slopes, velocities, and optimizing functions.",
     inputs: [
       {
         id: "expr",
@@ -21,7 +21,7 @@ export const calculusTools: MathTool[] = [
     id: "integral_num",
     name: "Definite Integral",
     category: "Calculus",
-    description: "Calculate the definite integral of a function.",
+    description: "Calculate the definite integral of a function over a specific interval. Useful for finding the area under a curve, total distance, or accumulated growth.",
     inputs: [
       {
         id: "expr",
@@ -43,7 +43,7 @@ export const calculusTools: MathTool[] = [
     id: "limit_eval",
     name: "Limit Evaluator",
     category: "Calculus",
-    description: "Evaluate the limit of a function as x approaches a value.",
+    description: "Evaluate the limit of a function as x approaches a specific value. Crucial for understanding function behavior near undefined points and asymptotes.",
     inputs: [
       {
         id: "expr",
@@ -111,7 +111,7 @@ export const calculusTools: MathTool[] = [
     id: "second_derivative",
     name: "Second Derivative Calculator",
     category: "Calculus",
-    description: "Find the second derivative of a function f(x).",
+    description: "Find the second derivative of a function. Vital for determining concavity, inflection points, and acceleration in physics.",
     inputs: [
       {
         id: "expr",
@@ -145,7 +145,7 @@ export const calculusTools: MathTool[] = [
     id: "partial_derivative",
     name: "Partial Derivative Calculator",
     category: "Calculus",
-    description: "Find the partial derivative of a multivariable function.",
+    description: "Find the partial derivative of a multivariable function. Essential for multivariable calculus, thermodynamics, and machine learning.",
     inputs: [
       {
         id: "expr",
@@ -183,7 +183,7 @@ export const calculusTools: MathTool[] = [
     id: "limit_infinity",
     name: "Limit at Infinity",
     category: "Calculus",
-    description: "Evaluate the limit of a function as x approaches infinity.",
+    description: "Evaluate the limit of a function as x approaches positive or negative infinity. Helps in finding horizontal asymptotes and end behavior.",
     inputs: [
       {
         id: "expr",
@@ -254,7 +254,7 @@ export const calculusTools: MathTool[] = [
     id: "tangent_line",
     name: "Tangent Line Equation",
     category: "Calculus",
-    description: "Find the equation of the tangent line to a curve at a given point.",
+    description: "Find the equation of the tangent line to a curve at a given point. Useful for linear approximations of complex functions.",
     inputs: [
       {
         id: "expr",
@@ -316,7 +316,7 @@ export const calculusTools: MathTool[] = [
     id: "area_between_curves",
     name: "Area Between Curves",
     category: "Calculus",
-    description: "Calculate the area between two functions f(x) and g(x).",
+    description: "Calculate the area enclosed between two functions over a specific interval. A classic application of definite integrals.",
     inputs: [
       { id: "f", label: "Upper Function f(x)", type: "text", placeholder: "e.g., x^2" },
       { id: "g", label: "Lower Function g(x)", type: "text", placeholder: "e.g., x" },
@@ -335,7 +335,7 @@ export const calculusTools: MathTool[] = [
     id: "critical_points",
     name: "Critical Points",
     category: "Calculus",
-    description: "Find the critical points of a function f(x) by setting f'(x) = 0.",
+    description: "Find the critical points of a function by setting its derivative to zero. Essential for finding local maxima and minima.",
     inputs: [
       { id: "expr", label: "Function f(x)", type: "text", placeholder: "e.g., x^3 - 3x" },
     ],

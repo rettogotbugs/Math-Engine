@@ -7,7 +7,7 @@ export const mensurationTools: MathTool[] = [
     id: "volume_cube",
     name: "Volume of a Cube",
     category: "Mensuration",
-    description: "Calculate the volume of a cube given its side length.",
+    description: "Calculate the volume of a cube given its side length. Essential for determining the capacity of cubic containers.",
     inputs: [
       { id: "side", label: "Side (a)", type: "number", placeholder: "4" },
     ],
@@ -21,7 +21,7 @@ export const mensurationTools: MathTool[] = [
     id: "surface_area_cube",
     name: "Surface Area of a Cube",
     category: "Mensuration",
-    description: "Calculate the total surface area of a cube.",
+    description: "Calculate the total surface area of a cube. Useful for finding the amount of material needed to cover or build a cubic object.",
     inputs: [
       { id: "side", label: "Side (a)", type: "number", placeholder: "4" },
     ],
@@ -35,7 +35,7 @@ export const mensurationTools: MathTool[] = [
     id: "volume_cylinder",
     name: "Volume of a Cylinder",
     category: "Mensuration",
-    description: "Calculate the volume of a cylinder given radius and height.",
+    description: "Calculate the volume of a cylinder given its radius and height. Perfect for finding the capacity of pipes, tanks, and cans.",
     inputs: [
       { id: "radius", label: "Radius (r)", type: "number", placeholder: "3" },
       { id: "height", label: "Height (h)", type: "number", placeholder: "10" },
@@ -51,7 +51,7 @@ export const mensurationTools: MathTool[] = [
     id: "surface_area_cylinder",
     name: "Surface Area of a Cylinder",
     category: "Mensuration",
-    description: "Calculate the total surface area of a cylinder.",
+    description: "Calculate the total surface area of a cylinder, including both circular bases and the curved side.",
     inputs: [
       { id: "radius", label: "Radius (r)", type: "number", placeholder: "3" },
       { id: "height", label: "Height (h)", type: "number", placeholder: "10" },
@@ -67,7 +67,7 @@ export const mensurationTools: MathTool[] = [
     id: "volume_sphere",
     name: "Volume of a Sphere",
     category: "Mensuration",
-    description: "Calculate the volume of a sphere given its radius.",
+    description: "Calculate the volume of a sphere given its radius. Useful in physics and for determining the capacity of spherical objects.",
     inputs: [
       { id: "radius", label: "Radius (r)", type: "number", placeholder: "5" },
     ],
@@ -81,7 +81,7 @@ export const mensurationTools: MathTool[] = [
     id: "surface_area_sphere",
     name: "Surface Area of a Sphere",
     category: "Mensuration",
-    description: "Calculate the surface area of a sphere.",
+    description: "Calculate the total surface area of a sphere. Important for determining the material needed to cover round objects like balls or planets.",
     inputs: [
       { id: "radius", label: "Radius (r)", type: "number", placeholder: "5" },
     ],
@@ -95,7 +95,7 @@ export const mensurationTools: MathTool[] = [
     id: "volume_cone",
     name: "Volume of a Cone",
     category: "Mensuration",
-    description: "Calculate the volume of a cone given radius and height.",
+    description: "Calculate the volume of a cone given its base radius and height. Useful for funnels, traffic cones, and architectural structures.",
     inputs: [
       { id: "radius", label: "Radius (r)", type: "number", placeholder: "3" },
       { id: "height", label: "Height (h)", type: "number", placeholder: "10" },
@@ -111,7 +111,7 @@ export const mensurationTools: MathTool[] = [
     id: "surface_area_cone",
     name: "Surface Area of a Cone",
     category: "Mensuration",
-    description: "Calculate the total surface area of a cone.",
+    description: "Calculate the total surface area of a cone, including the circular base and the lateral (curved) surface.",
     inputs: [
       { id: "radius", label: "Radius (r)", type: "number", placeholder: "3" },
       { id: "height", label: "Height (h)", type: "number", placeholder: "10" },
@@ -127,7 +127,7 @@ export const mensurationTools: MathTool[] = [
     id: "volume_hemisphere",
     name: "Volume of a Hemisphere",
     category: "Mensuration",
-    description: "Calculate the volume of a hemisphere.",
+    description: "Calculate the volume of a hemisphere (half of a sphere). Useful for bowls, domes, and similar structures.",
     inputs: [
       { id: "radius", label: "Radius (r)", type: "number", placeholder: "5" },
     ],
@@ -141,7 +141,7 @@ export const mensurationTools: MathTool[] = [
     id: "surface_area_hemisphere",
     name: "Surface Area of a Hemisphere",
     category: "Mensuration",
-    description: "Calculate the total surface area of a hemisphere.",
+    description: "Calculate the total surface area of a solid hemisphere, including the curved surface and the flat circular base.",
     inputs: [
       { id: "radius", label: "Radius (r)", type: "number", placeholder: "5" },
     ],
@@ -155,7 +155,7 @@ export const mensurationTools: MathTool[] = [
     id: "volume_cuboid",
     name: "Volume of a Cuboid",
     category: "Mensuration",
-    description: "Calculate the volume of a cuboid (rectangular prism).",
+    description: "Calculate the volume of a cuboid (rectangular prism). Essential for finding the capacity of boxes, rooms, and rectangular tanks.",
     inputs: [
       { id: "l", label: "Length (l)", type: "number", placeholder: "5" },
       { id: "w", label: "Width (w)", type: "number", placeholder: "4" },
@@ -182,7 +182,7 @@ export const mensurationTools: MathTool[] = [
     id: "surface_area_cuboid",
     name: "Surface Area of a Cuboid",
     category: "Mensuration",
-    description: "Calculate the total surface area of a cuboid.",
+    description: "Calculate the total surface area of a cuboid. Useful for determining the amount of wrapping paper, paint, or material needed.",
     inputs: [
       { id: "l", label: "Length (l)", type: "number", placeholder: "5" },
       { id: "w", label: "Width (w)", type: "number", placeholder: "4" },
@@ -211,7 +211,7 @@ export const mensurationTools: MathTool[] = [
     id: "volume_pyramid",
     name: "Volume of a Square Pyramid",
     category: "Mensuration",
-    description: "Calculate the volume of a square-based pyramid.",
+    description: "Calculate the volume of a square-based pyramid. Useful in architecture and geometry problems involving pyramidal structures.",
     inputs: [
       { id: "b", label: "Base edge (b)", type: "number", placeholder: "e.g., 5" },
       { id: "h", label: "Height (h)", type: "number", placeholder: "e.g., 6" },
@@ -239,7 +239,7 @@ export const mensurationTools: MathTool[] = [
     id: "surface_area_pyramid",
     name: "Surface Area of a Square Pyramid",
     category: "Mensuration",
-    description: "Calculate the total surface area of a square-based pyramid.",
+    description: "Calculate the total surface area of a square-based pyramid, including the square base and four triangular faces.",
     inputs: [
       { id: "b", label: "Base edge (b)", type: "number", placeholder: "e.g., 5" },
       { id: "h", label: "Height (h)", type: "number", placeholder: "e.g., 6" },

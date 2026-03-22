@@ -11,7 +11,7 @@ export const advancedMathTools: MathTool[] = [
     name: "Matrix Operations",
     category: "Advanced Math (JEE Level)",
     description:
-      "Perform operations on matrices (use array format like [[1,2],[3,4]]).",
+      "Perform operations on matrices like addition, subtraction, multiplication, determinant, inverse, and transpose. Essential for linear algebra.",
     inputs: [
       {
         id: "matrixA",
@@ -50,7 +50,7 @@ export const advancedMathTools: MathTool[] = [
     name: "Vector Operations",
     category: "Advanced Math (JEE Level)",
     description:
-      "Perform operations on vectors (use array format like [1, 2, 3]).",
+      "Perform operations on vectors including dot product, cross product, magnitude, and projection. Crucial for physics and 3D geometry.",
     inputs: [
       {
         id: "vectorA",
@@ -87,7 +87,7 @@ export const advancedMathTools: MathTool[] = [
     id: "complex_arithmetic",
     name: "Complex Numbers",
     category: "Advanced Math (JEE Level)",
-    description: "Evaluate expressions with complex numbers (use 'i').",
+    description: "Evaluate expressions involving complex numbers (using 'i'). Useful for electrical engineering and advanced algebra.",
     inputs: [
       {
         id: "expr",
@@ -116,7 +116,7 @@ export const advancedMathTools: MathTool[] = [
     id: "advanced_derivative",
     name: "Advanced Differentiation",
     category: "Advanced Math (JEE Level)",
-    description: "Differentiate complex functions (chain rule, etc).",
+    description: "Differentiate complex functions involving chain rule, product rule, and quotient rule. Essential for calculus problems.",
     inputs: [
       {
         id: "expr",
@@ -131,7 +131,7 @@ export const advancedMathTools: MathTool[] = [
     id: "matrix_trace",
     name: "Matrix Trace",
     category: "Advanced Math (JEE Level)",
-    description: "Calculate the trace (sum of diagonal elements) of a square matrix.",
+    description: "Calculate the trace (sum of diagonal elements) of a square matrix. Used in linear algebra and tensor analysis.",
     inputs: [
       {
         id: "matrix",
@@ -174,7 +174,7 @@ export const advancedMathTools: MathTool[] = [
     id: "matrix_determinant",
     name: "Matrix Determinant",
     category: "Advanced Math (JEE Level)",
-    description: "Calculate the determinant of a square matrix.",
+    description: "Calculate the determinant of a square matrix. Crucial for finding matrix inverses and solving systems of linear equations.",
     inputs: [
       {
         id: "matrix",
@@ -201,7 +201,7 @@ export const advancedMathTools: MathTool[] = [
     id: "matrix_inverse",
     name: "Matrix Inverse",
     category: "Advanced Math (JEE Level)",
-    description: "Calculate the inverse of a square matrix.",
+    description: "Calculate the inverse of a square matrix. Used to solve matrix equations of the form AX = B.",
     inputs: [
       {
         id: "matrix",
@@ -228,7 +228,7 @@ export const advancedMathTools: MathTool[] = [
     id: "matrix_eigenvalues",
     name: "Matrix Eigenvalues",
     category: "Advanced Math (JEE Level)",
-    description: "Calculate the eigenvalues of a square matrix.",
+    description: "Calculate the eigenvalues of a square matrix. Important in differential equations, stability analysis, and quantum mechanics.",
     inputs: [
       {
         id: "matrix",

@@ -13,24 +13,27 @@ import {
   Box,
   Map,
   Wrench,
-  Flame
+  Flame,
+  Home
 } from "lucide-react";
 
-export const CATEGORIES = [
-  { id: "favorites", name: "Favorites", icon: Star },
-  { id: "recent", name: "Recent", icon: Clock },
-  { id: "popular", name: "Popular", icon: Flame },
+export const MAIN_MENU = [
+  { id: "home", name: "Home", icon: Home },
   { id: "all", name: "All Tools", icon: Box },
+];
+
+export const CATEGORIES = [
   { id: "Basic Math", name: "Basic Math", icon: Calculator },
   { id: "Arithmetic & Number System", name: "Arithmetic & Number System", icon: Hash },
   { id: "Algebra", name: "Algebra", icon: FunctionSquare },
   { id: "Trigonometry", name: "Trigonometry", icon: Triangle },
   { id: "Geometry", name: "Geometry", icon: Square },
-  { id: "Mensuration", name: "Mensuration", icon: Box },
   { id: "Coordinate Geometry", name: "Coordinate Geometry", icon: Map },
   { id: "Calculus", name: "Calculus", icon: Sigma },
   { id: "Advanced Math (JEE Level)", name: "Advanced Math (JEE Level)", icon: GraduationCap },
-  { id: "Utilities", name: "Utilities", icon: Wrench },
+];
+
+export const EXTRA_MENU = [
   { id: "Formulas", name: "Formula Library", icon: BookOpen },
   { id: "Graphs", name: "Graph Viewer", icon: LineChart },
 ];

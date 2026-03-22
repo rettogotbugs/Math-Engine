@@ -6,7 +6,7 @@ export const utilityTools: MathTool[] = [
     id: "expression_evaluator",
     name: "Expression Evaluator",
     category: "Utilities",
-    description: "Evaluate any mathematical expression.",
+    description: "Evaluate any mathematical expression, including basic arithmetic, functions, and variables. A versatile tool for quick calculations.",
     inputs: [
       { id: "expr", label: "Expression", type: "text", placeholder: "2 * (3 + 4) / 5" },
     ],
@@ -19,7 +19,7 @@ export const utilityTools: MathTool[] = [
     id: "unit_converter",
     name: "Unit Converter",
     category: "Utilities",
-    description: "Convert between units (e.g., 'inch' to 'cm', 'kg' to 'lb').",
+    description: "Convert between various units of measurement (e.g., length, mass, volume). Essential for science, engineering, and everyday tasks.",
     inputs: [
       { id: "value", label: "Value", type: "number", placeholder: "10" },
       { id: "fromUnit", label: "From Unit", type: "text", placeholder: "inch" },
@@ -35,7 +35,7 @@ export const utilityTools: MathTool[] = [
     id: "scientific_calculator",
     name: "Scientific Calculator",
     category: "Utilities",
-    description: "Evaluate scientific expressions (e.g., log(10), exp(2)).",
+    description: "Evaluate complex scientific expressions involving trigonometric, logarithmic, and exponential functions.",
     inputs: [
       { id: "expr", label: "Expression", type: "text", placeholder: "log(10) + sin(pi/4)" },
     ],
@@ -48,7 +48,7 @@ export const utilityTools: MathTool[] = [
     id: "random_number",
     name: "Random Number Generator",
     category: "Utilities",
-    description: "Generate a random number between a minimum and maximum value.",
+    description: "Generate a random integer or decimal number within a specified range. Useful for simulations, games, and statistical sampling.",
     inputs: [
       { id: "min", label: "Minimum", type: "number", placeholder: "1" },
       { id: "max", label: "Maximum", type: "number", placeholder: "100" },
@@ -79,7 +79,7 @@ export const utilityTools: MathTool[] = [
     id: "statistics_calc",
     name: "Statistics Calculator",
     category: "Utilities",
-    description: "Calculate mean, median, mode, and standard deviation of a dataset.",
+    description: "Calculate descriptive statistics (mean, median, mode, standard deviation, variance) for a given dataset. Crucial for data analysis.",
     inputs: [
       { id: "data", label: "Data points (comma-separated)", type: "text", placeholder: "1, 2, 3, 4, 5" },
     ],
@@ -118,7 +118,7 @@ export const utilityTools: MathTool[] = [
     id: "password_generator",
     name: "Random Password Generator",
     category: "Utilities",
-    description: "Generate a secure random password.",
+    description: "Generate a secure, random password with customizable length and character types (uppercase, numbers, symbols).",
     inputs: [
       { id: "length", label: "Length", type: "number", placeholder: "12" },
       { id: "uppercase", label: "Include Uppercase", type: "select", options: [{label: "Yes", value: "yes"}, {label: "No", value: "no"}], defaultValue: "yes" },
@@ -159,7 +159,7 @@ export const utilityTools: MathTool[] = [
     id: "roman_numeral",
     name: "Roman Numeral Converter",
     category: "Utilities",
-    description: "Convert numbers to Roman numerals and vice versa.",
+    description: "Convert standard numbers to Roman numerals and vice versa. Useful for historical dates, outlines, and clock faces.",
     inputs: [
       { id: "input", label: "Number or Roman Numeral", type: "text", placeholder: "e.g., 2024 or MMXXIV" },
     ],
@@ -225,7 +225,7 @@ export const utilityTools: MathTool[] = [
     id: "bmi_calculator",
     name: "BMI Calculator",
     category: "Utilities",
-    description: "Calculate Body Mass Index (BMI).",
+    description: "Calculate Body Mass Index (BMI) to estimate body fat based on height and weight. Provides standard health categories.",
     inputs: [
       { id: "weight", label: "Weight (kg)", type: "number", placeholder: "e.g., 70" },
       { id: "height", label: "Height (cm)", type: "number", placeholder: "e.g., 175" },

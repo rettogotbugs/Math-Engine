@@ -6,7 +6,7 @@ export const algebraTools: MathTool[] = [
     id: "linear_eq",
     name: "Linear Equation Solver",
     category: "Algebra",
-    description: "Solve simple linear equations like 2x + 3 = 7",
+    description: "Solve linear equations step-by-step and understand how variables are isolated. Essential for finding unknown values in proportional relationships.",
     inputs: [
       {
         id: "eq",
@@ -21,7 +21,7 @@ export const algebraTools: MathTool[] = [
     id: "quadratic_eq",
     name: "Quadratic Equation Solver",
     category: "Algebra",
-    description: "Solve equations of the form ax² + bx + c = 0",
+    description: "Find roots of quadratic equations using the discriminant method with detailed steps. Crucial for physics, engineering, and optimization problems.",
     inputs: [
       { id: "a", label: "a", type: "number", placeholder: "1" },
       { id: "b", label: "b", type: "number", placeholder: "-3" },
@@ -39,7 +39,7 @@ export const algebraTools: MathTool[] = [
     id: "expand_expr",
     name: "Expression Expansion",
     category: "Algebra",
-    description: "Expand algebraic expressions like (a+b)^2.",
+    description: "Expand complex algebraic expressions into their standard polynomial form. Useful for simplifying equations before solving or graphing.",
     inputs: [
       { id: "expr", label: "Expression", type: "text", placeholder: "(x+2)^2" },
     ],
@@ -49,7 +49,7 @@ export const algebraTools: MathTool[] = [
     id: "system_2x2",
     name: "System of Linear Equations (2x2)",
     category: "Algebra",
-    description: "Solve a system of two linear equations: a1x + b1y = c1, a2x + b2y = c2.",
+    description: "Solve a system of two linear equations simultaneously. Perfect for finding intersection points of lines and solving multi-variable word problems.",
     inputs: [
       { id: "a1", label: "a1", type: "number", placeholder: "2" },
       { id: "b1", label: "b1", type: "number", placeholder: "3" },
@@ -73,7 +73,7 @@ export const algebraTools: MathTool[] = [
     id: "polynomial_eval",
     name: "Polynomial Evaluator",
     category: "Algebra",
-    description: "Evaluate a polynomial for a given value of x.",
+    description: "Evaluate a polynomial function for a specific value of x. Helps in plotting graphs and finding function outputs quickly.",
     inputs: [
       { id: "poly", label: "Polynomial P(x)", type: "text", placeholder: "x^2 + 2x + 1" },
       { id: "xVal", label: "Value of x", type: "number", placeholder: "3" },
@@ -101,7 +101,7 @@ export const algebraTools: MathTool[] = [
     id: "algebraic_identities",
     name: "Algebraic Identities",
     category: "Algebra",
-    description: "Calculate (a+b)², (a-b)², a²-b², etc.",
+    description: "Calculate standard algebraic identities like (a+b)² or a²-b². A great reference tool for factoring and expanding expressions.",
     inputs: [
       { id: "a", label: "a", type: "number", placeholder: "3" },
       { id: "b", label: "b", type: "number", placeholder: "4" },
@@ -179,7 +179,7 @@ export const algebraTools: MathTool[] = [
     id: "binomial_theorem",
     name: "Binomial Theorem Expansion",
     category: "Algebra",
-    description: "Expand (x + y)^n using the Binomial Theorem.",
+    description: "Expand expressions of the form (x + y)^n using binomial coefficients. Essential for advanced algebra, probability, and calculus.",
     inputs: [
       { id: "n", label: "Power (n)", type: "number", placeholder: "e.g., 3" },
     ],
@@ -240,7 +240,7 @@ export const algebraTools: MathTool[] = [
     id: "polynomial_add_sub",
     name: "Polynomial Addition/Subtraction",
     category: "Algebra",
-    description: "Add or subtract two polynomials.",
+    description: "Add or subtract two polynomials by combining like terms. A fundamental operation for simplifying complex algebraic expressions.",
     inputs: [
       { id: "p1", label: "Polynomial 1", type: "text", placeholder: "e.g., 2x^2 + 3x + 1" },
       {
@@ -276,7 +276,7 @@ export const algebraTools: MathTool[] = [
     id: "polynomial_mult",
     name: "Polynomial Multiplication",
     category: "Algebra",
-    description: "Multiply two polynomials.",
+    description: "Multiply two polynomials using the distributive property. Useful for finding areas in geometry and expanding algebraic models.",
     inputs: [
       { id: "p1", label: "Polynomial 1", type: "text", placeholder: "e.g., x + 2" },
       { id: "p2", label: "Polynomial 2", type: "text", placeholder: "e.g., x - 3" },
@@ -304,7 +304,7 @@ export const algebraTools: MathTool[] = [
     id: "arithmetic_progression",
     name: "Arithmetic Progression (AP)",
     category: "Algebra",
-    description: "Find the nth term and sum of an AP.",
+    description: "Find the nth term and sum of an arithmetic sequence. Essential for calculating linear growth, depreciation, and simple interest.",
     inputs: [
       { id: "a", label: "First term (a)", type: "number", placeholder: "e.g., 2" },
       { id: "d", label: "Common difference (d)", type: "number", placeholder: "e.g., 3" },
@@ -334,7 +334,7 @@ export const algebraTools: MathTool[] = [
     id: "geometric_progression",
     name: "Geometric Progression (GP)",
     category: "Algebra",
-    description: "Find the nth term and sum of a GP.",
+    description: "Find the nth term and sum of a geometric sequence. Crucial for modeling exponential growth, compound interest, and population dynamics.",
     inputs: [
       { id: "a", label: "First term (a)", type: "number", placeholder: "e.g., 2" },
       { id: "r", label: "Common ratio (r)", type: "number", placeholder: "e.g., 3" },

@@ -16,6 +16,7 @@ export type ToolInput = {
   type: "number" | "text" | "select";
   options?: { label: string; value: string }[];
   placeholder?: string;
+  defaultValue?: string;
 };
 
 export type ToolResult = {

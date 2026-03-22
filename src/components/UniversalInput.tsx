@@ -16,19 +16,7 @@ export function UniversalInput() {
   };
 
   return (
-    <div className="mx-auto w-full max-w-3xl mb-12">
-      <div className="mb-4 text-center">
-        <h2 className="text-2xl font-bold text-white mb-2">
-          Universal Math Solver
-        </h2>
-        <p className="text-zinc-400 text-sm">
-          Type any problem:{" "}
-          <span className="text-indigo-400 font-mono">2x + 3 = 7</span>,{" "}
-          <span className="text-indigo-400 font-mono">sin(30 deg)</span>,{" "}
-          <span className="text-indigo-400 font-mono">differentiate x^2</span>
-        </p>
-      </div>
-
+    <div className="mx-auto w-full max-w-3xl mb-4">
       <div className="relative">
         <div
           className={cn(

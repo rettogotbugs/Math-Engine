@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Search, BookOpen } from "lucide-react";
+import { Search, BookOpen, Copy, Check } from "lucide-react";
 import { motion } from "motion/react";
 import { cn } from "../lib/utils";
 
@@ -114,6 +114,7 @@ const FORMULAS = [
 export function FormulaLibrary() {
   const [search, setSearch] = useState("");
   const [activeCategory, setActiveCategory] = useState("All");
+  const [copiedFormula, setCopiedFormula] = useState<string | null>(null);
 
   const categories = ["All", ...FORMULAS.map((f) => f.category)];
 
@@ -127,6 +128,12 @@ export function FormulaLibrary() {
           item.desc.toLowerCase().includes(search.toLowerCase())),
     ),
   })).filter((cat) => cat.items.length > 0);
+
+  const handleCopy = (formula: string) => {
+    navigator.clipboard.writeText(formula);
+    setCopiedFormula(formula);
+    setTimeout(() => setCopiedFormula(null), 2000);
+  };
 
   return (
     <div className="mx-auto max-w-6xl p-4 md:p-8">
@@ -183,7 +190,7 @@ export function FormulaLibrary() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: idx * 0.05 }}
-                  className="rounded-2xl border border-white/10 bg-zinc-900/50 p-6 shadow-xl backdrop-blur-xl hover:border-indigo-500/30 transition-colors"
+                  className="flex flex-col rounded-3xl border border-white/10 bg-zinc-900/50 p-6 shadow-xl backdrop-blur-xl hover:border-indigo-500/30 transition-colors"
                 >
                   <h3 className="text-lg font-semibold text-white mb-2">
                     {item.name}
@@ -193,7 +200,24 @@ export function FormulaLibrary() {
                       {item.formula}
                     </code>
                   </div>
-                  <p className="text-sm text-zinc-400">{item.desc}</p>
+                  <p className="text-sm text-zinc-400 mb-6 flex-1">{item.desc}</p>
+                  
+                  <button
+                    onClick={() => handleCopy(item.formula)}
+                    className="mt-auto flex w-full items-center justify-center gap-2 rounded-xl bg-white/5 px-4 py-2.5 text-sm font-medium text-white transition-colors hover:bg-white/10 active:scale-[0.98]"
+                  >
+                    {copiedFormula === item.formula ? (
+                      <>
+                        <Check className="h-4 w-4 text-emerald-400" />
+                        <span className="text-emerald-400">Copied!</span>
+                      </>
+                    ) : (
+                      <>
+                        <Copy className="h-4 w-4 text-zinc-400" />
+                        <span>Use this formula</span>
+                      </>
+                    )}
+                  </button>
                 </motion.div>
               ))}
             </div>

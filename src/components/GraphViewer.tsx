@@ -10,7 +10,7 @@ import {
   ReferenceLine,
 } from "recharts";
 import * as math from "mathjs";
-import { LineChart as LineChartIcon, Settings2 } from "lucide-react";
+import { LineChart as LineChartIcon, Settings2, RefreshCw } from "lucide-react";
 import { cn } from "../lib/utils";
 import { motion } from "motion/react";
 
@@ -20,6 +20,14 @@ export function GraphViewer() {
   const [xMax, setXMax] = useState(10);
   const [points, setPoints] = useState(100);
   const [error, setError] = useState<string | null>(null);
+
+  const handleReset = () => {
+    setExpression("sin(x)");
+    setXMin(-10);
+    setXMax(10);
+    setPoints(100);
+    setError(null);
+  };
 
   const data = useMemo(() => {
     try {
@@ -61,10 +69,19 @@ export function GraphViewer() {
 
       <div className="grid gap-8 lg:grid-cols-4">
         {/* Controls */}
-        <div className="lg:col-span-1 space-y-6 rounded-2xl border border-white/10 bg-zinc-900/50 p-6 shadow-xl backdrop-blur-xl">
-          <div className="flex items-center gap-2 text-lg font-semibold text-white mb-4">
-            <Settings2 className="h-5 w-5 text-indigo-400" />
-            Graph Settings
+        <div className="lg:col-span-1 space-y-6 rounded-3xl border border-white/10 bg-zinc-900/50 p-6 shadow-xl backdrop-blur-xl">
+          <div className="flex items-center justify-between mb-4">
+            <div className="flex items-center gap-2 text-lg font-semibold text-white">
+              <Settings2 className="h-5 w-5 text-indigo-400" />
+              Settings
+            </div>
+            <button
+              onClick={handleReset}
+              className="flex items-center gap-1.5 rounded-lg bg-white/5 px-3 py-1.5 text-xs font-medium text-zinc-300 transition-colors hover:bg-white/10 hover:text-white"
+            >
+              <RefreshCw className="h-3 w-3" />
+              Reset
+            </button>
           </div>
 
           <div className="space-y-4">
@@ -130,7 +147,7 @@ export function GraphViewer() {
         </div>
 
         {/* Graph Area */}
-        <div className="lg:col-span-3 rounded-2xl border border-white/10 bg-zinc-900/50 p-6 shadow-xl backdrop-blur-xl h-[500px]">
+        <div className="lg:col-span-3 rounded-3xl border border-white/10 bg-zinc-900/50 p-6 shadow-xl backdrop-blur-xl h-[500px]">
           {data.length > 0 ? (
             <ResponsiveContainer width="100%" height="100%">
               <LineChart

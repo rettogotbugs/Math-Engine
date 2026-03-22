@@ -6,7 +6,7 @@ export const geometryTools: MathTool[] = [
     id: "area_circle",
     name: "Area of a Circle",
     category: "Geometry",
-    description: "Calculate the area of a circle given its radius.",
+    description: "Calculate the area of a circle given its radius. Essential for finding the space occupied by circular objects like wheels or fields.",
     inputs: [
       { id: "radius", label: "Radius (r)", type: "number", placeholder: "5" },
     ],
@@ -20,7 +20,7 @@ export const geometryTools: MathTool[] = [
     id: "area_triangle",
     name: "Area of a Triangle",
     category: "Geometry",
-    description: "Calculate the area of a triangle given base and height.",
+    description: "Calculate the area of a triangle given its base and height. A fundamental formula used in architecture, surveying, and 3D modeling.",
     inputs: [
       { id: "base", label: "Base (b)", type: "number", placeholder: "10" },
       { id: "height", label: "Height (h)", type: "number", placeholder: "5" },
@@ -36,7 +36,7 @@ export const geometryTools: MathTool[] = [
     id: "area_rectangle",
     name: "Area of a Rectangle",
     category: "Geometry",
-    description: "Calculate the area of a rectangle given length and width.",
+    description: "Calculate the area of a rectangle given length and width. Useful for determining floor space, land area, and material requirements.",
     inputs: [
       { id: "length", label: "Length (l)", type: "number", placeholder: "10" },
       { id: "width", label: "Width (w)", type: "number", placeholder: "5" },
@@ -52,7 +52,7 @@ export const geometryTools: MathTool[] = [
     id: "perimeter_rectangle",
     name: "Perimeter of a Rectangle",
     category: "Geometry",
-    description: "Calculate the perimeter of a rectangle.",
+    description: "Calculate the total distance around the outside of a rectangle. Perfect for finding the length of fencing or framing needed.",
     inputs: [
       { id: "length", label: "Length (l)", type: "number", placeholder: "10" },
       { id: "width", label: "Width (w)", type: "number", placeholder: "5" },
@@ -78,7 +78,7 @@ export const geometryTools: MathTool[] = [
     id: "circumference_circle",
     name: "Circumference of a Circle",
     category: "Geometry",
-    description: "Calculate the circumference of a circle.",
+    description: "Calculate the distance around the edge of a circle. Useful for measuring circular tracks, rings, and rotational distances.",
     inputs: [
       { id: "radius", label: "Radius (r)", type: "number", placeholder: "5" },
     ],
@@ -101,7 +101,7 @@ export const geometryTools: MathTool[] = [
     id: "area_trapezoid",
     name: "Area of a Trapezoid",
     category: "Geometry",
-    description: "Calculate the area of a trapezoid given two parallel bases and height.",
+    description: "Calculate the area of a trapezoid given two parallel bases and height. Often used in land surveying and calculating cross-sectional areas.",
     inputs: [
       { id: "a", label: "Base a", type: "number", placeholder: "5" },
       { id: "b", label: "Base b", type: "number", placeholder: "7" },
@@ -130,7 +130,7 @@ export const geometryTools: MathTool[] = [
     id: "perimeter_triangle",
     name: "Perimeter of a Triangle",
     category: "Geometry",
-    description: "Calculate the perimeter of a triangle given its three sides.",
+    description: "Calculate the total distance around a triangle given its three sides. Useful for finding the boundary length of triangular plots.",
     inputs: [
       { id: "a", label: "Side a", type: "number", placeholder: "3" },
       { id: "b", label: "Side b", type: "number", placeholder: "4" },
@@ -157,7 +157,7 @@ export const geometryTools: MathTool[] = [
     id: "area_parallelogram",
     name: "Area of a Parallelogram",
     category: "Geometry",
-    description: "Calculate the area of a parallelogram given base and height.",
+    description: "Calculate the area of a parallelogram given base and height. Important for geometry problems involving slanted rectangular shapes.",
     inputs: [
       { id: "base", label: "Base (b)", type: "number", placeholder: "10" },
       { id: "height", label: "Height (h)", type: "number", placeholder: "5" },
@@ -182,7 +182,7 @@ export const geometryTools: MathTool[] = [
     id: "perimeter_parallelogram",
     name: "Perimeter of a Parallelogram",
     category: "Geometry",
-    description: "Calculate the perimeter of a parallelogram given two adjacent sides.",
+    description: "Calculate the perimeter of a parallelogram given two adjacent sides. Helps in determining the boundary length of slanted shapes.",
     inputs: [
       { id: "a", label: "Side a", type: "number", placeholder: "10" },
       { id: "b", label: "Side b", type: "number", placeholder: "5" },
@@ -208,7 +208,7 @@ export const geometryTools: MathTool[] = [
     id: "area_rhombus",
     name: "Area of a Rhombus",
     category: "Geometry",
-    description: "Calculate the area of a rhombus given its two diagonals.",
+    description: "Calculate the area of a rhombus given its two diagonals. Useful for calculating the area of diamond-shaped objects.",
     inputs: [
       { id: "d1", label: "Diagonal 1 (d1)", type: "number", placeholder: "10" },
       { id: "d2", label: "Diagonal 2 (d2)", type: "number", placeholder: "8" },
@@ -234,7 +234,7 @@ export const geometryTools: MathTool[] = [
     id: "perimeter_rhombus",
     name: "Perimeter of a Rhombus",
     category: "Geometry",
-    description: "Calculate the perimeter of a rhombus given its side length.",
+    description: "Calculate the perimeter of a rhombus given its side length. Since all sides are equal, this is a quick calculation.",
     inputs: [
       { id: "a", label: "Side length (a)", type: "number", placeholder: "5" },
     ],
@@ -257,7 +257,7 @@ export const geometryTools: MathTool[] = [
     id: "area_regular_polygon",
     name: "Area of a Regular Polygon",
     category: "Geometry",
-    description: "Calculate the area of a regular polygon given number of sides and side length.",
+    description: "Calculate the area of a regular polygon given the number of sides and side length. Great for shapes like pentagons, hexagons, and octagons.",
     inputs: [
       { id: "n", label: "Number of sides (n)", type: "number", placeholder: "5" },
       { id: "s", label: "Side length (s)", type: "number", placeholder: "4" },
@@ -283,7 +283,7 @@ export const geometryTools: MathTool[] = [
     id: "perimeter_regular_polygon",
     name: "Perimeter of a Regular Polygon",
     category: "Geometry",
-    description: "Calculate the perimeter of a regular polygon.",
+    description: "Calculate the perimeter of a regular polygon by multiplying the number of sides by the side length.",
     inputs: [
       { id: "n", label: "Number of sides (n)", type: "number", placeholder: "e.g., 5" },
       { id: "s", label: "Side length (s)", type: "number", placeholder: "e.g., 4" },
@@ -309,7 +309,7 @@ export const geometryTools: MathTool[] = [
     id: "area_ellipse",
     name: "Area of an Ellipse",
     category: "Geometry",
-    description: "Calculate the area of an ellipse.",
+    description: "Calculate the area of an ellipse using its semi-major and semi-minor axes. Useful in astronomy and engineering.",
     inputs: [
       { id: "a", label: "Semi-major axis (a)", type: "number", placeholder: "e.g., 5" },
       { id: "b", label: "Semi-minor axis (b)", type: "number", placeholder: "e.g., 3" },
@@ -335,7 +335,7 @@ export const geometryTools: MathTool[] = [
     id: "area_sector",
     name: "Area of a Sector",
     category: "Geometry",
-    description: "Calculate the area of a circular sector.",
+    description: "Calculate the area of a circular sector given its radius and central angle. Perfect for finding the area of a 'slice of pie'.",
     inputs: [
       { id: "r", label: "Radius (r)", type: "number", placeholder: "e.g., 5" },
       { id: "theta", label: "Central Angle (θ in degrees)", type: "number", placeholder: "e.g., 60" },
@@ -362,7 +362,7 @@ export const geometryTools: MathTool[] = [
     id: "arc_length",
     name: "Arc Length of a Sector",
     category: "Geometry",
-    description: "Calculate the arc length of a circular sector.",
+    description: "Calculate the arc length of a circular sector. Useful for determining the distance along a curved path.",
     inputs: [
       { id: "r", label: "Radius (r)", type: "number", placeholder: "e.g., 5" },
       { id: "theta", label: "Central Angle (θ in degrees)", type: "number", placeholder: "e.g., 60" },

@@ -6,7 +6,7 @@ export const trigTools: MathTool[] = [
     id: "trig_basic",
     name: "Trigonometry Basics",
     category: "Trigonometry",
-    description: "Calculate sin, cos, tan of an angle.",
+    description: "Calculate sine, cosine, tangent, and their reciprocals for any angle. Essential for analyzing right triangles and periodic functions.",
     inputs: [
       {
         id: "func",
@@ -46,7 +46,7 @@ export const trigTools: MathTool[] = [
     id: "inverse_trig",
     name: "Inverse Trigonometry",
     category: "Trigonometry",
-    description: "Calculate arcsin, arccos, arctan of a value.",
+    description: "Calculate arcsin, arccos, and arctan to find an angle given a trigonometric ratio. Crucial for solving triangles when sides are known.",
     inputs: [
       {
         id: "func",
@@ -83,7 +83,7 @@ export const trigTools: MathTool[] = [
     id: "angle_conversion",
     name: "Angle Conversion",
     category: "Trigonometry",
-    description: "Convert angles between degrees and radians.",
+    description: "Convert angles between degrees and radians. A fundamental utility for moving between everyday geometry and advanced calculus.",
     inputs: [
       { id: "angle", label: "Angle", type: "number", placeholder: "180" },
       {
@@ -129,7 +129,7 @@ export const trigTools: MathTool[] = [
     id: "pythagorean_theorem",
     name: "Pythagorean Theorem",
     category: "Trigonometry",
-    description: "Find the missing side of a right-angled triangle (a² + b² = c²).",
+    description: "Find the missing side of a right-angled triangle using a² + b² = c². The cornerstone of distance calculation in flat spaces.",
     inputs: [
       { id: "a", label: "Side a", type: "number", placeholder: "3" },
       { id: "b", label: "Side b", type: "number", placeholder: "4" },
@@ -186,7 +186,7 @@ export const trigTools: MathTool[] = [
     id: "law_of_sines",
     name: "Law of Sines",
     category: "Trigonometry",
-    description: "Find a missing side or angle using a/sin(A) = b/sin(B).",
+    description: "Find a missing side or angle in any triangle using the ratio of sides to the sines of their opposite angles.",
     inputs: [
       { id: "a", label: "Side a", type: "number", placeholder: "e.g., 5" },
       { id: "A", label: "Angle A (deg)", type: "number", placeholder: "e.g., 30" },
@@ -266,7 +266,7 @@ export const trigTools: MathTool[] = [
     id: "law_of_cosines",
     name: "Law of Cosines",
     category: "Trigonometry",
-    description: "Find a missing side or angle using c² = a² + b² - 2ab*cos(C).",
+    description: "Find a missing side or angle in any triangle using a generalized form of the Pythagorean theorem.",
     inputs: [
       { id: "a", label: "Side a", type: "number", placeholder: "e.g., 5" },
       { id: "b", label: "Side b", type: "number", placeholder: "e.g., 7" },
@@ -320,7 +320,7 @@ export const trigTools: MathTool[] = [
     id: "double_angle",
     name: "Double Angle Formulas",
     category: "Trigonometry",
-    description: "Calculate sin(2θ), cos(2θ), tan(2θ) given θ.",
+    description: "Calculate trigonometric values for double angles (2θ). Useful for simplifying complex trigonometric expressions.",
     inputs: [
       { id: "angle", label: "Angle θ (deg)", type: "number", placeholder: "e.g., 30" },
     ],
@@ -351,7 +351,7 @@ export const trigTools: MathTool[] = [
     id: "half_angle",
     name: "Half Angle Formulas",
     category: "Trigonometry",
-    description: "Calculate sin(θ/2), cos(θ/2), tan(θ/2) given θ.",
+    description: "Calculate trigonometric values for half angles (θ/2). Frequently used in integration and solving trigonometric equations.",
     inputs: [
       { id: "angle", label: "Angle θ (deg)", type: "number", placeholder: "e.g., 60" },
     ],
@@ -382,7 +382,7 @@ export const trigTools: MathTool[] = [
     id: "sum_to_product",
     name: "Sum to Product Formulas",
     category: "Trigonometry",
-    description: "Convert sin(A) ± sin(B) or cos(A) ± cos(B) to products.",
+    description: "Convert sums or differences of sines and cosines into products. Essential for solving equations and analyzing wave interference.",
     inputs: [
       { id: "func", label: "Expression", type: "select", options: [
         { label: "sin(A) + sin(B)", value: "sin_plus_sin" },

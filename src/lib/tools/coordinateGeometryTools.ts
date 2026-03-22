@@ -6,7 +6,7 @@ export const coordinateGeometryTools: MathTool[] = [
     id: "distance_2d",
     name: "Distance Between Two Points",
     category: "Coordinate Geometry",
-    description: "Find the distance between (x₁, y₁) and (x₂, y₂).",
+    description: "Find the straight-line distance between two points (x₁, y₁) and (x₂, y₂) on a 2D plane. Essential for mapping and spatial analysis.",
     inputs: [
       { id: "x1", label: "x₁", type: "number", placeholder: "0" },
       { id: "y1", label: "y₁", type: "number", placeholder: "0" },
@@ -26,7 +26,7 @@ export const coordinateGeometryTools: MathTool[] = [
     id: "midpoint_2d",
     name: "Midpoint Calculator",
     category: "Coordinate Geometry",
-    description: "Find the midpoint between (x₁, y₁) and (x₂, y₂).",
+    description: "Find the exact center point between (x₁, y₁) and (x₂, y₂). Useful for finding the center of a line segment or balancing points.",
     inputs: [
       { id: "x1", label: "x₁", type: "number", placeholder: "0" },
       { id: "y1", label: "y₁", type: "number", placeholder: "0" },
@@ -46,7 +46,7 @@ export const coordinateGeometryTools: MathTool[] = [
     id: "slope_2d",
     name: "Slope of a Line",
     category: "Coordinate Geometry",
-    description: "Find the slope of a line passing through (x₁, y₁) and (x₂, y₂).",
+    description: "Calculate the steepness or incline of a line passing through two points. A fundamental concept in algebra and calculus.",
     inputs: [
       { id: "x1", label: "x₁", type: "number", placeholder: "1" },
       { id: "y1", label: "y₁", type: "number", placeholder: "2" },
@@ -66,7 +66,7 @@ export const coordinateGeometryTools: MathTool[] = [
     id: "line_equation",
     name: "Equation of a Line",
     category: "Coordinate Geometry",
-    description: "Find the equation of a line passing through two points.",
+    description: "Determine the equation of a line (y = mx + b) passing through two given points. Crucial for modeling linear relationships.",
     inputs: [
       { id: "x1", label: "x₁", type: "number", placeholder: "1" },
       { id: "y1", label: "y₁", type: "number", placeholder: "2" },
@@ -86,7 +86,7 @@ export const coordinateGeometryTools: MathTool[] = [
     id: "distance_3d",
     name: "3D Distance Between Two Points",
     category: "Coordinate Geometry",
-    description: "Find the distance between (x₁, y₁, z₁) and (x₂, y₂, z₂).",
+    description: "Calculate the straight-line distance between two points in three-dimensional space. Essential for 3D modeling and physics.",
     inputs: [
       { id: "x1", label: "x₁", type: "number", placeholder: "0" },
       { id: "y1", label: "y₁", type: "number", placeholder: "0" },
@@ -127,7 +127,7 @@ export const coordinateGeometryTools: MathTool[] = [
     id: "midpoint_3d",
     name: "3D Midpoint Calculator",
     category: "Coordinate Geometry",
-    description: "Find the midpoint between (x₁, y₁, z₁) and (x₂, y₂, z₂).",
+    description: "Find the exact center point between two points in 3D space. Useful in computer graphics and spatial geometry.",
     inputs: [
       { id: "x1", label: "x₁", type: "number", placeholder: "0" },
       { id: "y1", label: "y₁", type: "number", placeholder: "0" },
@@ -165,7 +165,7 @@ export const coordinateGeometryTools: MathTool[] = [
     id: "section_formula_2d",
     name: "Section Formula (2D)",
     category: "Coordinate Geometry",
-    description: "Find the point that divides the line segment joining two points in a given ratio m:n.",
+    description: "Find the coordinates of a point that divides a line segment into a given ratio m:n. Important for interpolation.",
     inputs: [
       { id: "x1", label: "x₁", type: "number", placeholder: "1" },
       { id: "y1", label: "y₁", type: "number", placeholder: "2" },
@@ -202,7 +202,7 @@ export const coordinateGeometryTools: MathTool[] = [
     id: "area_triangle_coords",
     name: "Area of Triangle (Coordinates)",
     category: "Coordinate Geometry",
-    description: "Calculate the area of a triangle given its three vertices.",
+    description: "Calculate the area of a triangle using the coordinates of its three vertices. A powerful tool in analytical geometry.",
     inputs: [
       { id: "x1", label: "x₁", type: "number", placeholder: "0" },
       { id: "y1", label: "y₁", type: "number", placeholder: "0" },
@@ -239,7 +239,7 @@ export const coordinateGeometryTools: MathTool[] = [
     id: "centroid_triangle",
     name: "Centroid of a Triangle",
     category: "Coordinate Geometry",
-    description: "Find the centroid (center of mass) of a triangle given its vertices.",
+    description: "Find the centroid (center of mass) of a triangle given its vertices. Useful in physics and engineering.",
     inputs: [
       { id: "x1", label: "x₁", type: "number", placeholder: "0" },
       { id: "y1", label: "y₁", type: "number", placeholder: "0" },
@@ -276,7 +276,7 @@ export const coordinateGeometryTools: MathTool[] = [
     id: "distance_point_line",
     name: "Distance from Point to Line",
     category: "Coordinate Geometry",
-    description: "Find the perpendicular distance from a point (x₀, y₀) to a line Ax + By + C = 0.",
+    description: "Find the shortest (perpendicular) distance from a point to a line given by Ax + By + C = 0.",
     inputs: [
       { id: "x0", label: "Point x₀", type: "number", placeholder: "1" },
       { id: "y0", label: "Point y₀", type: "number", placeholder: "2" },

@@ -6,7 +6,7 @@ export const basicMathTools: MathTool[] = [
     id: "basic_add",
     name: "Addition & Subtraction",
     category: "Basic Math",
-    description: "Add or subtract two numbers with steps.",
+    description: "Perform basic addition and subtraction operations with detailed step-by-step breakdowns. Useful for verifying manual calculations and understanding fundamental arithmetic.",
     inputs: [
       { id: "a", label: "Number 1", type: "number", placeholder: "e.g., 15" },
       {
@@ -33,7 +33,7 @@ export const basicMathTools: MathTool[] = [
     id: "basic_mult_div",
     name: "Multiplication & Division",
     category: "Basic Math",
-    description: "Multiply or divide two numbers with steps.",
+    description: "Multiply or divide two numbers and see the exact process. Great for learning long multiplication or division techniques and checking your work.",
     inputs: [
       { id: "a", label: "Number 1", type: "number", placeholder: "e.g., 12" },
       {
@@ -60,7 +60,7 @@ export const basicMathTools: MathTool[] = [
     id: "fraction_add",
     name: "Fraction Addition",
     category: "Basic Math",
-    description: "Add two fractions step-by-step.",
+    description: "Add two fractions by finding the least common denominator. Essential for understanding how to combine parts of a whole.",
     inputs: [
       { id: "n1", label: "Numerator 1", type: "number", placeholder: "1" },
       { id: "d1", label: "Denominator 1", type: "number", placeholder: "2" },
@@ -81,7 +81,7 @@ export const basicMathTools: MathTool[] = [
     id: "fraction_sub",
     name: "Fraction Subtraction",
     category: "Basic Math",
-    description: "Subtract two fractions step-by-step.",
+    description: "Subtract two fractions step-by-step by finding a common denominator. Helps in solving problems involving differences of fractional quantities.",
     inputs: [
       { id: "n1", label: "Numerator 1", type: "number", placeholder: "1" },
       { id: "d1", label: "Denominator 1", type: "number", placeholder: "2" },
@@ -114,7 +114,7 @@ export const basicMathTools: MathTool[] = [
     id: "fraction_mult",
     name: "Fraction Multiplication",
     category: "Basic Math",
-    description: "Multiply two fractions step-by-step.",
+    description: "Multiply two fractions by multiplying numerators and denominators. Useful for scaling quantities and finding fractions of fractions.",
     inputs: [
       { id: "n1", label: "Numerator 1", type: "number", placeholder: "1" },
       { id: "d1", label: "Denominator 1", type: "number", placeholder: "2" },
@@ -145,7 +145,7 @@ export const basicMathTools: MathTool[] = [
     id: "fraction_div",
     name: "Fraction Division",
     category: "Basic Math",
-    description: "Divide two fractions step-by-step.",
+    description: "Divide two fractions using the reciprocal method (keep-change-flip). Crucial for solving algebraic equations involving rational numbers.",
     inputs: [
       { id: "n1", label: "Numerator 1", type: "number", placeholder: "1" },
       { id: "d1", label: "Denominator 1", type: "number", placeholder: "2" },
@@ -177,7 +177,7 @@ export const basicMathTools: MathTool[] = [
     id: "decimal_to_fraction",
     name: "Decimal to Fraction",
     category: "Basic Math",
-    description: "Convert a decimal number to a fraction.",
+    description: "Convert a decimal number to its simplest fractional form. Helps in standardizing numbers for exact algebraic calculations.",
     inputs: [
       { id: "dec", label: "Decimal", type: "number", placeholder: "0.75" },
     ],
@@ -206,7 +206,7 @@ export const basicMathTools: MathTool[] = [
     id: "fraction_to_decimal",
     name: "Fraction to Decimal",
     category: "Basic Math",
-    description: "Convert a fraction to a decimal number.",
+    description: "Convert a fraction to a decimal number. Useful for practical applications like measurement and financial calculations.",
     inputs: [
       { id: "n", label: "Numerator", type: "number", placeholder: "3" },
       { id: "d", label: "Denominator", type: "number", placeholder: "4" },
@@ -229,7 +229,7 @@ export const basicMathTools: MathTool[] = [
     id: "decimal_to_percent",
     name: "Decimal to Percentage",
     category: "Basic Math",
-    description: "Convert a decimal number to a percentage.",
+    description: "Convert a decimal number to a percentage. Essential for understanding rates, probabilities, and statistical data.",
     inputs: [
       { id: "dec", label: "Decimal", type: "number", placeholder: "0.75" },
     ],
@@ -250,7 +250,7 @@ export const basicMathTools: MathTool[] = [
     id: "percent_to_decimal",
     name: "Percentage to Decimal",
     category: "Basic Math",
-    description: "Convert a percentage to a decimal number.",
+    description: "Convert a percentage to a decimal number. A necessary step before using percentages in mathematical formulas.",
     inputs: [
       { id: "pct", label: "Percentage", type: "number", placeholder: "75" },
     ],
@@ -271,7 +271,7 @@ export const basicMathTools: MathTool[] = [
     id: "lcm_hcf",
     name: "LCM & HCF",
     category: "Basic Math",
-    description: "Find the Least Common Multiple and Highest Common Factor.",
+    description: "Calculate Least Common Multiple and Highest Common Factor using efficient methods. Vital for simplifying fractions and solving time-cycle problems.",
     inputs: [
       { id: "a", label: "Number 1", type: "number", placeholder: "12" },
       { id: "b", label: "Number 2", type: "number", placeholder: "18" },
@@ -292,7 +292,7 @@ export const basicMathTools: MathTool[] = [
     id: "percentage_calc",
     name: "Percentage Calculator",
     category: "Basic Math",
-    description: "Calculate what percentage one number is of another.",
+    description: "Calculate what percentage one number is of another. Perfect for finding test scores, profit margins, and growth rates.",
     inputs: [
       { id: "part", label: "Part", type: "number", placeholder: "25" },
       { id: "total", label: "Total", type: "number", placeholder: "100" },
@@ -308,7 +308,7 @@ export const basicMathTools: MathTool[] = [
     id: "ratio_simp",
     name: "Ratio Simplifier",
     category: "Basic Math",
-    description: "Simplify a ratio a:b to its simplest form.",
+    description: "Simplify a ratio a:b to its simplest form by dividing by the greatest common divisor. Useful for comparing quantities and scaling recipes.",
     inputs: [
       { id: "a", label: "A", type: "number", placeholder: "12" },
       { id: "b", label: "B", type: "number", placeholder: "16" },
@@ -324,7 +324,7 @@ export const basicMathTools: MathTool[] = [
     id: "discount_calculator",
     name: "Discount Calculator",
     category: "Basic Math",
-    description: "Calculate the final price after applying a discount.",
+    description: "Calculate the final price after applying a percentage discount. A handy tool for shopping, sales analysis, and financial planning.",
     inputs: [
       { id: "price", label: "Original Price", type: "number", placeholder: "e.g., 100" },
       { id: "discount", label: "Discount (%)", type: "number", placeholder: "e.g., 20" },
