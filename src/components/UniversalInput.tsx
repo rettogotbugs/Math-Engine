@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { Search, Sparkles } from "lucide-react";
 import { universalParser } from "../lib/solvers/universalParser";
 import { cn } from "../lib/utils";
@@ -69,10 +69,11 @@ export function UniversalInput() {
                   </button>
                 </div>
 
-                <div className="rounded-xl bg-indigo-500/10 p-4 mb-6 border border-indigo-500/20">
-                  <div className="text-2xl font-bold text-indigo-400 font-mono break-all">
-                    {result.result}
-                  </div>
+                <div className={cn(
+                  "rounded-xl bg-indigo-500/10 p-4 mb-6 border border-indigo-500/20",
+                  React.isValidElement(result.result) ? "" : "text-2xl font-bold text-indigo-400 font-mono break-all"
+                )}>
+                  {result.result}
                 </div>
 
                 {result.steps && result.steps.length > 0 && (
@@ -80,19 +81,32 @@ export function UniversalInput() {
                     <h4 className="mb-3 text-sm font-semibold uppercase tracking-wider text-zinc-500">
                       Step-by-step Solution
                     </h4>
-                    <div className="space-y-3">
+                    <motion.div 
+                      className="space-y-3"
+                      initial="hidden"
+                      animate="visible"
+                      variants={{
+                        visible: {
+                          transition: { staggerChildren: 0.1 }
+                        }
+                      }}
+                    >
                       {result.steps.map((step: string, idx: number) => (
-                        <div
+                        <motion.div
                           key={idx}
+                          variants={{
+                            hidden: { opacity: 0, x: -10 },
+                            visible: { opacity: 1, x: 0 }
+                          }}
                           className="flex items-start gap-3 rounded-lg bg-white/5 p-3 text-sm text-zinc-300"
                         >
                           <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-indigo-500/20 text-xs font-bold text-indigo-400">
                             {idx + 1}
                           </span>
                           <span className="pt-0.5 font-mono">{step}</span>
-                        </div>
+                        </motion.div>
                       ))}
-                    </div>
+                    </motion.div>
                   </div>
                 )}
               </div>

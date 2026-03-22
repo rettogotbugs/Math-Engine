@@ -4,18 +4,18 @@ import { algebraSolver } from "../solvers/algebraSolver";
 export const algebraTools: MathTool[] = [
   {
     id: "linear_eq",
-    name: "Linear Equation Solver",
+    name: "Universal Equation Solver",
     category: "Algebra",
-    description: "Solve linear equations step-by-step and understand how variables are isolated. Essential for finding unknown values in proportional relationships.",
+    description: "Solve linear and quadratic equations step-by-step. Essential for finding unknown values.",
     inputs: [
       {
         id: "eq",
         label: "Equation",
         type: "text",
-        placeholder: "e.g., 2x + 3 = 7",
+        placeholder: "e.g., 2x + 3 = 7 or x^2 - 4 = 0",
       },
     ],
-    calculate: (values) => algebraSolver.solveLinear(values.eq),
+    calculate: (values) => algebraSolver.solveEquation(values.eq),
   },
   {
     id: "quadratic_eq",
@@ -367,5 +367,20 @@ export const algebraTools: MathTool[] = [
         ]
       };
     },
+  },
+  {
+    id: "inequality_solver",
+    name: "Inequality Solver",
+    category: "Algebra",
+    description: "Solve linear inequalities step-by-step. Understand how to isolate variables and when to flip the inequality sign.",
+    inputs: [
+      {
+        id: "ineq",
+        label: "Inequality",
+        type: "text",
+        placeholder: "e.g., 2x + 3 > 7",
+      },
+    ],
+    calculate: (values) => algebraSolver.solveInequality(values.ineq),
   }
 ];

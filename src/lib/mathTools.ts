@@ -9,6 +9,8 @@ import { coordinateGeometryTools } from "./tools/coordinateGeometryTools";
 import { calculusTools } from "./tools/calculusTools";
 import { advancedMathTools } from "./tools/advancedMathTools";
 import { utilityTools } from "./tools/utilityTools";
+import { statisticsTools } from "./tools/statisticsTools";
+import { chartTools } from "./tools/chartTools";
 
 export type ToolInput = {
   id: string;
@@ -45,4 +47,6 @@ export const mathTools: MathTool[] = [
   ...calculusTools,
   ...advancedMathTools,
   ...utilityTools,
+  ...statisticsTools,
+  ...chartTools,
 ];

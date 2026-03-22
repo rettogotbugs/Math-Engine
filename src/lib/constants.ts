@@ -14,7 +14,9 @@ import {
   Map,
   Wrench,
   Flame,
-  Home
+  Home,
+  BarChart,
+  PieChart
 } from "lucide-react";
 
 export const MAIN_MENU = [
@@ -30,6 +32,8 @@ export const CATEGORIES = [
   { id: "Geometry", name: "Geometry", icon: Square },
   { id: "Coordinate Geometry", name: "Coordinate Geometry", icon: Map },
   { id: "Calculus", name: "Calculus", icon: Sigma },
+  { id: "Statistics & Data", name: "Statistics & Data", icon: BarChart },
+  { id: "Charts & Graphs", name: "Charts & Graphs", icon: PieChart },
   { id: "Advanced Math (JEE Level)", name: "Advanced Math (JEE Level)", icon: GraduationCap },
 ];
 

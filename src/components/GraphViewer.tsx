@@ -10,50 +10,109 @@ import {
   ReferenceLine,
 } from "recharts";
 import * as math from "mathjs";
-import { LineChart as LineChartIcon, Settings2, RefreshCw } from "lucide-react";
+import { LineChart as LineChartIcon, Settings2, RefreshCw, Plus, Trash2, ZoomIn, ZoomOut } from "lucide-react";
 import { cn } from "../lib/utils";
 import { motion } from "motion/react";
 
+const COLORS = ["#818cf8", "#34d399", "#fbbf24", "#f87171", "#a78bfa"];
+
 export function GraphViewer() {
-  const [expression, setExpression] = useState("sin(x)");
+  const [expressions, setExpressions] = useState(["sin(x)"]);
   const [xMin, setXMin] = useState(-10);
   const [xMax, setXMax] = useState(10);
   const [points, setPoints] = useState(100);
-  const [error, setError] = useState<string | null>(null);
+  const [errors, setErrors] = useState<(string | null)[]>([null]);
 
   const handleReset = () => {
-    setExpression("sin(x)");
+    setExpressions(["sin(x)"]);
     setXMin(-10);
     setXMax(10);
     setPoints(100);
-    setError(null);
+    setErrors([null]);
+  };
+
+  const handleZoomIn = () => {
+    const range = xMax - xMin;
+    setXMin(xMin + range * 0.25);
+    setXMax(xMax - range * 0.25);
+  };
+
+  const handleZoomOut = () => {
+    const range = xMax - xMin;
+    setXMin(xMin - range * 0.5);
+    setXMax(xMax + range * 0.5);
+  };
+
+  const handleAddExpression = () => {
+    if (expressions.length < 5) {
+      setExpressions([...expressions, ""]);
+      setErrors([...errors, null]);
+    }
+  };
+
+  const handleRemoveExpression = (index: number) => {
+    const newExprs = [...expressions];
+    newExprs.splice(index, 1);
+    setExpressions(newExprs);
+
+    const newErrs = [...errors];
+    newErrs.splice(index, 1);
+    setErrors(newErrs);
+  };
+
+  const handleExpressionChange = (index: number, value: string) => {
+    const newExprs = [...expressions];
+    newExprs[index] = value;
+    setExpressions(newExprs);
   };
 
   const data = useMemo(() => {
-    try {
-      const node = math.parse(expression);
-      const code = node.compile();
-      const step = (xMax - xMin) / points;
-      const result = [];
-
-      for (let x = xMin; x <= xMax; x += step) {
-        try {
-          const y = code.evaluate({ x });
-          // Filter out complex numbers or infinities for graphing
-          if (typeof y === "number" && isFinite(y)) {
-            result.push({ x: Number(x.toFixed(2)), y: Number(y.toFixed(4)) });
-          }
-        } catch (e) {
-          // Skip invalid points
-        }
+    const step = (xMax - xMin) / points;
+    const result = [];
+    const newErrors = [...errors];
+    
+    const compiledExprs = expressions.map((expr, i) => {
+      try {
+        if (!expr.trim()) return null;
+        const node = math.parse(expr);
+        newErrors[i] = null;
+        return node.compile();
+      } catch (e) {
+        newErrors[i] = "Invalid expression";
+        return null;
       }
-      setError(null);
-      return result;
-    } catch (e) {
-      setError("Invalid expression");
-      return [];
+    });
+
+    for (let x = xMin; x <= xMax; x += step) {
+      const point: any = { x: Number(x.toFixed(2)) };
+      let hasValidY = false;
+      
+      compiledExprs.forEach((code, i) => {
+        if (code) {
+          try {
+            const y = code.evaluate({ x });
+            if (typeof y === "number" && isFinite(y)) {
+              point[`y${i}`] = Number(y.toFixed(4));
+              hasValidY = true;
+            }
+          } catch (e) {
+            // Skip invalid points
+          }
+        }
+      });
+      
+      if (hasValidY) {
+        result.push(point);
+      }
     }
-  }, [expression, xMin, xMax, points]);
+    
+    // Only update errors if they changed to avoid infinite loops
+    if (JSON.stringify(newErrors) !== JSON.stringify(errors)) {
+      setErrors(newErrors);
+    }
+    
+    return result;
+  }, [expressions, xMin, xMax, points]);
 
   return (
     <div className="mx-auto max-w-6xl p-4 md:p-8">
@@ -63,7 +122,7 @@ export function GraphViewer() {
           Graph Viewer
         </h1>
         <p className="mt-2 text-zinc-400">
-          Plot mathematical functions interactively
+          Plot multiple mathematical functions interactively
         </p>
       </div>
 
@@ -86,22 +145,44 @@ export function GraphViewer() {
 
           <div className="space-y-4">
             <div>
-              <label className="mb-2 block text-sm font-medium text-zinc-300">
-                Function f(x)
-              </label>
-              <input
-                type="text"
-                value={expression}
-                onChange={(e) => setExpression(e.target.value)}
-                placeholder="e.g., x^2"
-                className={cn(
-                  "w-full rounded-xl border bg-zinc-950 px-4 py-3 text-white placeholder-zinc-600 outline-none transition-all focus:ring-1 font-mono",
-                  error
-                    ? "border-red-500/50 focus:border-red-500 focus:ring-red-500"
-                    : "border-white/10 focus:border-indigo-500 focus:ring-indigo-500",
+              <label className="mb-2 flex items-center justify-between text-sm font-medium text-zinc-300">
+                <span>Functions f(x)</span>
+                {expressions.length < 5 && (
+                  <button onClick={handleAddExpression} className="text-indigo-400 hover:text-indigo-300 flex items-center gap-1 text-xs">
+                    <Plus className="h-3 w-3" /> Add
+                  </button>
                 )}
-              />
-              {error && <p className="mt-2 text-xs text-red-400">{error}</p>}
+              </label>
+              <div className="space-y-3">
+                {expressions.map((expr, index) => (
+                  <div key={index}>
+                    <div className="relative flex items-center">
+                      <div className="absolute left-3 w-3 h-3 rounded-full" style={{ backgroundColor: COLORS[index % COLORS.length] }}></div>
+                      <input
+                        type="text"
+                        value={expr}
+                        onChange={(e) => handleExpressionChange(index, e.target.value)}
+                        placeholder="e.g., x^2"
+                        className={cn(
+                          "w-full rounded-xl border bg-zinc-950 pl-8 pr-10 py-2 text-sm text-white placeholder-zinc-600 outline-none transition-all focus:ring-1 font-mono",
+                          errors[index]
+                            ? "border-red-500/50 focus:border-red-500 focus:ring-red-500"
+                            : "border-white/10 focus:border-indigo-500 focus:ring-indigo-500",
+                        )}
+                      />
+                      {expressions.length > 1 && (
+                        <button 
+                          onClick={() => handleRemoveExpression(index)}
+                          className="absolute right-2 p-1 text-zinc-500 hover:text-red-400 transition-colors"
+                        >
+                          <Trash2 className="h-4 w-4" />
+                        </button>
+                      )}
+                    </div>
+                    {errors[index] && <p className="mt-1 text-xs text-red-400">{errors[index]}</p>}
+                  </div>
+                ))}
+              </div>
             </div>
 
             <div className="grid grid-cols-2 gap-4">
@@ -113,7 +194,7 @@ export function GraphViewer() {
                   type="number"
                   value={xMin}
                   onChange={(e) => setXMin(Number(e.target.value))}
-                  className="w-full rounded-xl border border-white/10 bg-zinc-950 px-4 py-3 text-white outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+                  className="w-full rounded-xl border border-white/10 bg-zinc-950 px-4 py-2 text-sm text-white outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
                 />
               </div>
               <div>
@@ -124,9 +205,18 @@ export function GraphViewer() {
                   type="number"
                   value={xMax}
                   onChange={(e) => setXMax(Number(e.target.value))}
-                  className="w-full rounded-xl border border-white/10 bg-zinc-950 px-4 py-3 text-white outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+                  className="w-full rounded-xl border border-white/10 bg-zinc-950 px-4 py-2 text-sm text-white outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
                 />
               </div>
+            </div>
+            
+            <div className="flex gap-2">
+              <button onClick={handleZoomIn} className="flex-1 flex items-center justify-center gap-2 rounded-xl bg-white/5 py-2 text-sm text-white hover:bg-white/10 transition-colors">
+                <ZoomIn className="h-4 w-4" /> Zoom In
+              </button>
+              <button onClick={handleZoomOut} className="flex-1 flex items-center justify-center gap-2 rounded-xl bg-white/5 py-2 text-sm text-white hover:bg-white/10 transition-colors">
+                <ZoomOut className="h-4 w-4" /> Zoom Out
+              </button>
             </div>
 
             <div>
@@ -178,9 +268,12 @@ export function GraphViewer() {
                     borderRadius: "0.75rem",
                     color: "#fff",
                   }}
-                  itemStyle={{ color: "#818cf8", fontWeight: "bold" }}
+                  itemStyle={{ fontWeight: "bold" }}
                   labelStyle={{ color: "#a1a1aa", marginBottom: "4px" }}
-                  formatter={(value: number) => [value.toFixed(4), "f(x)"]}
+                  formatter={(value: number, name: string) => {
+                    const index = parseInt(name.replace('y', ''));
+                    return [value.toFixed(4), expressions[index] || `f${index + 1}(x)`];
+                  }}
                   labelFormatter={(label: number) => `x = ${label}`}
                 />
                 <ReferenceLine
@@ -195,19 +288,22 @@ export function GraphViewer() {
                   strokeWidth={2}
                   opacity={0.5}
                 />
-                <Line
-                  type="monotone"
-                  dataKey="y"
-                  stroke="#818cf8"
-                  strokeWidth={3}
-                  dot={false}
-                  activeDot={{
-                    r: 6,
-                    fill: "#818cf8",
-                    stroke: "#fff",
-                    strokeWidth: 2,
-                  }}
-                />
+                {expressions.map((expr, index) => (
+                  <Line
+                    key={`line-${index}`}
+                    type="monotone"
+                    dataKey={`y${index}`}
+                    stroke={COLORS[index % COLORS.length]}
+                    strokeWidth={3}
+                    dot={false}
+                    activeDot={{
+                      r: 6,
+                      fill: COLORS[index % COLORS.length],
+                      stroke: "#fff",
+                      strokeWidth: 2,
+                    }}
+                  />
+                ))}
               </LineChart>
             </ResponsiveContainer>
           ) : (
