@@ -1,133 +1,39 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { Search, BookOpen, Copy, Check } from "lucide-react";
 import { motion } from "motion/react";
+import { BlockMath } from "react-katex";
+import "katex/dist/katex.min.css";
 import { cn } from "../lib/utils";
-
-const FORMULAS = [
-  {
-    category: "Algebra",
-    items: [
-      {
-        name: "Quadratic Formula",
-        formula: "x = (-b ± √(b² - 4ac)) / 2a",
-        desc: "Used to find the roots of a quadratic equation ax² + bx + c = 0.",
-      },
-      {
-        name: "Difference of Squares",
-        formula: "a² - b² = (a - b)(a + b)",
-        desc: "Factoring a difference of two squares.",
-      },
-      {
-        name: "Perfect Square Trinomial",
-        formula: "(a ± b)² = a² ± 2ab + b²",
-        desc: "Expanding a binomial squared.",
-      },
-      {
-        name: "Sum of Cubes",
-        formula: "a³ + b³ = (a + b)(a² - ab + b²)",
-        desc: "Factoring a sum of two cubes.",
-      },
-    ],
-  },
-  {
-    category: "Trigonometry",
-    items: [
-      {
-        name: "Pythagorean Identity",
-        formula: "sin²(θ) + cos²(θ) = 1",
-        desc: "Fundamental identity relating sine and cosine.",
-      },
-      {
-        name: "Double Angle (Sine)",
-        formula: "sin(2θ) = 2sin(θ)cos(θ)",
-        desc: "Sine of a double angle.",
-      },
-      {
-        name: "Double Angle (Cosine)",
-        formula: "cos(2θ) = cos²(θ) - sin²(θ)",
-        desc: "Cosine of a double angle.",
-      },
-      {
-        name: "Tangent Identity",
-        formula: "tan(θ) = sin(θ) / cos(θ)",
-        desc: "Definition of tangent.",
-      },
-    ],
-  },
-  {
-    category: "Calculus",
-    items: [
-      {
-        name: "Power Rule (Derivative)",
-        formula: "d/dx (x^n) = n * x^(n-1)",
-        desc: "Derivative of a power function.",
-      },
-      {
-        name: "Product Rule",
-        formula: "d/dx (u*v) = u * dv/dx + v * du/dx",
-        desc: "Derivative of a product of two functions.",
-      },
-      {
-        name: "Quotient Rule",
-        formula: "d/dx (u/v) = (v * du/dx - u * dv/dx) / v²",
-        desc: "Derivative of a quotient of two functions.",
-      },
-      {
-        name: "Chain Rule",
-        formula: "d/dx f(g(x)) = f'(g(x)) * g'(x)",
-        desc: "Derivative of a composite function.",
-      },
-      {
-        name: "Power Rule (Integral)",
-        formula: "∫ x^n dx = (x^(n+1)) / (n+1) + C",
-        desc: "Integral of a power function (n ≠ -1).",
-      },
-    ],
-  },
-  {
-    category: "Geometry",
-    items: [
-      {
-        name: "Area of Circle",
-        formula: "A = πr²",
-        desc: "Area of a circle with radius r.",
-      },
-      {
-        name: "Circumference of Circle",
-        formula: "C = 2πr",
-        desc: "Perimeter of a circle.",
-      },
-      {
-        name: "Volume of Sphere",
-        formula: "V = (4/3)πr³",
-        desc: "Volume of a sphere with radius r.",
-      },
-      {
-        name: "Pythagorean Theorem",
-        formula: "a² + b² = c²",
-        desc: "Relates the sides of a right triangle.",
-      },
-    ],
-  },
-];
+import { formulas } from "../lib/formulas";
 
 export function FormulaLibrary() {
   const [search, setSearch] = useState("");
   const [activeCategory, setActiveCategory] = useState("All");
   const [copiedFormula, setCopiedFormula] = useState<string | null>(null);
 
-  const categories = ["All", ...FORMULAS.map((f) => f.category)];
+  const categories = ["All", ...Array.from(new Set(formulas.map((f) => f.category)))];
 
-  const filteredFormulas = FORMULAS.map((cat) => ({
-    ...cat,
-    items: cat.items.filter(
+  const filteredFormulas = useMemo(() => {
+    const filtered = formulas.filter(
       (item) =>
-        (activeCategory === "All" || cat.category === activeCategory) &&
+        (activeCategory === "All" || item.category === activeCategory) &&
         (item.name.toLowerCase().includes(search.toLowerCase()) ||
-          item.formula.toLowerCase().includes(search.toLowerCase()) ||
-          item.desc.toLowerCase().includes(search.toLowerCase())),
-    ),
-  })).filter((cat) => cat.items.length > 0);
+          item.formula.toLowerCase().includes(search.toLowerCase()))
+    );
+
+    const grouped = filtered.reduce((acc, item) => {
+      if (!acc[item.category]) {
+        acc[item.category] = [];
+      }
+      acc[item.category].push(item);
+      return acc;
+    }, {} as Record<string, typeof formulas>);
+
+    return Object.entries(grouped).map(([category, items]) => ({
+      category,
+      items,
+    }));
+  }, [search, activeCategory]);
 
   const handleCopy = (formula: string) => {
     navigator.clipboard.writeText(formula);
@@ -186,7 +92,7 @@ export function FormulaLibrary() {
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {category.items.map((item, idx) => (
                 <motion.div
-                  key={idx}
+                  key={item.id}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: idx * 0.05 }}
@@ -195,12 +101,11 @@ export function FormulaLibrary() {
                   <h3 className="text-lg font-semibold text-white mb-2">
                     {item.name}
                   </h3>
-                  <div className="rounded-xl bg-indigo-500/10 p-4 mb-4 border border-indigo-500/20">
-                    <code className="text-lg font-bold text-indigo-400 font-mono block text-center">
-                      {item.formula}
-                    </code>
+                  <div className="rounded-xl bg-indigo-500/10 p-4 mb-4 border border-indigo-500/20 flex-1 flex items-center justify-center overflow-x-auto">
+                    <div className="text-indigo-400">
+                      <BlockMath math={item.formula} />
+                    </div>
                   </div>
-                  <p className="text-sm text-zinc-400 mb-6 flex-1">{item.desc}</p>
                   
                   <button
                     onClick={() => handleCopy(item.formula)}

@@ -9,10 +9,10 @@ export const coordinateGeometryTools: MathTool[] = [
     classLevel: "Class 9-10",
     description: "Find the straight-line distance between two points (x₁, y₁) and (x₂, y₂) on a 2D plane. Essential for mapping and spatial analysis.",
     inputs: [
-      { id: "x1", label: "x₁", type: "number", placeholder: "0" },
-      { id: "y1", label: "y₁", type: "number", placeholder: "0" },
-      { id: "x2", label: "x₂", type: "number", placeholder: "3" },
-      { id: "y2", label: "y₂", type: "number", placeholder: "4" },
+      { id: "x1", label: "x₁", type: "number", placeholder: "-2", defaultValue: "-2" },
+      { id: "y1", label: "y₁", type: "number", placeholder: "1", defaultValue: "1" },
+      { id: "x2", label: "x₂", type: "number", placeholder: "4", defaultValue: "4" },
+      { id: "y2", label: "y₂", type: "number", placeholder: "9", defaultValue: "9" },
     ],
     calculate: (values) => {
       const x1 = parseFloat(values.x1);
@@ -30,10 +30,10 @@ export const coordinateGeometryTools: MathTool[] = [
     classLevel: "Class 9-10",
     description: "Find the exact center point between (x₁, y₁) and (x₂, y₂). Useful for finding the center of a line segment or balancing points.",
     inputs: [
-      { id: "x1", label: "x₁", type: "number", placeholder: "0" },
-      { id: "y1", label: "y₁", type: "number", placeholder: "0" },
-      { id: "x2", label: "x₂", type: "number", placeholder: "4" },
-      { id: "y2", label: "y₂", type: "number", placeholder: "6" },
+      { id: "x1", label: "x₁", type: "number", placeholder: "-3", defaultValue: "-3" },
+      { id: "y1", label: "y₁", type: "number", placeholder: "5", defaultValue: "5" },
+      { id: "x2", label: "x₂", type: "number", placeholder: "7", defaultValue: "7" },
+      { id: "y2", label: "y₂", type: "number", placeholder: "-1", defaultValue: "-1" },
     ],
     calculate: (values) => {
       const x1 = parseFloat(values.x1);
@@ -51,10 +51,10 @@ export const coordinateGeometryTools: MathTool[] = [
     classLevel: "Class 9-10",
     description: "Calculate the steepness or incline of a line passing through two points. A fundamental concept in algebra and calculus.",
     inputs: [
-      { id: "x1", label: "x₁", type: "number", placeholder: "1" },
-      { id: "y1", label: "y₁", type: "number", placeholder: "2" },
-      { id: "x2", label: "x₂", type: "number", placeholder: "3" },
-      { id: "y2", label: "y₂", type: "number", placeholder: "6" },
+      { id: "x1", label: "x₁", type: "number", placeholder: "-1", defaultValue: "-1" },
+      { id: "y1", label: "y₁", type: "number", placeholder: "4", defaultValue: "4" },
+      { id: "x2", label: "x₂", type: "number", placeholder: "3", defaultValue: "3" },
+      { id: "y2", label: "y₂", type: "number", placeholder: "-2", defaultValue: "-2" },
     ],
     calculate: (values) => {
       const x1 = parseFloat(values.x1);
@@ -72,10 +72,10 @@ export const coordinateGeometryTools: MathTool[] = [
     classLevel: "Class 9-10",
     description: "Determine the equation of a line (y = mx + b) passing through two given points. Crucial for modeling linear relationships.",
     inputs: [
-      { id: "x1", label: "x₁", type: "number", placeholder: "1" },
-      { id: "y1", label: "y₁", type: "number", placeholder: "2" },
-      { id: "x2", label: "x₂", type: "number", placeholder: "3" },
-      { id: "y2", label: "y₂", type: "number", placeholder: "6" },
+      { id: "x1", label: "x₁", type: "number", placeholder: "2", defaultValue: "2" },
+      { id: "y1", label: "y₁", type: "number", placeholder: "5", defaultValue: "5" },
+      { id: "x2", label: "x₂", type: "number", placeholder: "6", defaultValue: "6" },
+      { id: "y2", label: "y₂", type: "number", placeholder: "13", defaultValue: "13" },
     ],
     calculate: (values) => {
       const x1 = parseFloat(values.x1);
@@ -93,12 +93,12 @@ export const coordinateGeometryTools: MathTool[] = [
     classLevel: "Class 9-10",
     description: "Calculate the straight-line distance between two points in three-dimensional space. Essential for 3D modeling and physics.",
     inputs: [
-      { id: "x1", label: "x₁", type: "number", placeholder: "0" },
-      { id: "y1", label: "y₁", type: "number", placeholder: "0" },
-      { id: "z1", label: "z₁", type: "number", placeholder: "0" },
-      { id: "x2", label: "x₂", type: "number", placeholder: "3" },
-      { id: "y2", label: "y₂", type: "number", placeholder: "4" },
-      { id: "z2", label: "z₂", type: "number", placeholder: "12" },
+      { id: "x1", label: "x₁", type: "number", placeholder: "1", defaultValue: "1" },
+      { id: "y1", label: "y₁", type: "number", placeholder: "-2", defaultValue: "-2" },
+      { id: "z1", label: "z₁", type: "number", placeholder: "3", defaultValue: "3" },
+      { id: "x2", label: "x₂", type: "number", placeholder: "4", defaultValue: "4" },
+      { id: "y2", label: "y₂", type: "number", placeholder: "2", defaultValue: "2" },
+      { id: "z2", label: "z₂", type: "number", placeholder: "15", defaultValue: "15" },
     ],
     calculate: (values) => {
       const x1 = parseFloat(values.x1);
@@ -112,18 +112,17 @@ export const coordinateGeometryTools: MathTool[] = [
       const dx = x2 - x1;
       const dy = y2 - y1;
       const dz = z2 - z1;
-      const dist = Math.sqrt(dx*dx + dy*dy + dz*dz);
+      const dist2 = dx*dx + dy*dy + dz*dz;
+      const dist = Math.sqrt(dist2);
       
       return {
-        result: dist.toFixed(4),
+        result: `$$d = \\sqrt{${dist2}} \\approx ${dist.toFixed(4)}$$`,
         steps: [
-          `Find 3D distance between (${x1}, ${y1}, ${z1}) and (${x2}, ${y2}, ${z2})`,
-          `Formula: d = √((x₂ - x₁)² + (y₂ - y₁)² + (z₂ - z₁)²)`,
-          `d = √((${x2} - ${x1})² + (${y2} - ${y1})² + (${z2} - ${z1})²)`,
-          `d = √((${dx})² + (${dy})² + (${dz})²)`,
-          `d = √(${dx*dx} + ${dy*dy} + ${dz*dz})`,
-          `d = √(${dx*dx + dy*dy + dz*dz})`,
-          `d ≈ ${dist.toFixed(4)}`
+          `Formula: $d = \\sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2 + (z_2 - z_1)^2}$`,
+          `$d = \\sqrt{(${x2} - ${x1})^2 + (${y2} - ${y1})^2 + (${z2} - ${z1})^2}$`,
+          `$d = \\sqrt{(${dx})^2 + (${dy})^2 + (${dz})^2}$`,
+          `$d = \\sqrt{${dx*dx} + ${dy*dy} + ${dz*dz}}$`,
+          `$d = \\sqrt{${dist2}} \\approx ${dist.toFixed(4)}$`
         ]
       };
     },
@@ -135,12 +134,12 @@ export const coordinateGeometryTools: MathTool[] = [
     classLevel: "Class 9-10",
     description: "Find the exact center point between two points in 3D space. Useful in computer graphics and spatial geometry.",
     inputs: [
-      { id: "x1", label: "x₁", type: "number", placeholder: "0" },
-      { id: "y1", label: "y₁", type: "number", placeholder: "0" },
-      { id: "z1", label: "z₁", type: "number", placeholder: "0" },
-      { id: "x2", label: "x₂", type: "number", placeholder: "4" },
-      { id: "y2", label: "y₂", type: "number", placeholder: "6" },
-      { id: "z2", label: "z₂", type: "number", placeholder: "8" },
+      { id: "x1", label: "x₁", type: "number", placeholder: "-2", defaultValue: "-2" },
+      { id: "y1", label: "y₁", type: "number", placeholder: "4", defaultValue: "4" },
+      { id: "z1", label: "z₁", type: "number", placeholder: "1", defaultValue: "1" },
+      { id: "x2", label: "x₂", type: "number", placeholder: "6", defaultValue: "6" },
+      { id: "y2", label: "y₂", type: "number", placeholder: "-2", defaultValue: "-2" },
+      { id: "z2", label: "z₂", type: "number", placeholder: "9", defaultValue: "9" },
     ],
     calculate: (values) => {
       const x1 = parseFloat(values.x1);
@@ -156,13 +155,13 @@ export const coordinateGeometryTools: MathTool[] = [
       const mz = (z1 + z2) / 2;
       
       return {
-        result: `(${mx}, ${my}, ${mz})`,
+        result: `$$(${mx}, ${my}, ${mz})$$`,
         steps: [
-          `Find 3D midpoint between (${x1}, ${y1}, ${z1}) and (${x2}, ${y2}, ${z2})`,
-          `Formula: M = ((x₁ + x₂)/2, (y₁ + y₂)/2, (z₁ + z₂)/2)`,
-          `M = ((${x1} + ${x2})/2, (${y1} + ${y2})/2, (${z1} + ${z2})/2)`,
-          `M = (${x1 + x2}/2, ${y1 + y2}/2, ${z1 + z2}/2)`,
-          `M = (${mx}, ${my}, ${mz})`
+          `Find 3D midpoint between $(${x1}, ${y1}, ${z1})$ and $(${x2}, ${y2}, ${z2})$`,
+          `Formula: $M = \\left(\\frac{x_1 + x_2}{2}, \\frac{y_1 + y_2}{2}, \\frac{z_1 + z_2}{2}\\right)$`,
+          `$M = \\left(\\frac{${x1} + ${x2}}{2}, \\frac{${y1} + ${y2}}{2}, \\frac{${z1} + ${z2}}{2}\\right)$`,
+          `$M = \\left(\\frac{${x1 + x2}}{2}, \\frac{${y1 + y2}}{2}, \\frac{${z1 + z2}}{2}\\right)$`,
+          `$M = (${mx}, ${my}, ${mz})$`
         ]
       };
     },
@@ -174,12 +173,12 @@ export const coordinateGeometryTools: MathTool[] = [
     classLevel: "Class 9-10",
     description: "Find the coordinates of a point that divides a line segment into a given ratio m:n. Important for interpolation.",
     inputs: [
-      { id: "x1", label: "x₁", type: "number", placeholder: "1" },
-      { id: "y1", label: "y₁", type: "number", placeholder: "2" },
-      { id: "x2", label: "x₂", type: "number", placeholder: "4" },
-      { id: "y2", label: "y₂", type: "number", placeholder: "6" },
-      { id: "m", label: "Ratio m", type: "number", placeholder: "1" },
-      { id: "n", label: "Ratio n", type: "number", placeholder: "1" },
+      { id: "x1", label: "x₁", type: "number", placeholder: "-1", defaultValue: "-1" },
+      { id: "y1", label: "y₁", type: "number", placeholder: "4", defaultValue: "4" },
+      { id: "x2", label: "x₂", type: "number", placeholder: "5", defaultValue: "5" },
+      { id: "y2", label: "y₂", type: "number", placeholder: "-2", defaultValue: "-2" },
+      { id: "m", label: "Ratio m", type: "number", placeholder: "2", defaultValue: "2" },
+      { id: "n", label: "Ratio n", type: "number", placeholder: "3", defaultValue: "3" },
     ],
     calculate: (values) => {
       const x1 = parseFloat(values.x1);
@@ -194,12 +193,12 @@ export const coordinateGeometryTools: MathTool[] = [
       const py = (m * y2 + n * y1) / (m + n);
       
       return {
-        result: `(${px.toFixed(2)}, ${py.toFixed(2)})`,
+        result: `$$(${px.toFixed(2)}, ${py.toFixed(2)})$$`,
         steps: [
-          `Find point dividing (${x1}, ${y1}) and (${x2}, ${y2}) in ratio ${m}:${n}`,
-          `Formula: P = ((mx₂ + nx₁)/(m + n), (my₂ + ny₁)/(m + n))`,
-          `P_x = (${m}*${x2} + ${n}*${x1}) / (${m} + ${n}) = ${m*x2 + n*x1} / ${m+n} = ${px.toFixed(2)}`,
-          `P_y = (${m}*${y2} + ${n}*${y1}) / (${m} + ${n}) = ${m*y2 + n*y1} / ${m+n} = ${py.toFixed(2)}`,
+          `Find point dividing $(${x1}, ${y1})$ and $(${x2}, ${y2})$ in ratio $${m}:${n}$`,
+          `Formula: $P = \\left(\\frac{mx_2 + nx_1}{m + n}, \\frac{my_2 + ny_1}{m + n}\\right)$`,
+          `$P_x = \\frac{${m}(${x2}) + ${n}(${x1})}{${m} + ${n}} = \\frac{${m*x2} + ${n*x1}}{${m+n}} = ${px.toFixed(2)}$`,
+          `P_y = \\frac{${m}(${y2}) + ${n}(${y1})}{${m} + ${n}} = \\frac{${m*y2} + ${n*y1}}{${m+n}} = ${py.toFixed(2)}`,
           `P = (${px.toFixed(2)}, ${py.toFixed(2)})`
         ]
       };
@@ -212,12 +211,12 @@ export const coordinateGeometryTools: MathTool[] = [
     classLevel: "Class 9-10",
     description: "Calculate the area of a triangle using the coordinates of its three vertices. A powerful tool in analytical geometry.",
     inputs: [
-      { id: "x1", label: "x₁", type: "number", placeholder: "0" },
-      { id: "y1", label: "y₁", type: "number", placeholder: "0" },
-      { id: "x2", label: "x₂", type: "number", placeholder: "4" },
-      { id: "y2", label: "y₂", type: "number", placeholder: "0" },
-      { id: "x3", label: "x₃", type: "number", placeholder: "0" },
-      { id: "y3", label: "y₃", type: "number", placeholder: "3" },
+      { id: "x1", label: "x₁", type: "number", placeholder: "-2", defaultValue: "-2" },
+      { id: "y1", label: "y₁", type: "number", placeholder: "3", defaultValue: "3" },
+      { id: "x2", label: "x₂", type: "number", placeholder: "4", defaultValue: "4" },
+      { id: "y2", label: "y₂", type: "number", placeholder: "7", defaultValue: "7" },
+      { id: "x3", label: "x₃", type: "number", placeholder: "6", defaultValue: "6" },
+      { id: "y3", label: "y₃", type: "number", placeholder: "-1", defaultValue: "-1" },
     ],
     calculate: (values) => {
       const x1 = parseFloat(values.x1);
@@ -231,14 +230,14 @@ export const coordinateGeometryTools: MathTool[] = [
       const area = 0.5 * Math.abs(x1*(y2 - y3) + x2*(y3 - y1) + x3*(y1 - y2));
       
       return {
-        result: area.toString(),
+        result: `$$${area}$$`,
         steps: [
-          `Find area of triangle with vertices (${x1}, ${y1}), (${x2}, ${y2}), (${x3}, ${y3})`,
-          `Formula: Area = 0.5 * |x₁(y₂ - y₃) + x₂(y₃ - y₁) + x₃(y₁ - y₂)|`,
-          `Area = 0.5 * |${x1}(${y2} - ${y3}) + ${x2}(${y3} - ${y1}) + ${x3}(${y1} - ${y2})|`,
-          `Area = 0.5 * |${x1 * (y2 - y3)} + ${x2 * (y3 - y1)} + ${x3 * (y1 - y2)}|`,
-          `Area = 0.5 * |${x1*(y2 - y3) + x2*(y3 - y1) + x3*(y1 - y2)}|`,
-          `Area = ${area}`
+          `Find area of triangle with vertices $(${x1}, ${y1}), (${x2}, ${y2}), (${x3}, ${y3})$`,
+          `Formula: $\\text{Area} = \\frac{1}{2} |x_1(y_2 - y_3) + x_2(y_3 - y_1) + x_3(y_1 - y_2)|$`,
+          `$\\text{Area} = \\frac{1}{2} |${x1}(${y2} - (${y3})) + ${x2}(${y3} - ${y1}) + ${x3}(${y1} - ${y2})|$`,
+          `$\\text{Area} = \\frac{1}{2} |${x1 * (y2 - y3)} + ${x2 * (y3 - y1)} + ${x3 * (y1 - y2)}|$`,
+          `$\\text{Area} = \\frac{1}{2} |${x1*(y2 - y3) + x2*(y3 - y1) + x3*(y1 - y2)}|$`,
+          `$\\text{Area} = ${area}$`
         ]
       };
     },
@@ -250,12 +249,12 @@ export const coordinateGeometryTools: MathTool[] = [
     classLevel: "Class 9-10",
     description: "Find the centroid (center of mass) of a triangle given its vertices. Useful in physics and engineering.",
     inputs: [
-      { id: "x1", label: "x₁", type: "number", placeholder: "0" },
-      { id: "y1", label: "y₁", type: "number", placeholder: "0" },
-      { id: "x2", label: "x₂", type: "number", placeholder: "4" },
-      { id: "y2", label: "y₂", type: "number", placeholder: "0" },
-      { id: "x3", label: "x₃", type: "number", placeholder: "0" },
-      { id: "y3", label: "y₃", type: "number", placeholder: "3" },
+      { id: "x1", label: "x₁", type: "number", placeholder: "-1", defaultValue: "-1" },
+      { id: "y1", label: "y₁", type: "number", placeholder: "4", defaultValue: "4" },
+      { id: "x2", label: "x₂", type: "number", placeholder: "5", defaultValue: "5" },
+      { id: "y2", label: "y₂", type: "number", placeholder: "2", defaultValue: "2" },
+      { id: "x3", label: "x₃", type: "number", placeholder: "-1", defaultValue: "-1" },
+      { id: "y3", label: "y₃", type: "number", placeholder: "-3", defaultValue: "-3" },
     ],
     calculate: (values) => {
       const x1 = parseFloat(values.x1);
@@ -270,13 +269,13 @@ export const coordinateGeometryTools: MathTool[] = [
       const cy = (y1 + y2 + y3) / 3;
       
       return {
-        result: `(${cx.toFixed(4)}, ${cy.toFixed(4)})`,
+        result: `$$(${cx.toFixed(4)}, ${cy.toFixed(4)})$$`,
         steps: [
-          `Find centroid of triangle with vertices (${x1}, ${y1}), (${x2}, ${y2}), (${x3}, ${y3})`,
-          `Formula: Centroid = ((x₁ + x₂ + x₃)/3, (y₁ + y₂ + y₃)/3)`,
-          `x-coordinate = (${x1} + ${x2} + ${x3}) / 3 = ${(x1 + x2 + x3)} / 3 = ${cx.toFixed(4)}`,
-          `y-coordinate = (${y1} + ${y2} + ${y3}) / 3 = ${(y1 + y2 + y3)} / 3 = ${cy.toFixed(4)}`,
-          `Centroid = (${cx.toFixed(4)}, ${cy.toFixed(4)})`
+          `Find centroid of triangle with vertices $(${x1}, ${y1}), (${x2}, ${y2}), (${x3}, ${y3})$`,
+          `Formula: $\\text{Centroid} = \\left(\\frac{x_1 + x_2 + x_3}{3}, \\frac{y_1 + y_2 + y_3}{3}\\right)$`,
+          `$x\\text{-coordinate} = \\frac{${x1} + ${x2} + ${x3}}{3} = \\frac{${(x1 + x2 + x3)}}{3} = ${cx.toFixed(4)}$`,
+          `$y\\text{-coordinate} = \\frac{${y1} + ${y2} + ${y3}}{3} = \\frac{${(y1 + y2 + y3)}}{3} = ${cy.toFixed(4)}$`,
+          `$\\text{Centroid} = (${cx.toFixed(4)}, ${cy.toFixed(4)})$`
         ]
       };
     },
@@ -288,11 +287,11 @@ export const coordinateGeometryTools: MathTool[] = [
     classLevel: "Class 9-10",
     description: "Find the shortest (perpendicular) distance from a point to a line given by Ax + By + C = 0.",
     inputs: [
-      { id: "x0", label: "Point x₀", type: "number", placeholder: "1" },
-      { id: "y0", label: "Point y₀", type: "number", placeholder: "2" },
-      { id: "A", label: "Coefficient A", type: "number", placeholder: "3" },
-      { id: "B", label: "Coefficient B", type: "number", placeholder: "4" },
-      { id: "C", label: "Constant C", type: "number", placeholder: "-5" },
+      { id: "x0", label: "Point x₀", type: "number", placeholder: "3", defaultValue: "3" },
+      { id: "y0", label: "Point y₀", type: "number", placeholder: "4", defaultValue: "4" },
+      { id: "A", label: "Coefficient A", type: "number", placeholder: "5", defaultValue: "5" },
+      { id: "B", label: "Coefficient B", type: "number", placeholder: "-12", defaultValue: "-12" },
+      { id: "C", label: "Constant C", type: "number", placeholder: "26", defaultValue: "26" },
     ],
     calculate: (values) => {
       const x0 = parseFloat(values.x0);
@@ -309,15 +308,15 @@ export const coordinateGeometryTools: MathTool[] = [
       const dist = num / den;
       
       return {
-        result: dist.toFixed(4),
+        result: `$$d = \\frac{${num}}{${den.toFixed(4)}} \\approx ${dist.toFixed(4)}$$`,
         steps: [
-          `Find distance from point (${x0}, ${y0}) to line ${A}x + ${B}y + ${C} = 0`,
-          `Formula: d = |Ax₀ + By₀ + C| / √(A² + B²)`,
-          `Numerator = |${A}(${x0}) + ${B}(${y0}) + ${C}|`,
-          `Numerator = |${A * x0} + ${B * y0} + ${C}| = |${A * x0 + B * y0 + C}| = ${num}`,
-          `Denominator = √(${A}² + ${B}²)`,
-          `Denominator = √(${A * A} + ${B * B}) = √(${A * A + B * B}) = ${den.toFixed(4)}`,
-          `Distance = ${num} / ${den.toFixed(4)} ≈ ${dist.toFixed(4)}`
+          `Find distance from point $(${x0}, ${y0})$ to line $${A}x + ${B}y + ${C} = 0$`,
+          `Formula: $d = \\frac{|Ax_0 + By_0 + C|}{\\sqrt{A^2 + B^2}}$`,
+          `$\\text{Numerator} = |${A}(${x0}) + ${B}(${y0}) + ${C}|$`,
+          `$\\text{Numerator} = |${A * x0} + ${B * y0} + ${C}| = |${A * x0 + B * y0 + C}| = ${num}$`,
+          `$\\text{Denominator} = \\sqrt{${A}^2 + ${B}^2}$`,
+          `$\\text{Denominator} = \\sqrt{${A * A} + ${B * B}} = \\sqrt{${A * A + B * B}} = ${den.toFixed(4)}$`,
+          `$d = \\frac{${num}}{${den.toFixed(4)}} \\approx ${dist.toFixed(4)}$`
         ]
       };
     },

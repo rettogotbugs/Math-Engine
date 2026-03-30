@@ -19,6 +19,7 @@ export const advancedMathTools: MathTool[] = [
         label: "Matrix A",
         type: "text",
         placeholder: "[[1, 2], [3, 4]]",
+        defaultValue: "[[1, 2], [3, 4]]"
       },
       {
         id: "op",
@@ -33,12 +34,14 @@ export const advancedMathTools: MathTool[] = [
           { label: "Transpose Aᵀ", value: "transpose" },
           { label: "Eigenvalues", value: "eigenvalues" },
         ],
+        defaultValue: "multiply"
       },
       {
         id: "matrixB",
         label: "Matrix B (if needed)",
         type: "text",
         placeholder: "[[5, 6], [7, 8]]",
+        defaultValue: "[[5, 6], [7, 8]]"
       },
     ],
     calculate: (values) => {
@@ -58,7 +61,8 @@ export const advancedMathTools: MathTool[] = [
         id: "vectorA",
         label: "Vector A",
         type: "text",
-        placeholder: "[1, 2, 3]",
+        placeholder: "[1, -2, 3]",
+        defaultValue: "[1, -2, 3]"
       },
       {
         id: "op",
@@ -72,12 +76,14 @@ export const advancedMathTools: MathTool[] = [
           { label: "Magnitude |A|", value: "magnitude" },
           { label: "Projection of A on B", value: "projection" },
         ],
+        defaultValue: "cross"
       },
       {
         id: "vectorB",
         label: "Vector B (if needed)",
         type: "text",
-        placeholder: "[4, 5, 6]",
+        placeholder: "[4, 5, -6]",
+        defaultValue: "[4, 5, -6]"
       },
     ],
     calculate: (values) => {
@@ -96,7 +102,8 @@ export const advancedMathTools: MathTool[] = [
         id: "expr",
         label: "Expression",
         type: "text",
-        placeholder: "e.g., (2+3i)*(4-i)",
+        placeholder: "(2+3i)/(4-i)",
+        defaultValue: "(2+3i)/(4-i)"
       },
     ],
     calculate: (values) => {
@@ -104,10 +111,10 @@ export const advancedMathTools: MathTool[] = [
         const math = require("mathjs");
         const result = math.evaluate(values.expr);
         return {
-          result: result.toString(),
+          result: `$$${math.parse(result.toString()).toTex()}$$`,
           steps: [
-            `Evaluate complex expression: ${values.expr}`,
-            `Result: ${result.toString()}`,
+            `Evaluate complex expression: $${math.parse(values.expr).toTex()}$`,
+            `Result: $$${math.parse(result.toString()).toTex()}$$`,
           ],
         };
       } catch (e) {
@@ -126,7 +133,8 @@ export const advancedMathTools: MathTool[] = [
         id: "expr",
         label: "Function f(x)",
         type: "text",
-        placeholder: "e.g., sin(x^2)*exp(x)",
+        placeholder: "sin(x^2)*exp(x)",
+        defaultValue: "sin(x^2)*exp(x)"
       },
     ],
     calculate: (values) => calculusSolver.differentiate(values.expr, "x"),
@@ -142,20 +150,21 @@ export const advancedMathTools: MathTool[] = [
         id: "matrix",
         label: "Matrix (JSON format)",
         type: "text",
-        placeholder: "[[1, 2], [3, 4]]",
+        placeholder: "[[1, 2, 3], [4, 5, 6], [7, 8, 9]]",
+        defaultValue: "[[1, 2, 3], [4, 5, 6], [7, 8, 9]]"
       },
     ],
     calculate: (values) => {
       try {
         const math = require("mathjs");
-        const mat = math.matrix(JSON.parse(values.matrix));
+        const mat = math.evaluate(values.matrix);
         const size = mat.size();
         if (size.length !== 2 || size[0] !== size[1]) {
           return { result: "Matrix must be square" };
         }
         
         let trace = 0;
-        const steps = [`Calculate the trace of the matrix:`, `Trace = sum of diagonal elements`];
+        const steps = [`Calculate the trace of the matrix:`, `$\\text{Trace} = \\text{sum of diagonal elements}$`];
         let sumStr = "";
         
         for (let i = 0; i < size[0]; i++) {
@@ -164,10 +173,10 @@ export const advancedMathTools: MathTool[] = [
           sumStr += (i === 0 ? "" : " + ") + val;
         }
         
-        steps.push(`Trace = ${sumStr} = ${trace}`);
+        steps.push(`$\\text{Trace} = ${sumStr} = ${trace}$`);
         
         return {
-          result: trace.toString(),
+          result: `$$${trace}$$`,
           steps
         };
       } catch (e) {
@@ -186,17 +195,18 @@ export const advancedMathTools: MathTool[] = [
         id: "matrix",
         label: "Matrix (JSON format)",
         type: "text",
-        placeholder: "[[1, 2], [3, 4]]",
+        placeholder: "[[1, 2, 3], [0, 1, 4], [5, 6, 0]]",
+        defaultValue: "[[1, 2, 3], [0, 1, 4], [5, 6, 0]]"
       },
     ],
     calculate: (values) => {
       try {
         const math = require("mathjs");
-        const mat = math.matrix(JSON.parse(values.matrix));
+        const mat = math.evaluate(values.matrix);
         const det = math.det(mat);
         return {
-          result: det.toString(),
-          steps: [`Calculate the determinant of the matrix`, `|A| = ${det}`],
+          result: `$$${det}$$`,
+          steps: [`Calculate the determinant of the matrix.`, `The determinant is $|A| = ${det}$`],
         };
       } catch (e) {
         return { result: "Invalid matrix format" };
@@ -214,17 +224,18 @@ export const advancedMathTools: MathTool[] = [
         id: "matrix",
         label: "Matrix (JSON format)",
         type: "text",
-        placeholder: "[[1, 2], [3, 4]]",
+        placeholder: "[[4, 7], [2, 6]]",
+        defaultValue: "[[4, 7], [2, 6]]"
       },
     ],
     calculate: (values) => {
       try {
         const math = require("mathjs");
-        const mat = math.matrix(JSON.parse(values.matrix));
+        const mat = math.evaluate(values.matrix);
         const inv = math.inv(mat);
         return {
-          result: JSON.stringify(inv.toArray()),
-          steps: [`Calculate the inverse of the matrix`, `A⁻¹ = ${JSON.stringify(inv.toArray())}`],
+          result: `$$${math.parse(JSON.stringify(inv.toArray())).toTex()}$$`,
+          steps: [`Calculate the inverse of the matrix.`, `The inverse is $$A^{-1} = ${math.parse(JSON.stringify(inv.toArray())).toTex()}$$`],
         };
       } catch (e) {
         return { result: "Invalid matrix format or singular matrix" };
@@ -242,21 +253,22 @@ export const advancedMathTools: MathTool[] = [
         id: "matrix",
         label: "Matrix (JSON format)",
         type: "text",
-        placeholder: "[[1, 2], [3, 4]]",
+        placeholder: "[[2, 1], [1, 2]]",
+        defaultValue: "[[2, 1], [1, 2]]"
       },
     ],
     calculate: (values) => {
       try {
         const math = require("mathjs");
-        const mat = math.matrix(JSON.parse(values.matrix));
+        const mat = math.evaluate(values.matrix);
         const eigs = math.eigs(mat);
         return {
-          result: JSON.stringify(eigs.values.toArray()),
-          steps: [`Calculate the eigenvalues of the matrix`, `λ = ${JSON.stringify(eigs.values.toArray())}`],
+          result: `$$${math.parse(JSON.stringify(eigs.values.toArray())).toTex()}$$`,
+          steps: [`Calculate the eigenvalues of the matrix.`, `The eigenvalues are $$\\lambda = ${math.parse(JSON.stringify(eigs.values.toArray())).toTex()}$$`],
         };
       } catch (e) {
         return { result: "Invalid matrix format" };
       }
     },
-  },
+  }
 ];

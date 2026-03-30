@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Calculator, X } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 import { cn } from "../lib/utils";
+import * as math from "mathjs";
 
 export function ExpressionEvaluator() {
   const [isOpen, setIsOpen] = useState(false);
@@ -11,15 +12,11 @@ export function ExpressionEvaluator() {
 
   const evaluate = () => {
     try {
-      // Safe evaluation using Function constructor
-      // Only allow math operations and numbers
-      if (!/^[0-9+\-*/().\s]+$/.test(expression)) {
-        throw new Error("Invalid characters");
-      }
-      // eslint-disable-next-line no-new-func
-      const res = new Function(`return ${expression}`)();
+      const cleanExpr = expression.replace(/×/g, '*').replace(/÷/g, '/');
+      const res = math.evaluate(cleanExpr);
+      
       if (typeof res === "number" && !isNaN(res)) {
-        setResult(res.toString());
+        setResult(math.format(res, { precision: 14 }));
         setError(null);
       } else {
         throw new Error("Invalid result");

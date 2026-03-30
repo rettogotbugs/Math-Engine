@@ -16,7 +16,8 @@ export const statisticsTools: MathTool[] = [
         id: "data",
         label: "Data Set (comma separated)",
         type: "text",
-        placeholder: "e.g., 1, 2, 2, 3, 4, 5",
+        placeholder: "12, 15, 12, 18, 20, 15, 12",
+        defaultValue: "12, 15, 12, 18, 20, 15, 12"
       },
     ],
     calculate: (values) => {
@@ -81,18 +82,18 @@ export const statisticsTools: MathTool[] = [
         );
 
         const steps = [
-          `Data set: [${data.join(", ")}]`,
-          `Count (n) = ${data.length}`,
-          `Sum = ${math.sum(data)}`,
-          `Mean = Sum / n = ${mean}`,
-          `Median (middle value) = ${median}`,
-          `Mode (most frequent) = ${mode.join(", ")}`,
-          `Range = Max - Min = ${max} - ${min} = ${range}`,
+          `Data set: $[${data.join(", ")}]$`,
+          `Count ($n$) = $${data.length}$`,
+          `Sum = $${math.sum(data)}$`,
+          `$\\text{Mean} = \\frac{\\text{Sum}}{n} = ${mean}$`,
+          `$\\text{Median (middle value)} = ${median}$`,
+          `$\\text{Mode (most frequent)} = ${mode.join(", ")}$`,
+          `$\\text{Range} = \\text{Max} - \\text{Min} = ${max} - ${min} = ${range}$`,
           ...(data.length > 1 ? [
-            `Population Variance (σ²) = ${variancePop}`,
-            `Population Std Dev (σ) = √σ² = ${stdPop}`,
-            `Sample Variance (s²) = ${varianceSamp}`,
-            `Sample Std Dev (s) = √s² = ${stdSamp}`,
+            `$\\text{Population Variance} (\\sigma^2) = ${variancePop}$`,
+            `$\\text{Population Std Dev} (\\sigma) = \\sqrt{\\sigma^2} = ${stdPop}$`,
+            `$\\text{Sample Variance} (s^2) = ${varianceSamp}$`,
+            `$\\text{Sample Std Dev} (s) = \\sqrt{s^2} = ${stdSamp}$`,
           ] : [])
         ];
 
@@ -113,7 +114,7 @@ export const statisticsTools: MathTool[] = [
             chart
           ),
           steps,
-          formula: "Mean = Σx / n, σ = √(Σ(x - μ)² / N)",
+          formula: "$$\\text{Mean} = \\frac{\\sum x}{n}, \\sigma = \\sqrt{\\frac{\\sum (x - \\mu)^2}{N}}$$",
         };
       } catch (e) {
         return { result: "Invalid input. Please enter a comma-separated list of numbers." };
@@ -131,7 +132,8 @@ export const statisticsTools: MathTool[] = [
         id: "data",
         label: "Data Set (comma separated)",
         type: "text",
-        placeholder: "e.g., A, B, A, C, B, A",
+        placeholder: "Red, Blue, Green, Red, Blue, Red",
+        defaultValue: "Red, Blue, Green, Red, Blue, Red"
       },
     ],
     calculate: (values) => {
@@ -150,21 +152,21 @@ export const statisticsTools: MathTool[] = [
         const sortedKeys = Object.keys(counts).sort();
 
         const steps = [
-          `Total items (n) = ${total}`,
-          `Unique items = ${sortedKeys.length}`,
-          `--- Frequency Table ---`
+          `Total items ($n$) = $${total}$`,
+          `Unique items = $${sortedKeys.length}$`,
+          `$\\text{--- Frequency Table ---}$`
         ];
 
         sortedKeys.forEach(key => {
           const count = counts[key];
           const relativeFreq = (count / total * 100).toFixed(2);
-          steps.push(`Item '${key}': Count = ${count}, Relative Frequency = ${relativeFreq}%`);
+          steps.push(`$\\text{Item } '${key}': \\text{Count } = ${count}, \\text{Relative Frequency } = ${relativeFreq}\\%$`);
         });
 
         return {
           result: `Generated frequency table for ${total} items.`,
           steps,
-          formula: "Relative Frequency = (Count / Total) * 100",
+          formula: "$$\\text{Relative Frequency} = \\frac{\\text{Count}}{\\text{Total}} \\times 100$$",
         };
       } catch (e) {
         return { result: "Invalid input." };

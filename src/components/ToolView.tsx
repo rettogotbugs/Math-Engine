@@ -5,6 +5,41 @@ import { useAppStore } from "../lib/store";
 import { cn } from "../lib/utils";
 import { motion, AnimatePresence } from "motion/react";
 import { ToolCard } from "./ToolCard";
+import 'katex/dist/katex.min.css';
+import { BlockMath, InlineMath } from 'react-katex';
+
+const renderMixedText = (text: string) => {
+  const parts = text.split(/(\$\$[\s\S]*?\$\$|\$[\s\S]*?\$)/g);
+  return parts.map((part, index) => {
+    if (part.startsWith('$$') && part.endsWith('$$')) {
+      return <BlockMath key={index} math={part.slice(2, -2)} renderError={() => <span>{part}</span>} />;
+    } else if (part.startsWith('$') && part.endsWith('$')) {
+      return <InlineMath key={index} math={part.slice(1, -1)} renderError={() => <span>{part}</span>} />;
+    } else {
+      return <span key={index}>{part}</span>;
+    }
+  });
+};
+
+const renderStep = (step: string) => {
+  const parts = step.split(/(\$\$[\s\S]*?\$\$|\$[\s\S]*?\$)/g);
+  return (
+    <span>
+      {parts.map((part, index) => {
+        if (part.startsWith("$$") && part.endsWith("$$")) {
+          return (
+            <div key={index} className="overflow-x-auto py-2">
+              <BlockMath math={part.slice(2, -2)} renderError={() => <span>{part}</span>} />
+            </div>
+          );
+        } else if (part.startsWith("$") && part.endsWith("$")) {
+          return <InlineMath key={index} math={part.slice(1, -1)} renderError={() => <span>{part}</span>} />;
+        }
+        return <span key={index}>{part}</span>;
+      })}
+    </span>
+  );
+};
 
 type ToolViewProps = {
   key?: string;
@@ -80,14 +115,15 @@ export function ToolView({ tool, onBack, onSelectTool }: ToolViewProps) {
   const handleExample = () => {
     const exampleInputs: Record<string, string> = {};
     tool.inputs.forEach((input) => {
-      if (input.type === "select" && input.options?.length) {
-        exampleInputs[input.id] = input.options[0].value;
+      if (input.defaultValue) {
+        exampleInputs[input.id] = input.defaultValue;
       } else if (input.placeholder) {
-        // Extract a number or use a default string from placeholder
         const match = input.placeholder.match(/e\.g\.,?\s*(.+)/i);
-        exampleInputs[input.id] = match ? match[1] : "5";
+        exampleInputs[input.id] = match ? match[1] : input.placeholder;
+      } else if (input.type === "select" && input.options?.length) {
+        exampleInputs[input.id] = input.options[0].value;
       } else {
-        exampleInputs[input.id] = "5";
+        exampleInputs[input.id] = "";
       }
     });
     setInputs(exampleInputs);
@@ -100,6 +136,26 @@ export function ToolView({ tool, onBack, onSelectTool }: ToolViewProps) {
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     }
+  };
+
+  const renderResult = (res: any) => {
+    if (React.isValidElement(res)) return res;
+    
+    const resStr = String(res);
+    
+    // Check for error messages
+    const lowerRes = resStr.toLowerCase();
+    if (lowerRes.includes("invalid") || lowerRes.includes("error") || lowerRes.includes("required") || lowerRes.includes("must be")) {
+      return <span className="text-red-400">{resStr}</span>;
+    }
+
+    // Check for inline math or mixed text
+    if (resStr.includes("$")) {
+      return renderMixedText(resStr);
+    }
+
+    // Default to plain text
+    return <span>{resStr}</span>;
   };
 
   return (
@@ -293,7 +349,7 @@ export function ToolView({ tool, onBack, onSelectTool }: ToolViewProps) {
                       "pr-10",
                       React.isValidElement(result.result) ? "" : "text-3xl font-bold text-white break-words"
                     )}>
-                      {result.result}
+                      {renderResult(result.result)}
                     </div>
                     <button
                       onClick={handleCopy}
@@ -315,7 +371,7 @@ export function ToolView({ tool, onBack, onSelectTool }: ToolViewProps) {
                       Formula Used
                     </h3>
                     <div className="rounded-xl bg-zinc-950 p-6 font-mono text-lg text-indigo-300 border border-white/5 text-center">
-                      {result.formula}
+                      {renderMixedText(result.formula)}
                     </div>
                   </div>
                 )}
@@ -350,7 +406,7 @@ export function ToolView({ tool, onBack, onSelectTool }: ToolViewProps) {
                             {idx + 1}
                           </span>
                           <div className="pt-1 leading-relaxed text-base whitespace-pre-wrap font-mono">
-                            {step.replace(/\*\*/g, '').replace(/```/g, '')}
+                            {renderStep(step.replace(/\*\*/g, '').replace(/```[a-z]*\n?/g, ''))}
                           </div>
                         </motion.div>
                       ))}

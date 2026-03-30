@@ -3,16 +3,95 @@ import { Search, Sparkles } from "lucide-react";
 import { universalParser } from "../lib/solvers/universalParser";
 import { cn } from "../lib/utils";
 import { motion, AnimatePresence } from "motion/react";
+import 'katex/dist/katex.min.css';
+import { BlockMath, InlineMath } from 'react-katex';
+import * as math from "mathjs";
 
 export function UniversalInput() {
   const [input, setInput] = useState("");
   const [result, setResult] = useState<any>(null);
   const [isFocused, setIsFocused] = useState(false);
+  const [history, setHistory] = useState<string[]>([]);
+  const [historyIndex, setHistoryIndex] = useState(-1);
 
   const handleSolve = () => {
     if (!input.trim()) return;
     const res = universalParser.parseAndSolve(input);
     setResult(res);
+    setHistory((prev) => [input, ...prev]);
+    setHistoryIndex(-1);
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      handleSolve();
+    } else if (e.key === "ArrowUp") {
+      e.preventDefault();
+      if (history.length > 0 && historyIndex < history.length - 1) {
+        const nextIndex = historyIndex + 1;
+        setHistoryIndex(nextIndex);
+        setInput(history[nextIndex]);
+      }
+    } else if (e.key === "ArrowDown") {
+      e.preventDefault();
+      if (historyIndex > 0) {
+        const prevIndex = historyIndex - 1;
+        setHistoryIndex(prevIndex);
+        setInput(history[prevIndex]);
+      } else if (historyIndex === 0) {
+        setHistoryIndex(-1);
+        setInput("");
+      }
+    }
+  };
+
+  const renderResult = (res: any) => {
+    if (React.isValidElement(res)) return res;
+    
+    const resStr = String(res);
+    
+    // Check for error messages
+    const lowerRes = resStr.toLowerCase();
+    if (lowerRes.includes("invalid") || lowerRes.includes("error") || lowerRes.includes("required") || lowerRes.includes("must be")) {
+      return <span className="text-red-400">{resStr}</span>;
+    }
+
+    // Check for inline math or mixed text
+    if (resStr.includes("$")) {
+      const parts = resStr.split(/(\$\$[\s\S]*?\$\$|\$[\s\S]*?\$)/g);
+      return parts.map((part, index) => {
+        if (part.startsWith('$$') && part.endsWith('$$')) {
+          return <BlockMath key={index} math={part.slice(2, -2)} renderError={() => <span>{part}</span>} />;
+        } else if (part.startsWith('$') && part.endsWith('$')) {
+          return <InlineMath key={index} math={part.slice(1, -1)} renderError={() => <span>{part}</span>} />;
+        } else {
+          return <span key={index}>{part}</span>;
+        }
+      });
+    }
+
+    // Default to plain text
+    return <span>{resStr}</span>;
+  };
+
+  const renderStep = (step: string) => {
+    const parts = step.split(/(\$\$[\s\S]*?\$\$|\$[\s\S]*?\$)/g);
+    return (
+      <span>
+        {parts.map((part, index) => {
+          if (part.startsWith("$$") && part.endsWith("$$")) {
+            return (
+              <div key={index} className="overflow-x-auto py-2">
+                <BlockMath math={part.slice(2, -2)} renderError={() => <span>{part}</span>} />
+              </div>
+            );
+          } else if (part.startsWith("$") && part.endsWith("$")) {
+            return <InlineMath key={index} math={part.slice(1, -1)} renderError={() => <span>{part}</span>} />;
+          }
+          return <span key={index}>{part}</span>;
+        })}
+      </span>
+    );
   };
 
   return (
@@ -39,7 +118,7 @@ export function UniversalInput() {
             onChange={(e) => setInput(e.target.value)}
             onFocus={() => setIsFocused(true)}
             onBlur={() => setIsFocused(false)}
-            onKeyDown={(e) => e.key === "Enter" && handleSolve()}
+            onKeyDown={handleKeyDown}
             className="w-full bg-transparent text-lg text-white placeholder-zinc-500 outline-none font-mono"
           />
           <button
@@ -58,7 +137,7 @@ export function UniversalInput() {
               exit={{ opacity: 0, y: -10 }}
               className="absolute left-0 right-0 top-full z-20 mt-4 overflow-hidden rounded-2xl border border-white/10 bg-zinc-900 shadow-2xl backdrop-blur-xl"
             >
-              <div className="p-6">
+              <div className="p-6 max-h-[60vh] overflow-y-auto">
                 <div className="mb-4 flex items-center justify-between border-b border-white/10 pb-4">
                   <h3 className="text-lg font-semibold text-white">Result</h3>
                   <button
@@ -73,7 +152,7 @@ export function UniversalInput() {
                   "rounded-xl bg-indigo-500/10 p-4 mb-6 border border-indigo-500/20",
                   React.isValidElement(result.result) ? "" : "text-2xl font-bold text-indigo-400 font-mono break-all"
                 )}>
-                  {result.result}
+                  {renderResult(result.result)}
                 </div>
 
                 {result.steps && result.steps.length > 0 && (
@@ -103,7 +182,7 @@ export function UniversalInput() {
                           <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-indigo-500/20 text-xs font-bold text-indigo-400">
                             {idx + 1}
                           </span>
-                          <span className="pt-0.5 font-mono">{step}</span>
+                          <span className="pt-0.5 font-mono whitespace-pre-wrap">{renderStep(step.replace(/\*\*/g, '').replace(/```[a-z]*\n?/g, ''))}</span>
                         </motion.div>
                       ))}
                     </motion.div>

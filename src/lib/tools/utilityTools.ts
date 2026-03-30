@@ -9,7 +9,7 @@ export const utilityTools: MathTool[] = [
     classLevel: "General",
     description: "Evaluate any mathematical expression, including basic arithmetic, functions, and variables. A versatile tool for quick calculations.",
     inputs: [
-      { id: "expr", label: "Expression", type: "text", placeholder: "2 * (3 + 4) / 5" },
+      { id: "expr", label: "Expression", type: "text", placeholder: "2 * (3 + 4) / 5", defaultValue: "2 * (3 + 4) / 5" },
     ],
     calculate: (values) => {
       if (!values.expr) return { result: "Expression required" };
@@ -23,9 +23,9 @@ export const utilityTools: MathTool[] = [
     classLevel: "General",
     description: "Convert between various units of measurement (e.g., length, mass, volume). Essential for science, engineering, and everyday tasks.",
     inputs: [
-      { id: "value", label: "Value", type: "number", placeholder: "10" },
-      { id: "fromUnit", label: "From Unit", type: "text", placeholder: "inch" },
-      { id: "toUnit", label: "To Unit", type: "text", placeholder: "cm" },
+      { id: "value", label: "Value", type: "number", placeholder: "10", defaultValue: "10" },
+      { id: "fromUnit", label: "From Unit", type: "text", placeholder: "inch", defaultValue: "inch" },
+      { id: "toUnit", label: "To Unit", type: "text", placeholder: "cm", defaultValue: "cm" },
     ],
     calculate: (values) => {
       const val = parseFloat(values.value);
@@ -40,7 +40,7 @@ export const utilityTools: MathTool[] = [
     classLevel: "General",
     description: "Evaluate complex scientific expressions involving trigonometric, logarithmic, and exponential functions.",
     inputs: [
-      { id: "expr", label: "Expression", type: "text", placeholder: "log(10) + sin(pi/4)" },
+      { id: "expr", label: "Expression", type: "text", placeholder: "log(10) + sin(pi/4)", defaultValue: "log(10) + sin(pi/4)" },
     ],
     calculate: (values) => {
       if (!values.expr) return { result: "Expression required" };
@@ -54,8 +54,8 @@ export const utilityTools: MathTool[] = [
     classLevel: "General",
     description: "Generate a random integer or decimal number within a specified range. Useful for simulations, games, and statistical sampling.",
     inputs: [
-      { id: "min", label: "Minimum", type: "number", placeholder: "1" },
-      { id: "max", label: "Maximum", type: "number", placeholder: "100" },
+      { id: "min", label: "Minimum", type: "number", placeholder: "1", defaultValue: "1" },
+      { id: "max", label: "Maximum", type: "number", placeholder: "100", defaultValue: "100" },
       { id: "type", label: "Type", type: "select", options: [{label: "Integer", value: "int"}, {label: "Decimal", value: "float"}], defaultValue: "int" }
     ],
     calculate: (values) => {
@@ -71,10 +71,10 @@ export const utilityTools: MathTool[] = [
       }
       
       return {
-        result: result.toString(),
+        result: `$$${result}$$`,
         steps: [
-          `Generate a random ${values.type === "int" ? "integer" : "decimal"} between ${min} and ${max}`,
-          `Result: ${result}`
+          `Generate a random ${values.type === "int" ? "integer" : "decimal"} between $${min}$ and $${max}$`,
+          `Result: $${result}$`
         ]
       };
     },
@@ -86,7 +86,7 @@ export const utilityTools: MathTool[] = [
     classLevel: "General",
     description: "Calculate descriptive statistics (mean, median, mode, standard deviation, variance) for a given dataset. Crucial for data analysis.",
     inputs: [
-      { id: "data", label: "Data points (comma-separated)", type: "text", placeholder: "1, 2, 3, 4, 5" },
+      { id: "data", label: "Data points (comma-separated)", type: "text", placeholder: "1, 2, 3, 4, 5", defaultValue: "1, 2, 3, 4, 5" },
     ],
     calculate: (values) => {
       try {
@@ -103,15 +103,15 @@ export const utilityTools: MathTool[] = [
         const variance = math.variance(data);
         
         return {
-          result: `Mean: ${mean}`,
+          result: `$$\\mu = ${mean}$$`,
           steps: [
-            `Dataset: [${data.join(", ")}]`,
-            `Count (n): ${data.length}`,
-            `Mean (μ): ${mean}`,
-            `Median: ${median}`,
-            `Mode: ${Array.isArray(mode) ? mode.join(", ") : mode}`,
-            `Standard Deviation (σ): ${std}`,
-            `Variance (σ²): ${variance}`
+            `Dataset: $[${data.join(", ")}]$`,
+            `Count ($n$): $${data.length}$`,
+            `Mean ($\\mu$): $${mean}$`,
+            `Median: $${median}$`,
+            `Mode: $${Array.isArray(mode) ? mode.join(", ") : mode}$`,
+            `Standard Deviation ($\\sigma$): $${std}$`,
+            `Variance ($\\sigma^2$): $${variance}$`
           ]
         };
       } catch (e) {
@@ -126,7 +126,7 @@ export const utilityTools: MathTool[] = [
     classLevel: "General",
     description: "Generate a secure, random password with customizable length and character types (uppercase, numbers, symbols).",
     inputs: [
-      { id: "length", label: "Length", type: "number", placeholder: "12" },
+      { id: "length", label: "Length", type: "number", placeholder: "12", defaultValue: "12" },
       { id: "uppercase", label: "Include Uppercase", type: "select", options: [{label: "Yes", value: "yes"}, {label: "No", value: "no"}], defaultValue: "yes" },
       { id: "numbers", label: "Include Numbers", type: "select", options: [{label: "Yes", value: "yes"}, {label: "No", value: "no"}], defaultValue: "yes" },
       { id: "symbols", label: "Include Symbols", type: "select", options: [{label: "Yes", value: "yes"}, {label: "No", value: "no"}], defaultValue: "yes" }
@@ -168,7 +168,7 @@ export const utilityTools: MathTool[] = [
     classLevel: "General",
     description: "Convert standard numbers to Roman numerals and vice versa. Useful for historical dates, outlines, and clock faces.",
     inputs: [
-      { id: "input", label: "Number or Roman Numeral", type: "text", placeholder: "e.g., 2024 or MMXXIV" },
+      { id: "input", label: "Number or Roman Numeral", type: "text", placeholder: "2024", defaultValue: "2024" },
     ],
     calculate: (values) => {
       const input = values.input.trim().toUpperCase();
@@ -235,8 +235,8 @@ export const utilityTools: MathTool[] = [
     classLevel: "General",
     description: "Calculate Body Mass Index (BMI) to estimate body fat based on height and weight. Provides standard health categories.",
     inputs: [
-      { id: "weight", label: "Weight (kg)", type: "number", placeholder: "e.g., 70" },
-      { id: "height", label: "Height (cm)", type: "number", placeholder: "e.g., 175" },
+      { id: "weight", label: "Weight (kg)", type: "number", placeholder: "70", defaultValue: "70" },
+      { id: "height", label: "Height (cm)", type: "number", placeholder: "175", defaultValue: "175" },
     ],
     calculate: (values) => {
       const weight = parseFloat(values.weight);
@@ -256,17 +256,31 @@ export const utilityTools: MathTool[] = [
       else category = "Obese";
       
       return {
-        result: `${bmi.toFixed(1)} (${category})`,
+        result: `$$${bmi.toFixed(1)} \\text{ (${category})}$$`,
         steps: [
-          `Calculate BMI for weight = ${weight} kg, height = ${heightCm} cm`,
-          `Convert height to meters: ${heightCm} / 100 = ${heightM} m`,
-          `Formula: BMI = weight / height²`,
-          `BMI = ${weight} / (${heightM})²`,
-          `BMI = ${weight} / ${(heightM * heightM).toFixed(4)}`,
-          `BMI = ${bmi.toFixed(1)}`,
+          `Calculate BMI for weight = $${weight}\\text{ kg}$, height = $${heightCm}\\text{ cm}$`,
+          `Convert height to meters: $${heightCm} \\div 100 = ${heightM}\\text{ m}$`,
+          `Formula: $\\text{BMI} = \\frac{\\text{weight}}{\\text{height}^2}$`,
+          `$\\text{BMI} = \\frac{${weight}}{${heightM}^2}$`,
+          `$\\text{BMI} = \\frac{${weight}}{${(heightM * heightM).toFixed(4)}}$`,
+          `$\\text{BMI} = ${bmi.toFixed(1)}$`,
           `Category: ${category}`
         ]
       };
+    },
+  },
+  {
+    id: "scientific_notation",
+    name: "Scientific Notation Converter",
+    category: "Utilities",
+    classLevel: "General",
+    description: "Convert standard numbers to scientific notation (e.g., 0.00045 -> 4.5 × 10⁻⁴) and vice versa.",
+    inputs: [
+      { id: "num", label: "Number or Scientific Notation (e.g., 4.5e-4)", type: "text", placeholder: "0.00045", defaultValue: "0.00045" },
+    ],
+    calculate: (values) => {
+      if (!values.num) return { result: "Input required" };
+      return utilitiesSolver.scientificNotation(values.num);
     },
   },
 ];

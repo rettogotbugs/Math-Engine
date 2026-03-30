@@ -7,13 +7,13 @@ export const calculusSolver = {
       const simplified = math.simplify(derivative).toString();
 
       return {
-        result: simplified,
+        result: `$$${math.parse(simplified).toTex()}$$`,
         steps: [
-          `Function: f(${variable}) = ${expr}`,
-          `Apply differentiation rules with respect to ${variable}`,
-          `f'(${variable}) = d/d${variable} (${expr})`,
-          `Raw derivative: ${derivative.toString()}`,
-          `Simplified derivative: ${simplified}`,
+          `Function: $f(${variable}) = ${math.parse(expr).toTex()}$`,
+          `Apply differentiation rules with respect to $${variable}$`,
+          `$$f'(${variable}) = \\frac{d}{d${variable}} (${math.parse(expr).toTex()})$$`,
+          `Raw derivative: $$${math.parse(derivative.toString()).toTex()}$$`,
+          `Simplified derivative: $$${math.parse(simplified).toTex()}$$`,
         ],
       };
     } catch (e) {
@@ -52,12 +52,12 @@ export const calculusSolver = {
       const result = (h / 3) * sum;
 
       return {
-        result: result.toFixed(6),
+        result: `$$${result.toFixed(6)}$$`,
         steps: [
-          `Function: f(${variable}) = ${expr}`,
-          `Integrate from ${variable} = ${a} to ${b}`,
+          `Function: $f(${variable}) = ${math.parse(expr).toTex()}$`,
+          `Integrate from $${variable} = ${a}$ to $${b}$`,
           `Using numerical integration (Simpson's rule) with ${n} intervals`,
-          `Result: ∫(${expr}) d${variable} ≈ ${result.toFixed(6)}`,
+          `Result: $$\\int_{${a}}^{${b}} (${math.parse(expr).toTex()}) d${variable} \\approx ${result.toFixed(6)}$$`,
         ],
       };
     } catch (e) {

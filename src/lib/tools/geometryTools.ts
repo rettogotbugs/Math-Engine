@@ -9,7 +9,7 @@ export const geometryTools: MathTool[] = [
     classLevel: "Class 8",
     description: "Calculate the area of a circle given its radius. Essential for finding the space occupied by circular objects like wheels or fields.",
     inputs: [
-      { id: "radius", label: "Radius (r)", type: "number", placeholder: "5" },
+      { id: "radius", label: "Radius (r)", type: "number", placeholder: "7", defaultValue: "7" },
     ],
     calculate: (values) => {
       const r = parseFloat(values.radius);
@@ -24,8 +24,8 @@ export const geometryTools: MathTool[] = [
     classLevel: "Class 8",
     description: "Calculate the area of a triangle given its base and height. A fundamental formula used in architecture, surveying, and 3D modeling.",
     inputs: [
-      { id: "base", label: "Base (b)", type: "number", placeholder: "10" },
-      { id: "height", label: "Height (h)", type: "number", placeholder: "5" },
+      { id: "base", label: "Base (b)", type: "number", placeholder: "12", defaultValue: "12" },
+      { id: "height", label: "Height (h)", type: "number", placeholder: "5", defaultValue: "5" },
     ],
     calculate: (values) => {
       const b = parseFloat(values.base);
@@ -41,8 +41,8 @@ export const geometryTools: MathTool[] = [
     classLevel: "Class 8",
     description: "Calculate the area of a rectangle given length and width. Useful for determining floor space, land area, and material requirements.",
     inputs: [
-      { id: "length", label: "Length (l)", type: "number", placeholder: "10" },
-      { id: "width", label: "Width (w)", type: "number", placeholder: "5" },
+      { id: "length", label: "Length (l)", type: "number", placeholder: "15", defaultValue: "15" },
+      { id: "width", label: "Width (w)", type: "number", placeholder: "8", defaultValue: "8" },
     ],
     calculate: (values) => {
       const l = parseFloat(values.length);
@@ -58,8 +58,8 @@ export const geometryTools: MathTool[] = [
     classLevel: "Class 8",
     description: "Calculate the total distance around the outside of a rectangle. Perfect for finding the length of fencing or framing needed.",
     inputs: [
-      { id: "length", label: "Length (l)", type: "number", placeholder: "10" },
-      { id: "width", label: "Width (w)", type: "number", placeholder: "5" },
+      { id: "length", label: "Length (l)", type: "number", placeholder: "15", defaultValue: "15" },
+      { id: "width", label: "Width (w)", type: "number", placeholder: "8", defaultValue: "8" },
     ],
     calculate: (values) => {
       const l = parseFloat(values.length);
@@ -67,13 +67,13 @@ export const geometryTools: MathTool[] = [
       if (isNaN(l) || isNaN(w)) return { result: "Invalid input" };
       const p = 2 * (l + w);
       return {
-        result: p.toString(),
+        result: `$$${p}$$`,
         steps: [
-          `Find perimeter of rectangle with length l = ${l} and width w = ${w}`,
-          `Formula: Perimeter = 2(l + w)`,
-          `Perimeter = 2(${l} + ${w})`,
-          `Perimeter = 2(${l + w})`,
-          `Perimeter = ${p}`
+          `Find perimeter of rectangle with length $l = ${l}$ and width $w = ${w}$`,
+          `Formula: $\\text{Perimeter} = 2(l + w)$`,
+          `$\\text{Perimeter} = 2(${l} + ${w})$`,
+          `$\\text{Perimeter} = 2(${l + w})$`,
+          `$\\text{Perimeter} = ${p}$`
         ]
       };
     },
@@ -85,19 +85,19 @@ export const geometryTools: MathTool[] = [
     classLevel: "Class 8",
     description: "Calculate the distance around the edge of a circle. Useful for measuring circular tracks, rings, and rotational distances.",
     inputs: [
-      { id: "radius", label: "Radius (r)", type: "number", placeholder: "5" },
+      { id: "radius", label: "Radius (r)", type: "number", placeholder: "7", defaultValue: "7" },
     ],
     calculate: (values) => {
       const r = parseFloat(values.radius);
       if (isNaN(r)) return { result: "Invalid input" };
       const c = 2 * Math.PI * r;
       return {
-        result: c.toFixed(4),
+        result: `$$${c.toFixed(4)}$$`,
         steps: [
-          `Find circumference of circle with radius r = ${r}`,
-          `Formula: Circumference = 2πr`,
-          `Circumference = 2 * π * ${r}`,
-          `Circumference ≈ ${c.toFixed(4)}`
+          `Find circumference of circle with radius $r = ${r}$`,
+          `Formula: $\\text{Circumference} = 2\\pi r$`,
+          `$\\text{Circumference} = 2 \\times \\pi \\times ${r}$`,
+          `$\\text{Circumference} \\approx ${c.toFixed(4)}$`
         ]
       };
     },
@@ -109,9 +109,9 @@ export const geometryTools: MathTool[] = [
     classLevel: "Class 8",
     description: "Calculate the area of a trapezoid given two parallel bases and height. Often used in land surveying and calculating cross-sectional areas.",
     inputs: [
-      { id: "a", label: "Base a", type: "number", placeholder: "5" },
-      { id: "b", label: "Base b", type: "number", placeholder: "7" },
-      { id: "h", label: "Height h", type: "number", placeholder: "4" },
+      { id: "a", label: "Base a", type: "number", placeholder: "6", defaultValue: "6" },
+      { id: "b", label: "Base b", type: "number", placeholder: "10", defaultValue: "10" },
+      { id: "h", label: "Height h", type: "number", placeholder: "4", defaultValue: "4" },
     ],
     calculate: (values) => {
       const a = parseFloat(values.a);
@@ -120,14 +120,14 @@ export const geometryTools: MathTool[] = [
       if (isNaN(a) || isNaN(b) || isNaN(h)) return { result: "Invalid input" };
       const area = ((a + b) / 2) * h;
       return {
-        result: area.toString(),
+        result: `$$${area}$$`,
         steps: [
-          `Find area of trapezoid with bases a=${a}, b=${b} and height h=${h}`,
-          `Formula: Area = ((a + b) / 2) * h`,
-          `Area = ((${a} + ${b}) / 2) * ${h}`,
-          `Area = (${a + b} / 2) * ${h}`,
-          `Area = ${(a + b) / 2} * ${h}`,
-          `Area = ${area}`
+          `Find area of trapezoid with bases $a=${a}$, $b=${b}$ and height $h=${h}$`,
+          `Formula: $\\text{Area} = \\frac{a + b}{2} \\times h$`,
+          `$\\text{Area} = \\frac{${a} + ${b}}{2} \\times ${h}$`,
+          `$\\text{Area} = \\frac{${a + b}}{2} \\times ${h}$`,
+          `$\\text{Area} = ${(a + b) / 2} \\times ${h}$`,
+          `$\\text{Area} = ${area}$`
         ]
       };
     },
@@ -139,9 +139,9 @@ export const geometryTools: MathTool[] = [
     classLevel: "Class 8",
     description: "Calculate the total distance around a triangle given its three sides. Useful for finding the boundary length of triangular plots.",
     inputs: [
-      { id: "a", label: "Side a", type: "number", placeholder: "3" },
-      { id: "b", label: "Side b", type: "number", placeholder: "4" },
-      { id: "c", label: "Side c", type: "number", placeholder: "5" },
+      { id: "a", label: "Side a", type: "number", placeholder: "3", defaultValue: "3" },
+      { id: "b", label: "Side b", type: "number", placeholder: "4", defaultValue: "4" },
+      { id: "c", label: "Side c", type: "number", placeholder: "5", defaultValue: "5" },
     ],
     calculate: (values) => {
       const a = parseFloat(values.a);
@@ -150,12 +150,12 @@ export const geometryTools: MathTool[] = [
       if (isNaN(a) || isNaN(b) || isNaN(c)) return { result: "Invalid input" };
       const p = a + b + c;
       return {
-        result: p.toString(),
+        result: `$$${p}$$`,
         steps: [
-          `Find perimeter of triangle with sides a=${a}, b=${b}, c=${c}`,
-          `Formula: Perimeter = a + b + c`,
-          `Perimeter = ${a} + ${b} + ${c}`,
-          `Perimeter = ${p}`
+          `Find perimeter of triangle with sides $a=${a}$, $b=${b}$, $c=${c}$`,
+          `Formula: $\\text{Perimeter} = a + b + c$`,
+          `$\\text{Perimeter} = ${a} + ${b} + ${c}$`,
+          `$\\text{Perimeter} = ${p}$`
         ]
       };
     },
@@ -167,8 +167,8 @@ export const geometryTools: MathTool[] = [
     classLevel: "Class 8",
     description: "Calculate the area of a parallelogram given base and height. Important for geometry problems involving slanted rectangular shapes.",
     inputs: [
-      { id: "base", label: "Base (b)", type: "number", placeholder: "10" },
-      { id: "height", label: "Height (h)", type: "number", placeholder: "5" },
+      { id: "base", label: "Base (b)", type: "number", placeholder: "12", defaultValue: "12" },
+      { id: "height", label: "Height (h)", type: "number", placeholder: "7", defaultValue: "7" },
     ],
     calculate: (values) => {
       const b = parseFloat(values.base);
@@ -176,12 +176,12 @@ export const geometryTools: MathTool[] = [
       if (isNaN(b) || isNaN(h)) return { result: "Invalid input" };
       const area = b * h;
       return {
-        result: area.toString(),
+        result: `$$${area}$$`,
         steps: [
-          `Find area of parallelogram with base b=${b} and height h=${h}`,
-          `Formula: Area = b * h`,
-          `Area = ${b} * ${h}`,
-          `Area = ${area}`
+          `Find area of parallelogram with base $b=${b}$ and height $h=${h}$`,
+          `Formula: $\\text{Area} = b \\times h$`,
+          `$\\text{Area} = ${b} \\times ${h}$`,
+          `$\\text{Area} = ${area}$`
         ]
       };
     },
@@ -193,8 +193,8 @@ export const geometryTools: MathTool[] = [
     classLevel: "Class 8",
     description: "Calculate the perimeter of a parallelogram given two adjacent sides. Helps in determining the boundary length of slanted shapes.",
     inputs: [
-      { id: "a", label: "Side a", type: "number", placeholder: "10" },
-      { id: "b", label: "Side b", type: "number", placeholder: "5" },
+      { id: "a", label: "Side a", type: "number", placeholder: "12", defaultValue: "12" },
+      { id: "b", label: "Side b", type: "number", placeholder: "7", defaultValue: "7" },
     ],
     calculate: (values) => {
       const a = parseFloat(values.a);
@@ -202,13 +202,13 @@ export const geometryTools: MathTool[] = [
       if (isNaN(a) || isNaN(b)) return { result: "Invalid input" };
       const p = 2 * (a + b);
       return {
-        result: p.toString(),
+        result: `$$${p}$$`,
         steps: [
-          `Find perimeter of parallelogram with adjacent sides a=${a} and b=${b}`,
-          `Formula: Perimeter = 2(a + b)`,
-          `Perimeter = 2(${a} + ${b})`,
-          `Perimeter = 2(${a + b})`,
-          `Perimeter = ${p}`
+          `Find perimeter of parallelogram with adjacent sides $a=${a}$ and $b=${b}$`,
+          `Formula: $\\text{Perimeter} = 2(a + b)$`,
+          `$\\text{Perimeter} = 2(${a} + ${b})$`,
+          `$\\text{Perimeter} = 2(${a + b})$`,
+          `$\\text{Perimeter} = ${p}$`
         ]
       };
     },
@@ -220,8 +220,8 @@ export const geometryTools: MathTool[] = [
     classLevel: "Class 8",
     description: "Calculate the area of a rhombus given its two diagonals. Useful for calculating the area of diamond-shaped objects.",
     inputs: [
-      { id: "d1", label: "Diagonal 1 (d1)", type: "number", placeholder: "10" },
-      { id: "d2", label: "Diagonal 2 (d2)", type: "number", placeholder: "8" },
+      { id: "d1", label: "Diagonal 1 (d1)", type: "number", placeholder: "10", defaultValue: "10" },
+      { id: "d2", label: "Diagonal 2 (d2)", type: "number", placeholder: "8", defaultValue: "8" },
     ],
     calculate: (values) => {
       const d1 = parseFloat(values.d1);
@@ -229,13 +229,13 @@ export const geometryTools: MathTool[] = [
       if (isNaN(d1) || isNaN(d2)) return { result: "Invalid input" };
       const area = (d1 * d2) / 2;
       return {
-        result: area.toString(),
+        result: `$$${area}$$`,
         steps: [
-          `Find area of rhombus with diagonals d1=${d1} and d2=${d2}`,
-          `Formula: Area = (d1 * d2) / 2`,
-          `Area = (${d1} * ${d2}) / 2`,
-          `Area = ${d1 * d2} / 2`,
-          `Area = ${area}`
+          `Find area of rhombus with diagonals $d1=${d1}$ and $d2=${d2}$`,
+          `Formula: $\\text{Area} = \\frac{d1 \\times d2}{2}$`,
+          `$\\text{Area} = \\frac{${d1} \\times ${d2}}{2}$`,
+          `$\\text{Area} = \\frac{${d1 * d2}}{2}$`,
+          `$\\text{Area} = ${area}$`
         ]
       };
     },
@@ -247,19 +247,19 @@ export const geometryTools: MathTool[] = [
     classLevel: "Class 8",
     description: "Calculate the perimeter of a rhombus given its side length. Since all sides are equal, this is a quick calculation.",
     inputs: [
-      { id: "a", label: "Side length (a)", type: "number", placeholder: "5" },
+      { id: "a", label: "Side length (a)", type: "number", placeholder: "5", defaultValue: "5" },
     ],
     calculate: (values) => {
       const a = parseFloat(values.a);
       if (isNaN(a)) return { result: "Invalid input" };
       const p = 4 * a;
       return {
-        result: p.toString(),
+        result: `$$${p}$$`,
         steps: [
-          `Find perimeter of rhombus with side length a=${a}`,
-          `Formula: Perimeter = 4a`,
-          `Perimeter = 4 * ${a}`,
-          `Perimeter = ${p}`
+          `Find perimeter of rhombus with side length $a=${a}$`,
+          `Formula: $\\text{Perimeter} = 4a$`,
+          `$\\text{Perimeter} = 4 \\times ${a}$`,
+          `$\\text{Perimeter} = ${p}$`
         ]
       };
     },
@@ -271,8 +271,8 @@ export const geometryTools: MathTool[] = [
     classLevel: "Class 8",
     description: "Calculate the area of a regular polygon given the number of sides and side length. Great for shapes like pentagons, hexagons, and octagons.",
     inputs: [
-      { id: "n", label: "Number of sides (n)", type: "number", placeholder: "5" },
-      { id: "s", label: "Side length (s)", type: "number", placeholder: "4" },
+      { id: "n", label: "Number of sides (n)", type: "number", placeholder: "6", defaultValue: "6" },
+      { id: "s", label: "Side length (s)", type: "number", placeholder: "4", defaultValue: "4" },
     ],
     calculate: (values) => {
       const n = parseInt(values.n);
@@ -280,13 +280,13 @@ export const geometryTools: MathTool[] = [
       if (isNaN(n) || isNaN(s) || n < 3) return { result: "Invalid input (n >= 3)" };
       const area = (n * s * s) / (4 * Math.tan(Math.PI / n));
       return {
-        result: area.toFixed(4),
+        result: `$$${area.toFixed(4)}$$`,
         steps: [
-          `Find area of regular polygon with n=${n} sides and side length s=${s}`,
-          `Formula: Area = (n * s²) / (4 * tan(π/n))`,
-          `Area = (${n} * ${s}²) / (4 * tan(π/${n}))`,
-          `Area = (${n * s * s}) / (4 * ${Math.tan(Math.PI / n).toFixed(4)})`,
-          `Area ≈ ${area.toFixed(4)}`
+          `Find area of regular polygon with $n=${n}$ sides and side length $s=${s}$`,
+          `Formula: $\\text{Area} = \\frac{n \\times s^2}{4 \\times \\tan(\\frac{\\pi}{n})}$`,
+          `$\\text{Area} = \\frac{${n} \\times ${s}^2}{4 \\times \\tan(\\frac{\\pi}{${n}})}$`,
+          `$\\text{Area} = \\frac{${n * s * s}}{4 \\times ${Math.tan(Math.PI / n).toFixed(4)}}$`,
+          `$\\text{Area} \\approx ${area.toFixed(4)}$`
         ]
       };
     },
@@ -298,8 +298,8 @@ export const geometryTools: MathTool[] = [
     classLevel: "Class 8",
     description: "Calculate the perimeter of a regular polygon by multiplying the number of sides by the side length.",
     inputs: [
-      { id: "n", label: "Number of sides (n)", type: "number", placeholder: "e.g., 5" },
-      { id: "s", label: "Side length (s)", type: "number", placeholder: "e.g., 4" },
+      { id: "n", label: "Number of sides (n)", type: "number", placeholder: "6", defaultValue: "6" },
+      { id: "s", label: "Side length (s)", type: "number", placeholder: "4", defaultValue: "4" },
     ],
     calculate: (values) => {
       const n = parseFloat(values.n);
@@ -308,12 +308,12 @@ export const geometryTools: MathTool[] = [
       
       const perimeter = n * s;
       return {
-        result: perimeter.toString(),
+        result: `$$${perimeter}$$`,
         steps: [
-          `Find the perimeter of a regular polygon with ${n} sides and side length ${s}`,
-          `Formula: Perimeter = n * s`,
-          `Perimeter = ${n} * ${s}`,
-          `Perimeter = ${perimeter}`
+          `Find the perimeter of a regular polygon with $n=${n}$ sides and side length $s=${s}$`,
+          `Formula: $\\text{Perimeter} = n \\times s$`,
+          `$\\text{Perimeter} = ${n} \\times ${s}$`,
+          `$\\text{Perimeter} = ${perimeter}$`
         ]
       };
     },
@@ -325,8 +325,8 @@ export const geometryTools: MathTool[] = [
     classLevel: "Class 8",
     description: "Calculate the area of an ellipse using its semi-major and semi-minor axes. Useful in astronomy and engineering.",
     inputs: [
-      { id: "a", label: "Semi-major axis (a)", type: "number", placeholder: "e.g., 5" },
-      { id: "b", label: "Semi-minor axis (b)", type: "number", placeholder: "e.g., 3" },
+      { id: "a", label: "Semi-major axis (a)", type: "number", placeholder: "5", defaultValue: "5" },
+      { id: "b", label: "Semi-minor axis (b)", type: "number", placeholder: "3", defaultValue: "3" },
     ],
     calculate: (values) => {
       const a = parseFloat(values.a);
@@ -335,12 +335,12 @@ export const geometryTools: MathTool[] = [
       
       const area = Math.PI * a * b;
       return {
-        result: area.toFixed(4),
+        result: `$$${area.toFixed(4)}$$`,
         steps: [
-          `Find the area of an ellipse with semi-major axis a=${a} and semi-minor axis b=${b}`,
-          `Formula: Area = π * a * b`,
-          `Area = π * ${a} * ${b}`,
-          `Area ≈ ${area.toFixed(4)}`
+          `Find the area of an ellipse with semi-major axis $a=${a}$ and semi-minor axis $b=${b}$`,
+          `Formula: $\\text{Area} = \\pi \\times a \\times b$`,
+          `$\\text{Area} = \\pi \\times ${a} \\times ${b}$`,
+          `$\\text{Area} \\approx ${area.toFixed(4)}$`
         ]
       };
     },
@@ -352,8 +352,8 @@ export const geometryTools: MathTool[] = [
     classLevel: "Class 8",
     description: "Calculate the area of a circular sector given its radius and central angle. Perfect for finding the area of a 'slice of pie'.",
     inputs: [
-      { id: "r", label: "Radius (r)", type: "number", placeholder: "e.g., 5" },
-      { id: "theta", label: "Central Angle (θ in degrees)", type: "number", placeholder: "e.g., 60" },
+      { id: "r", label: "Radius (r)", type: "number", placeholder: "6", defaultValue: "6" },
+      { id: "theta", label: "Central Angle (θ in degrees)", type: "number", placeholder: "60", defaultValue: "60" },
     ],
     calculate: (values) => {
       const r = parseFloat(values.r);
@@ -362,13 +362,13 @@ export const geometryTools: MathTool[] = [
       
       const area = (theta / 360) * Math.PI * r * r;
       return {
-        result: area.toFixed(4),
+        result: `$$${area.toFixed(4)}$$`,
         steps: [
-          `Find the area of a sector with radius r=${r} and angle θ=${theta}°`,
-          `Formula: Area = (θ/360) * π * r²`,
-          `Area = (${theta}/360) * π * ${r}²`,
-          `Area = ${(theta/360).toFixed(4)} * π * ${r * r}`,
-          `Area ≈ ${area.toFixed(4)}`
+          `Find the area of a sector with radius $r=${r}$ and angle $\\theta=${theta}^{\\circ}$`,
+          `Formula: $\\text{Area} = \\frac{\\theta}{360} \\times \\pi \\times r^2$`,
+          `$\\text{Area} = \\frac{${theta}}{360} \\times \\pi \\times ${r}^2$`,
+          `$\\text{Area} = ${(theta/360).toFixed(4)} \\times \\pi \\times ${r * r}$`,
+          `$\\text{Area} \\approx ${area.toFixed(4)}$`
         ]
       };
     },
@@ -380,8 +380,8 @@ export const geometryTools: MathTool[] = [
     classLevel: "Class 8",
     description: "Calculate the arc length of a circular sector. Useful for determining the distance along a curved path.",
     inputs: [
-      { id: "r", label: "Radius (r)", type: "number", placeholder: "e.g., 5" },
-      { id: "theta", label: "Central Angle (θ in degrees)", type: "number", placeholder: "e.g., 60" },
+      { id: "r", label: "Radius (r)", type: "number", placeholder: "6", defaultValue: "6" },
+      { id: "theta", label: "Central Angle (θ in degrees)", type: "number", placeholder: "60", defaultValue: "60" },
     ],
     calculate: (values) => {
       const r = parseFloat(values.r);
@@ -390,13 +390,13 @@ export const geometryTools: MathTool[] = [
       
       const arcLength = (theta / 360) * 2 * Math.PI * r;
       return {
-        result: arcLength.toFixed(4),
+        result: `$$${arcLength.toFixed(4)}$$`,
         steps: [
-          `Find the arc length of a sector with radius r=${r} and angle θ=${theta}°`,
-          `Formula: Arc Length = (θ/360) * 2 * π * r`,
-          `Arc Length = (${theta}/360) * 2 * π * ${r}`,
-          `Arc Length = ${(theta/360).toFixed(4)} * 2 * π * ${r}`,
-          `Arc Length ≈ ${arcLength.toFixed(4)}`
+          `Find the arc length of a sector with radius $r=${r}$ and angle $\\theta=${theta}^{\\circ}$`,
+          `Formula: $\\text{Arc Length} = \\frac{\\theta}{360} \\times 2 \\times \\pi \\times r$`,
+          `$\\text{Arc Length} = \\frac{${theta}}{360} \\times 2 \\times \\pi \\times ${r}$`,
+          `$\\text{Arc Length} = ${(theta/360).toFixed(4)} \\times 2 \\times \\pi \\times ${r}$`,
+          `$\\text{Arc Length} \\approx ${arcLength.toFixed(4)}$`
         ]
       };
     },

@@ -17,13 +17,15 @@ export const chartTools: MathTool[] = [
         id: "labels",
         label: "Labels (comma separated)",
         type: "text",
-        placeholder: "e.g., Apples, Oranges, Bananas",
+        placeholder: "Apples, Oranges, Bananas",
+        defaultValue: "Apples, Oranges, Bananas"
       },
       {
         id: "values",
         label: "Values (comma separated)",
         type: "text",
-        placeholder: "e.g., 30, 20, 50",
+        placeholder: "30, 20, 50",
+        defaultValue: "30, 20, 50"
       },
     ],
     calculate: (values) => {
@@ -86,13 +88,15 @@ export const chartTools: MathTool[] = [
         id: "categories",
         label: "Categories (comma separated)",
         type: "text",
-        placeholder: "e.g., Q1, Q2, Q3, Q4",
+        placeholder: "Q1, Q2, Q3, Q4",
+        defaultValue: "Q1, Q2, Q3, Q4"
       },
       {
         id: "values",
         label: "Values (comma separated)",
         type: "text",
-        placeholder: "e.g., 100, 200, 150, 300",
+        placeholder: "100, 200, 150, 300",
+        defaultValue: "100, 200, 150, 300"
       },
     ],
     calculate: (values) => {
@@ -145,7 +149,8 @@ export const chartTools: MathTool[] = [
         id: "points",
         label: "Points (x,y pairs separated by semicolon)",
         type: "text",
-        placeholder: "e.g., 1,2; 2,3; 3,5; 4,7",
+        placeholder: "1,2; 2,3; 3,5; 4,7",
+        defaultValue: "1,2; 2,3; 3,5; 4,7"
       },
     ],
     calculate: (values) => {
@@ -198,13 +203,15 @@ export const chartTools: MathTool[] = [
         id: "categories",
         label: "Categories (comma separated)",
         type: "text",
-        placeholder: "e.g., Jan, Feb, Mar, Apr",
+        placeholder: "Jan, Feb, Mar, Apr",
+        defaultValue: "Jan, Feb, Mar, Apr"
       },
       {
         id: "values",
         label: "Values (comma separated)",
         type: "text",
-        placeholder: "e.g., 10, 20, 15, 30",
+        placeholder: "10, 20, 15, 30",
+        defaultValue: "10, 20, 15, 30"
       },
     ],
     calculate: (values) => {

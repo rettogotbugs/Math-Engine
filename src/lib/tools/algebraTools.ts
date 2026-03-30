@@ -11,10 +11,10 @@ export const algebraTools: MathTool[] = [
     classLevel: "Class 8",
     description: "Plot a graph using the x,y table method. Generates a table of values and plots the corresponding graph.",
     inputs: [
-      { id: "expr", label: "Function y = f(x)", type: "text", placeholder: "e.g., 2x + 3" },
-      { id: "xStart", label: "Start x", type: "number", placeholder: "-5" },
-      { id: "xEnd", label: "End x", type: "number", placeholder: "5" },
-      { id: "step", label: "Step", type: "number", placeholder: "1" }
+      { id: "expr", label: "Function y = f(x)", type: "text", placeholder: "2x + 3", defaultValue: "2x + 3" },
+      { id: "xStart", label: "Start x", type: "number", placeholder: "-5", defaultValue: "-5" },
+      { id: "xEnd", label: "End x", type: "number", placeholder: "5", defaultValue: "5" },
+      { id: "step", label: "Step", type: "number", placeholder: "1", defaultValue: "1" }
     ],
     calculate: (values) => {
       const xStart = parseFloat(values.xStart) || -5;
@@ -51,7 +51,8 @@ export const algebraTools: MathTool[] = [
         id: "eq",
         label: "Equation",
         type: "text",
-        placeholder: "e.g., 2x + 3 = 7",
+        placeholder: "2x + 5 = 15",
+        defaultValue: "2x + 5 = 15"
       },
     ],
     calculate: (values) => algebraSolver.solveEquation(values.eq),
@@ -63,9 +64,9 @@ export const algebraTools: MathTool[] = [
     classLevel: "Class 9-10",
     description: "Find roots of quadratic equations using the discriminant method with detailed steps.",
     inputs: [
-      { id: "a", label: "a", type: "number", placeholder: "1" },
-      { id: "b", label: "b", type: "number", placeholder: "-3" },
-      { id: "c", label: "c", type: "number", placeholder: "2" },
+      { id: "a", label: "a", type: "number", placeholder: "1", defaultValue: "1" },
+      { id: "b", label: "b", type: "number", placeholder: "-5", defaultValue: "-5" },
+      { id: "c", label: "c", type: "number", placeholder: "6", defaultValue: "6" },
     ],
     calculate: (values) => {
       const a = parseFloat(values.a);
@@ -82,33 +83,23 @@ export const algebraTools: MathTool[] = [
     classLevel: "Class 8",
     description: "Expand complex algebraic expressions into their standard polynomial form.",
     inputs: [
-      { id: "expr", label: "Expression", type: "text", placeholder: "(x+2)^2" },
+      { id: "expr", label: "Expression", type: "text", placeholder: "(x+3)(x-4)", defaultValue: "(x+3)(x-4)" },
     ],
     calculate: (values) => algebraSolver.expandExpression(values.expr),
   },
   {
     id: "system_2x2",
-    name: "System of Linear Equations (2x2)",
+    name: "System of Linear Equations (2 Variables)",
     category: "Algebra",
     classLevel: "Class 9-10",
-    description: "Solve a system of two linear equations simultaneously.",
+    description: "Solve a system of two linear equations simultaneously using substitution or elimination.",
     inputs: [
-      { id: "a1", label: "a1", type: "number", placeholder: "2" },
-      { id: "b1", label: "b1", type: "number", placeholder: "3" },
-      { id: "c1", label: "c1", type: "number", placeholder: "7" },
-      { id: "a2", label: "a2", type: "number", placeholder: "1" },
-      { id: "b2", label: "b2", type: "number", placeholder: "-1" },
-      { id: "c2", label: "c2", type: "number", placeholder: "1" },
+      { id: "eq1", label: "Equation 1", type: "text", placeholder: "2x + y = 10", defaultValue: "2x + y = 10" },
+      { id: "eq2", label: "Equation 2", type: "text", placeholder: "x - y = 2", defaultValue: "x - y = 2" },
     ],
     calculate: (values) => {
-      const a1 = parseFloat(values.a1);
-      const b1 = parseFloat(values.b1);
-      const c1 = parseFloat(values.c1);
-      const a2 = parseFloat(values.a2);
-      const b2 = parseFloat(values.b2);
-      const c2 = parseFloat(values.c2);
-      if (isNaN(a1) || isNaN(b1) || isNaN(c1) || isNaN(a2) || isNaN(b2) || isNaN(c2)) return { result: "Invalid input" };
-      return algebraSolver.solveSystem2x2(a1, b1, c1, a2, b2, c2);
+      if (!values.eq1 || !values.eq2) return { result: "Input required" };
+      return algebraSolver.solveSystem2x2(values.eq1, values.eq2);
     },
   },
   {
@@ -118,8 +109,8 @@ export const algebraTools: MathTool[] = [
     classLevel: "Class 9-10",
     description: "Evaluate a polynomial function for a specific value of x.",
     inputs: [
-      { id: "poly", label: "Polynomial P(x)", type: "text", placeholder: "x^2 + 2x + 1" },
-      { id: "xVal", label: "Value of x", type: "number", placeholder: "3" },
+      { id: "poly", label: "Polynomial P(x)", type: "text", placeholder: "x^3 - 4x^2 + 5x - 2", defaultValue: "x^3 - 4x^2 + 5x - 2" },
+      { id: "xVal", label: "Value of x", type: "number", placeholder: "2", defaultValue: "2" },
     ],
     calculate: (values) => {
       try {
@@ -128,11 +119,11 @@ export const algebraTools: MathTool[] = [
         const expr = math.parse(values.poly);
         const result = expr.evaluate({ x });
         return {
-          result: result.toString(),
+          result: `$$${result}$$`,
           steps: [
-            `Evaluate P(x) = ${values.poly} at x = ${x}`,
-            `Substitute x = ${x}: P(${x}) = ${values.poly.replace(/x/g, `(${x})`)}`,
-            `Result: ${result}`
+            `Evaluate $P(x) = ${expr.toTex()}$ at $x = ${x}$`,
+            `Substitute $x = ${x}$: $P(${x}) = ${values.poly.replace(/x/g, `(${x})`)}$`,
+            `Result: $$${result}$$`
           ]
         };
       } catch (e) {
@@ -146,8 +137,8 @@ export const algebraTools: MathTool[] = [
     category: "Algebra",
     description: "Calculate standard algebraic identities like (a+b)² or a²-b². A great reference tool for factoring and expanding expressions.",
     inputs: [
-      { id: "a", label: "a", type: "number", placeholder: "3" },
-      { id: "b", label: "b", type: "number", placeholder: "4" },
+      { id: "a", label: "a", type: "number", placeholder: "5", defaultValue: "5" },
+      { id: "b", label: "b", type: "number", placeholder: "2", defaultValue: "2" },
       {
         id: "identity",
         label: "Identity",
@@ -159,6 +150,7 @@ export const algebraTools: MathTool[] = [
           { label: "(a+b)³", value: "aplusb3" },
           { label: "(a-b)³", value: "aminusb3" },
         ],
+        defaultValue: "aplusb2"
       },
     ],
     calculate: (values) => {
@@ -172,50 +164,50 @@ export const algebraTools: MathTool[] = [
         case "aplusb2":
           res = Math.pow(a + b, 2);
           steps = [
-            `Identity: (a+b)² = a² + 2ab + b²`,
-            `(${a}+${b})² = ${a}² + 2(${a})(${b}) + ${b}²`,
-            `= ${a*a} + ${2*a*b} + ${b*b}`,
-            `= ${res}`
+            `Identity: $(a+b)^2 = a^2 + 2ab + b^2$`,
+            `$(${a}+${b})^2 = ${a}^2 + 2(${a})(${b}) + ${b}^2$`,
+            `$= ${a*a} + ${2*a*b} + ${b*b}$`,
+            `$= ${res}$`
           ];
           break;
         case "aminusb2":
           res = Math.pow(a - b, 2);
           steps = [
-            `Identity: (a-b)² = a² - 2ab + b²`,
-            `(${a}-${b})² = ${a}² - 2(${a})(${b}) + ${b}²`,
-            `= ${a*a} - ${2*a*b} + ${b*b}`,
-            `= ${res}`
+            `Identity: $(a-b)^2 = a^2 - 2ab + b^2$`,
+            `$(${a}-${b})^2 = ${a}^2 - 2(${a})(${b}) + ${b}^2$`,
+            `$= ${a*a} - ${2*a*b} + ${b*b}$`,
+            `$= ${res}$`
           ];
           break;
         case "a2minusb2":
           res = Math.pow(a, 2) - Math.pow(b, 2);
           steps = [
-            `Identity: a² - b² = (a+b)(a-b)`,
-            `${a}² - ${b}² = (${a}+${b})(${a}-${b})`,
-            `= (${a+b})(${a-b})`,
-            `= ${res}`
+            `Identity: $a^2 - b^2 = (a+b)(a-b)$`,
+            `$${a}^2 - ${b}^2 = (${a}+${b})(${a}-${b})$`,
+            `$= (${a+b})(${a-b})$`,
+            `$= ${res}$`
           ];
           break;
         case "aplusb3":
           res = Math.pow(a + b, 3);
           steps = [
-            `Identity: (a+b)³ = a³ + 3a²b + 3ab² + b³`,
-            `(${a}+${b})³ = ${a}³ + 3(${a})²(${b}) + 3(${a})(${b})² + ${b}³`,
-            `= ${Math.pow(a,3)} + ${3*Math.pow(a,2)*b} + ${3*a*Math.pow(b,2)} + ${Math.pow(b,3)}`,
-            `= ${res}`
+            `Identity: $(a+b)^3 = a^3 + 3a^2b + 3ab^2 + b^3$`,
+            `$(${a}+${b})^3 = ${a}^3 + 3(${a})^2(${b}) + 3(${a})(${b})^2 + ${b}^3$`,
+            `$= ${Math.pow(a,3)} + ${3*Math.pow(a,2)*b} + ${3*a*Math.pow(b,2)} + ${Math.pow(b,3)}$`,
+            `$= ${res}$`
           ];
           break;
         case "aminusb3":
           res = Math.pow(a - b, 3);
           steps = [
-            `Identity: (a-b)³ = a³ - 3a²b + 3ab² - b³`,
-            `(${a}-${b})³ = ${a}³ - 3(${a})²(${b}) + 3(${a})(${b})² - ${b}³`,
-            `= ${Math.pow(a,3)} - ${3*Math.pow(a,2)*b} + ${3*a*Math.pow(b,2)} - ${Math.pow(b,3)}`,
-            `= ${res}`
+            `Identity: $(a-b)^3 = a^3 - 3a^2b + 3ab^2 - b^3$`,
+            `$(${a}-${b})^3 = ${a}^3 - 3(${a})^2(${b}) + 3(${a})(${b})^2 - ${b}^3$`,
+            `$= ${Math.pow(a,3)} - ${3*Math.pow(a,2)*b} + ${3*a*Math.pow(b,2)} - ${Math.pow(b,3)}$`,
+            `$= ${res}$`
           ];
           break;
       }
-      return { result: res.toString(), steps };
+      return { result: `$$${res}$$`, steps };
     },
   },
   {
@@ -224,7 +216,7 @@ export const algebraTools: MathTool[] = [
     category: "Algebra",
     description: "Expand expressions of the form (x + y)^n using binomial coefficients. Essential for advanced algebra, probability, and calculus.",
     inputs: [
-      { id: "n", label: "Power (n)", type: "number", placeholder: "e.g., 3" },
+      { id: "n", label: "Power (n)", type: "number", placeholder: "4", defaultValue: "4" },
     ],
     calculate: (values) => {
       const n = parseInt(values.n);
@@ -243,8 +235,8 @@ export const algebraTools: MathTool[] = [
       
       let expansion = "";
       const steps = [
-        `Expand (x + y)^${n} using the Binomial Theorem`,
-        `Formula: (x + y)^n = Σ (nCr * x^(n-r) * y^r) from r=0 to n`
+        `Expand $(x + y)^{${n}}$ using the Binomial Theorem`,
+        `Formula: $(x + y)^n = \\sum_{r=0}^{n} \\binom{n}{r} x^{n-r} y^r$`
       ];
       
       for (let r = 0; r <= n; r++) {
@@ -257,24 +249,24 @@ export const algebraTools: MathTool[] = [
         
         if (xPower > 0) {
           term += "x";
-          if (xPower > 1) term += `^${xPower}`;
+          if (xPower > 1) term += `^{${xPower}}`;
         }
         
         if (yPower > 0) {
           term += "y";
-          if (yPower > 1) term += `^${yPower}`;
+          if (yPower > 1) term += `^{${yPower}}`;
         }
         
         if (term === "") term = "1";
         
         expansion += (r === 0 ? "" : " + ") + term;
-        steps.push(`Term ${r + 1} (r=${r}): ${coeff} * x^${xPower} * y^${yPower} = ${term}`);
+        steps.push(`Term ${r + 1} ($r=${r}$): $\\binom{${n}}{${r}} x^{${xPower}} y^{${yPower}} = ${term}$`);
       }
       
-      steps.push(`Final Expansion: ${expansion}`);
+      steps.push(`Final Expansion: $$${expansion}$$`);
       
       return {
-        result: expansion,
+        result: `$$${expansion}$$`,
         steps
       };
     },
@@ -285,7 +277,7 @@ export const algebraTools: MathTool[] = [
     category: "Algebra",
     description: "Add or subtract two polynomials by combining like terms. A fundamental operation for simplifying complex algebraic expressions.",
     inputs: [
-      { id: "p1", label: "Polynomial 1", type: "text", placeholder: "e.g., 2x^2 + 3x + 1" },
+      { id: "p1", label: "Polynomial 1", type: "text", placeholder: "2x^2 + 3x + 1", defaultValue: "2x^2 + 3x + 1" },
       {
         id: "op",
         label: "Operation",
@@ -294,8 +286,9 @@ export const algebraTools: MathTool[] = [
           { label: "+", value: "+" },
           { label: "-", value: "-" },
         ],
+        defaultValue: "+"
       },
-      { id: "p2", label: "Polynomial 2", type: "text", placeholder: "e.g., x^2 - 2x + 5" },
+      { id: "p2", label: "Polynomial 2", type: "text", placeholder: "x^2 - 2x + 5", defaultValue: "x^2 - 2x + 5" },
     ],
     calculate: (values) => {
       try {
@@ -303,11 +296,11 @@ export const algebraTools: MathTool[] = [
         const exprStr = `(${values.p1}) ${values.op} (${values.p2})`;
         const simplified = math.simplify(exprStr).toString();
         return {
-          result: simplified,
+          result: `$$${math.parse(simplified).toTex()}$$`,
           steps: [
-            `Expression: ${exprStr}`,
+            `Expression: $${math.parse(exprStr).toTex()}$`,
             `Simplify by combining like terms.`,
-            `Result: ${simplified}`
+            `Result: $$${math.parse(simplified).toTex()}$$`
           ]
         };
       } catch (e) {
@@ -321,8 +314,8 @@ export const algebraTools: MathTool[] = [
     category: "Algebra",
     description: "Multiply two polynomials using the distributive property. Useful for finding areas in geometry and expanding algebraic models.",
     inputs: [
-      { id: "p1", label: "Polynomial 1", type: "text", placeholder: "e.g., x + 2" },
-      { id: "p2", label: "Polynomial 2", type: "text", placeholder: "e.g., x - 3" },
+      { id: "p1", label: "Polynomial 1", type: "text", placeholder: "x + 2", defaultValue: "x + 2" },
+      { id: "p2", label: "Polynomial 2", type: "text", placeholder: "x - 3", defaultValue: "x - 3" },
     ],
     calculate: (values) => {
       try {
@@ -331,11 +324,11 @@ export const algebraTools: MathTool[] = [
         // math.simplify doesn't always expand, so we can use rationalization or expand
         const expanded = math.rationalize(exprStr).toString();
         return {
-          result: expanded,
+          result: `$$${math.parse(expanded).toTex()}$$`,
           steps: [
-            `Expression: ${exprStr}`,
+            `Expression: $${math.parse(exprStr).toTex()}$`,
             `Expand by multiplying each term.`,
-            `Result: ${expanded}`
+            `Result: $$${math.parse(expanded).toTex()}$$`
           ]
         };
       } catch (e) {
@@ -349,9 +342,9 @@ export const algebraTools: MathTool[] = [
     category: "Algebra",
     description: "Find the nth term and sum of an arithmetic sequence. Essential for calculating linear growth, depreciation, and simple interest.",
     inputs: [
-      { id: "a", label: "First term (a)", type: "number", placeholder: "e.g., 2" },
-      { id: "d", label: "Common difference (d)", type: "number", placeholder: "e.g., 3" },
-      { id: "n", label: "Number of terms (n)", type: "number", placeholder: "e.g., 10" },
+      { id: "a", label: "First term (a)", type: "number", placeholder: "2", defaultValue: "2" },
+      { id: "d", label: "Common difference (d)", type: "number", placeholder: "3", defaultValue: "3" },
+      { id: "n", label: "Number of terms (n)", type: "number", placeholder: "10", defaultValue: "10" },
     ],
     calculate: (values) => {
       const a = parseFloat(values.a);
@@ -363,12 +356,12 @@ export const algebraTools: MathTool[] = [
       const sum = (n / 2) * (2 * a + (n - 1) * d);
       
       return {
-        result: `nth term = ${nthTerm}, Sum = ${sum}`,
+        result: `$$a_{${n}} = ${nthTerm}, S_{${n}} = ${sum}$$`,
         steps: [
-          `nth term formula: a_n = a + (n-1)d`,
-          `a_${n} = ${a} + (${n}-1)(${d}) = ${nthTerm}`,
-          `Sum formula: S_n = (n/2)[2a + (n-1)d]`,
-          `S_${n} = (${n}/2)[2(${a}) + (${n}-1)(${d})] = ${sum}`
+          `$n$th term formula: $$a_n = a + (n-1)d$$`,
+          `$$a_{${n}} = ${a} + (${n}-1)(${d}) = ${nthTerm}$$`,
+          `Sum formula: $$S_n = \\frac{n}{2}[2a + (n-1)d]$$`,
+          `$$S_{${n}} = \\frac{${n}}{2}[2(${a}) + (${n}-1)(${d})] = ${sum}$$`
         ]
       };
     },
@@ -379,9 +372,9 @@ export const algebraTools: MathTool[] = [
     category: "Algebra",
     description: "Find the nth term and sum of a geometric sequence. Crucial for modeling exponential growth, compound interest, and population dynamics.",
     inputs: [
-      { id: "a", label: "First term (a)", type: "number", placeholder: "e.g., 2" },
-      { id: "r", label: "Common ratio (r)", type: "number", placeholder: "e.g., 3" },
-      { id: "n", label: "Number of terms (n)", type: "number", placeholder: "e.g., 5" },
+      { id: "a", label: "First term (a)", type: "number", placeholder: "2", defaultValue: "2" },
+      { id: "r", label: "Common ratio (r)", type: "number", placeholder: "3", defaultValue: "3" },
+      { id: "n", label: "Number of terms (n)", type: "number", placeholder: "5", defaultValue: "5" },
     ],
     calculate: (values) => {
       const a = parseFloat(values.a);
@@ -394,18 +387,18 @@ export const algebraTools: MathTool[] = [
       let sumStep = "";
       if (r === 1) {
         sum = n * a;
-        sumStep = `S_${n} = n * a = ${n} * ${a} = ${sum}`;
+        sumStep = `$$S_{${n}} = n \\times a = ${n} \\times ${a} = ${sum}$$`;
       } else {
         sum = a * (Math.pow(r, n) - 1) / (r - 1);
-        sumStep = `S_${n} = a(r^n - 1)/(r - 1) = ${a}(${r}^${n} - 1)/(${r} - 1) = ${sum}`;
+        sumStep = `$$S_{${n}} = \\frac{a(r^n - 1)}{r - 1} = \\frac{${a}(${r}^{${n}} - 1)}{${r} - 1} = ${sum}$$`;
       }
       
       return {
-        result: `nth term = ${nthTerm}, Sum = ${sum}`,
+        result: `$$a_{${n}} = ${nthTerm}, S_{${n}} = ${sum}$$`,
         steps: [
-          `nth term formula: a_n = a * r^(n-1)`,
-          `a_${n} = ${a} * ${r}^(${n}-1) = ${nthTerm}`,
-          `Sum formula: S_n = a(r^n - 1)/(r - 1) (for r ≠ 1)`,
+          `$n$th term formula: $$a_n = a \\cdot r^{n-1}$$`,
+          `$$a_{${n}} = ${a} \\cdot ${r}^{${n}-1} = ${nthTerm}$$`,
+          `Sum formula: $$S_n = \\frac{a(r^n - 1)}{r - 1} \\text{ (for } r \\neq 1 \\text{)}$$`,
           sumStep
         ]
       };
@@ -421,7 +414,8 @@ export const algebraTools: MathTool[] = [
         id: "ineq",
         label: "Inequality",
         type: "text",
-        placeholder: "e.g., 2x + 3 > 7",
+        placeholder: "2x + 3 > 7",
+        defaultValue: "2x + 3 > 7"
       },
     ],
     calculate: (values) => algebraSolver.solveInequality(values.ineq),

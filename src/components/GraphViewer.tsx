@@ -28,7 +28,7 @@ export function GraphViewer() {
   const handleDownload = async () => {
     if (graphRef.current) {
       try {
-        const dataUrl = await toPng(graphRef.current, { cacheBust: true, backgroundColor: '#18181b' });
+        const dataUrl = await toPng(graphRef.current, { pixelRatio: 2, skipFonts: false, backgroundColor: '#18181b', cacheBust: true });
         const link = document.createElement('a');
         link.download = 'graph.png';
         link.href = dataUrl;
@@ -320,6 +320,7 @@ export function GraphViewer() {
                     stroke={COLORS[index % COLORS.length]}
                     strokeWidth={3}
                     dot={false}
+                    isAnimationActive={false}
                     activeDot={{
                       r: 6,
                       fill: COLORS[index % COLORS.length],

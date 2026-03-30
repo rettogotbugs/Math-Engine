@@ -3,13 +3,13 @@ export const mensurationSolver = {
     if (side < 0) return { result: "Invalid side", steps: ["Side cannot be negative."] };
     const area = 6 * side * side;
     return {
-      result: area.toString(),
+      result: `$$${area}$$`,
       steps: [
-        `Find total surface area of cube with side a = ${side}`,
-        `Formula: Surface Area = 6 * a²`,
-        `Surface Area = 6 * (${side})²`,
-        `Surface Area = 6 * ${side * side}`,
-        `Surface Area = ${area}`
+        `Find total surface area of cube with side $a = ${side}$`,
+        `Formula: $\\text{Surface Area} = 6a^2$`,
+        `$\\text{Surface Area} = 6(${side})^2$`,
+        `$\\text{Surface Area} = 6(${side * side})$`,
+        `$\\text{Surface Area} = ${area}$`
       ]
     };
   },
@@ -18,13 +18,13 @@ export const mensurationSolver = {
     const lateralArea = 2 * Math.PI * radius * height;
     const totalArea = lateralArea + 2 * Math.PI * radius * radius;
     return {
-      result: totalArea.toFixed(4),
+      result: `$$${totalArea.toFixed(4)}$$`,
       steps: [
-        `Find total surface area of cylinder with radius r = ${radius} and height h = ${height}`,
-        `Formula: Total Surface Area = 2πrh + 2πr²`,
-        `Lateral Area = 2 * π * ${radius} * ${height} ≈ ${lateralArea.toFixed(4)}`,
-        `Base Area (x2) = 2 * π * (${radius})² ≈ ${(2 * Math.PI * radius * radius).toFixed(4)}`,
-        `Total Surface Area ≈ ${totalArea.toFixed(4)}`
+        `Find total surface area of cylinder with radius $r = ${radius}$ and height $h = ${height}$`,
+        `Formula: $\\text{Total Surface Area} = 2\\pi rh + 2\\pi r^2$`,
+        `$\\text{Lateral Area} = 2\\pi(${radius})(${height}) \\approx ${lateralArea.toFixed(4)}$`,
+        `$\\text{Base Area (x2)} = 2\\pi(${radius})^2 \\approx ${(2 * Math.PI * radius * radius).toFixed(4)}$`,
+        `$\\text{Total Surface Area} \\approx ${totalArea.toFixed(4)}$`
       ]
     };
   },
@@ -32,13 +32,13 @@ export const mensurationSolver = {
     if (radius < 0 || height < 0) return { result: "Invalid dimensions", steps: ["Dimensions cannot be negative."] };
     const volume = (1 / 3) * Math.PI * radius * radius * height;
     return {
-      result: volume.toFixed(4),
+      result: `$$${volume.toFixed(4)}$$`,
       steps: [
-        `Find volume of cone with radius r = ${radius} and height h = ${height}`,
-        `Formula: Volume = 1/3 * π * r² * h`,
-        `Volume = 1/3 * π * (${radius})² * ${height}`,
-        `Volume = 1/3 * π * ${radius * radius} * ${height}`,
-        `Volume ≈ ${volume.toFixed(4)}`
+        `Find volume of cone with radius $r = ${radius}$ and height $h = ${height}$`,
+        `Formula: $\\text{Volume} = \\frac{1}{3}\\pi r^2 h$`,
+        `$\\text{Volume} = \\frac{1}{3}\\pi(${radius})^2(${height})$`,
+        `$\\text{Volume} = \\frac{1}{3}\\pi(${radius * radius})(${height})$`,
+        `$\\text{Volume} \\approx ${volume.toFixed(4)}$`
       ]
     };
   },
@@ -48,14 +48,14 @@ export const mensurationSolver = {
     const lateralArea = Math.PI * radius * slantHeight;
     const totalArea = lateralArea + Math.PI * radius * radius;
     return {
-      result: totalArea.toFixed(4),
+      result: `$$${totalArea.toFixed(4)}$$`,
       steps: [
-        `Find total surface area of cone with radius r = ${radius} and height h = ${height}`,
-        `First, find slant height (l): l = √(r² + h²) = √(${radius}² + ${height}²) = √(${radius * radius + height * height}) ≈ ${slantHeight.toFixed(4)}`,
-        `Formula: Total Surface Area = πrl + πr²`,
-        `Lateral Area = π * ${radius} * ${slantHeight.toFixed(4)} ≈ ${lateralArea.toFixed(4)}`,
-        `Base Area = π * (${radius})² ≈ ${(Math.PI * radius * radius).toFixed(4)}`,
-        `Total Surface Area ≈ ${totalArea.toFixed(4)}`
+        `Find total surface area of cone with radius $r = ${radius}$ and height $h = ${height}$`,
+        `First, find slant height ($l$): $l = \\sqrt{r^2 + h^2} = \\sqrt{${radius}^2 + ${height}^2} = \\sqrt{${radius * radius + height * height}} \\approx ${slantHeight.toFixed(4)}$`,
+        `Formula: $\\text{Total Surface Area} = \\pi rl + \\pi r^2$`,
+        `$\\text{Lateral Area} = \\pi(${radius})(${slantHeight.toFixed(4)}) \\approx ${lateralArea.toFixed(4)}$`,
+        `$\\text{Base Area} = \\pi(${radius})^2 \\approx ${(Math.PI * radius * radius).toFixed(4)}$`,
+        `$\\text{Total Surface Area} \\approx ${totalArea.toFixed(4)}$`
       ]
     };
   },
@@ -63,13 +63,13 @@ export const mensurationSolver = {
     if (radius < 0) return { result: "Invalid radius", steps: ["Radius cannot be negative."] };
     const area = 4 * Math.PI * radius * radius;
     return {
-      result: area.toFixed(4),
+      result: `$$${area.toFixed(4)}$$`,
       steps: [
-        `Find surface area of sphere with radius r = ${radius}`,
-        `Formula: Surface Area = 4 * π * r²`,
-        `Surface Area = 4 * π * (${radius})²`,
-        `Surface Area = 4 * π * ${radius * radius}`,
-        `Surface Area ≈ ${area.toFixed(4)}`
+        `Find surface area of sphere with radius $r = ${radius}$`,
+        `Formula: $\\text{Surface Area} = 4\\pi r^2$`,
+        `$\\text{Surface Area} = 4\\pi(${radius})^2$`,
+        `$\\text{Surface Area} = 4\\pi(${radius * radius})$`,
+        `$\\text{Surface Area} \\approx ${area.toFixed(4)}$`
       ]
     };
   },
@@ -77,12 +77,12 @@ export const mensurationSolver = {
     if (radius < 0) return { result: "Invalid radius", steps: ["Radius cannot be negative."] };
     const volume = (2 / 3) * Math.PI * Math.pow(radius, 3);
     return {
-      result: volume.toFixed(4),
+      result: `$$${volume.toFixed(4)}$$`,
       steps: [
-        `Find volume of hemisphere with radius r = ${radius}`,
-        `Formula: Volume = 2/3 * π * r³`,
-        `Volume = 2/3 * π * (${radius})³`,
-        `Volume ≈ ${volume.toFixed(4)}`
+        `Find volume of hemisphere with radius $r = ${radius}$`,
+        `Formula: $\\text{Volume} = \\frac{2}{3}\\pi r^3$`,
+        `$\\text{Volume} = \\frac{2}{3}\\pi(${radius})^3$`,
+        `$\\text{Volume} \\approx ${volume.toFixed(4)}$`
       ]
     };
   },
@@ -90,12 +90,12 @@ export const mensurationSolver = {
     if (radius < 0) return { result: "Invalid radius", steps: ["Radius cannot be negative."] };
     const area = 3 * Math.PI * radius * radius;
     return {
-      result: area.toFixed(4),
+      result: `$$${area.toFixed(4)}$$`,
       steps: [
-        `Find total surface area of hemisphere with radius r = ${radius}`,
-        `Formula: Total Surface Area = 3 * π * r²`,
-        `Surface Area = 3 * π * (${radius})²`,
-        `Surface Area ≈ ${area.toFixed(4)}`
+        `Find total surface area of hemisphere with radius $r = ${radius}$`,
+        `Formula: $\\text{Total Surface Area} = 3\\pi r^2$`,
+        `$\\text{Surface Area} = 3\\pi(${radius})^2$`,
+        `$\\text{Surface Area} \\approx ${area.toFixed(4)}$`
       ]
     };
   }
