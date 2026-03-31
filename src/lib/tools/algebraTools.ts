@@ -103,6 +103,42 @@ export const algebraTools: MathTool[] = [
     },
   },
   {
+    id: "partial_fraction",
+    name: "Partial Fraction Decomposition",
+    category: "Algebra",
+    classLevel: "Class 11-12",
+    description: "Decompose a rational function into partial fractions. Highly useful for integration and inverse Laplace transforms.",
+    inputs: [
+      { id: "expr", label: "Expression", type: "text", placeholder: "1/((x-1)*(x+2))", defaultValue: "1/((x-1)*(x+2))" },
+      { id: "var", label: "Variable", type: "text", placeholder: "x", defaultValue: "x" },
+    ],
+    calculate: (values) => {
+      try {
+        const nerdamer = require("nerdamer");
+        require("nerdamer/Calculus");
+        require("nerdamer/Algebra");
+        
+        const expr = values.expr;
+        const variable = values.var || "x";
+        
+        const result = nerdamer(`partfrac(${expr}, ${variable})`).toTeX();
+        const orig = nerdamer(expr).toTeX();
+        
+        return {
+          result: `$$${result}$$`,
+          steps: [
+            `Decompose the following expression into partial fractions:`,
+            `$$${orig}$$`,
+            `Result:`,
+            `$$${result}$$`
+          ]
+        };
+      } catch (e) {
+        return { result: "Invalid input", steps: ["Could not decompose expression."] };
+      }
+    },
+  },
+  {
     id: "polynomial_eval",
     name: "Polynomial Evaluator",
     category: "Algebra",

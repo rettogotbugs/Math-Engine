@@ -17,6 +17,103 @@ export const utilityTools: MathTool[] = [
     },
   },
   {
+    id: "base_converter",
+    name: "Base/Radix Converter",
+    category: "Utilities",
+    classLevel: "General",
+    description: "Convert numbers between Binary, Octal, Decimal, and Hexadecimal bases.",
+    inputs: [
+      { id: "num", label: "Number", type: "text", placeholder: "1010", defaultValue: "1010" },
+      { id: "fromBase", label: "From Base", type: "select", options: [
+        {label: "Binary (2)", value: "2"},
+        {label: "Octal (8)", value: "8"},
+        {label: "Decimal (10)", value: "10"},
+        {label: "Hexadecimal (16)", value: "16"}
+      ], defaultValue: "2" },
+      { id: "toBase", label: "To Base", type: "select", options: [
+        {label: "Binary (2)", value: "2"},
+        {label: "Octal (8)", value: "8"},
+        {label: "Decimal (10)", value: "10"},
+        {label: "Hexadecimal (16)", value: "16"}
+      ], defaultValue: "10" },
+    ],
+    calculate: (values) => {
+      try {
+        const numStr = values.num.trim();
+        const fromBase = parseInt(values.fromBase);
+        const toBase = parseInt(values.toBase);
+        
+        // Parse to decimal first
+        const decimalValue = parseInt(numStr, fromBase);
+        if (isNaN(decimalValue)) return { result: "Invalid number for the selected base" };
+        
+        // Convert to target base
+        const resultStr = decimalValue.toString(toBase).toUpperCase();
+        
+        return {
+          result: `$$${resultStr}_{${toBase}}$$`,
+          steps: [
+            `Convert $${numStr}_{${fromBase}}$ to base $${toBase}$`,
+            `Step 1: Convert to Decimal (Base 10)`,
+            `$$${numStr}_{${fromBase}} = ${decimalValue}_{10}$$`,
+            `Step 2: Convert Decimal to Base ${toBase}`,
+            `$$${decimalValue}_{10} = ${resultStr}_{${toBase}}$$`,
+            `Result: $$${resultStr}_{${toBase}}$$`
+          ]
+        };
+      } catch (e) {
+        return { result: "Invalid input", steps: ["Could not convert base."] };
+      }
+    },
+  },
+  {
+    id: "compound_interest",
+    name: "Compound Interest Calculator",
+    category: "Utilities",
+    classLevel: "General",
+    description: "Calculate compound interest and final amount.",
+    inputs: [
+      { id: "principal", label: "Principal (P)", type: "number", placeholder: "1000", defaultValue: "1000" },
+      { id: "rate", label: "Annual Rate (r in %)", type: "number", placeholder: "5", defaultValue: "5" },
+      { id: "compounds", label: "Times Compounded per Year (n)", type: "number", placeholder: "12", defaultValue: "12" },
+      { id: "years", label: "Years (t)", type: "number", placeholder: "10", defaultValue: "10" },
+    ],
+    calculate: (values) => {
+      try {
+        const P = parseFloat(values.principal);
+        const rPercent = parseFloat(values.rate);
+        const n = parseFloat(values.compounds);
+        const t = parseFloat(values.years);
+        
+        if (isNaN(P) || isNaN(rPercent) || isNaN(n) || isNaN(t)) return { result: "Invalid input" };
+        
+        const r = rPercent / 100;
+        const A = P * Math.pow(1 + r / n, n * t);
+        const interest = A - P;
+        
+        return {
+          result: `$$A = ${A.toFixed(2)}$$`,
+          steps: [
+            `Calculate Compound Interest`,
+            `Formula: $$A = P\\left(1 + \\frac{r}{n}\\right)^{nt}$$`,
+            `Where:`,
+            `$P = ${P}$ (Principal)`,
+            `$r = ${rPercent}\\% = ${r}$ (Annual Rate)`,
+            `$n = ${n}$ (Compounds per year)`,
+            `$t = ${t}$ (Years)`,
+            `Substitute values:`,
+            `$$A = ${P}\\left(1 + \\frac{${r}}{${n}}\\right)^{${n} \\times ${t}}$$`,
+            `$$A = ${P}\\left(1 + ${r/n}\\right)^{${n * t}}$$`,
+            `$$A = ${A.toFixed(2)}$$`,
+            `Total Interest Earned: $$A - P = ${A.toFixed(2)} - ${P} = ${interest.toFixed(2)}$$`
+          ]
+        };
+      } catch (e) {
+        return { result: "Invalid input", steps: ["Could not calculate interest."] };
+      }
+    },
+  },
+  {
     id: "unit_converter",
     name: "Unit Converter",
     category: "Utilities",

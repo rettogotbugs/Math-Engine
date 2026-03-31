@@ -754,5 +754,227 @@ export const formulas: Formula[] = [
     name: "Binomial Probability",
     category: "Statistics & Probability",
     formula: "P(X = k) = \\binom{n}{k} p^k (1-p)^{n-k}"
+  },
+
+  // Physics / Kinematics
+  {
+    id: "phys-1",
+    name: "Kinematics: Velocity",
+    category: "Physics / Kinematics",
+    formula: "v = u + at"
+  },
+  {
+    id: "phys-2",
+    name: "Kinematics: Displacement",
+    category: "Physics / Kinematics",
+    formula: "s = ut + \\frac{1}{2}at^2"
+  },
+  {
+    id: "phys-3",
+    name: "Kinematics: Velocity Squared",
+    category: "Physics / Kinematics",
+    formula: "v^2 = u^2 + 2as"
+  },
+  {
+    id: "phys-4",
+    name: "Newton's Second Law",
+    category: "Physics / Kinematics",
+    formula: "F = ma"
+  },
+  {
+    id: "phys-5",
+    name: "Mass-Energy Equivalence",
+    category: "Physics / Kinematics",
+    formula: "E = mc^2"
+  },
+  {
+    id: "phys-6",
+    name: "Work",
+    category: "Physics / Kinematics",
+    formula: "W = Fd \\cos(\\theta)"
+  },
+  {
+    id: "phys-7",
+    name: "Kinetic Energy",
+    category: "Physics / Kinematics",
+    formula: "KE = \\frac{1}{2}mv^2"
+  },
+  {
+    id: "phys-8",
+    name: "Potential Energy",
+    category: "Physics / Kinematics",
+    formula: "PE = mgh"
+  },
+  {
+    id: "phys-9",
+    name: "Power",
+    category: "Physics / Kinematics",
+    formula: "P = \\frac{W}{t}"
+  },
+  {
+    id: "phys-10",
+    name: "Momentum",
+    category: "Physics / Kinematics",
+    formula: "p = mv"
+  },
+  {
+    id: "phys-11",
+    name: "Centripetal Force",
+    category: "Physics / Kinematics",
+    formula: "F_c = \\frac{mv^2}{r}"
+  },
+  {
+    id: "phys-12",
+    name: "Gravitational Force",
+    category: "Physics / Kinematics",
+    formula: "F_g = G\\frac{m_1 m_2}{r^2}"
+  },
+
+  // Financial Math
+  {
+    id: "fin-1",
+    name: "Simple Interest",
+    category: "Financial Math",
+    formula: "I = Prt"
+  },
+  {
+    id: "fin-2",
+    name: "Compound Interest",
+    category: "Financial Math",
+    formula: "A = P\\left(1 + \\frac{r}{n}\\right)^{nt}"
+  },
+  {
+    id: "fin-3",
+    name: "Continuous Compounding",
+    category: "Financial Math",
+    formula: "A = Pe^{rt}"
+  },
+  {
+    id: "fin-4",
+    name: "Future Value of Annuity",
+    category: "Financial Math",
+    formula: "FV = P \\times \\frac{(1 + r)^n - 1}{r}"
+  },
+  {
+    id: "fin-5",
+    name: "Present Value of Annuity",
+    category: "Financial Math",
+    formula: "PV = P \\times \\frac{1 - (1 + r)^{-n}}{r}"
+  },
+  {
+    id: "fin-6",
+    name: "Effective Annual Rate (EAR)",
+    category: "Financial Math",
+    formula: "EAR = \\left(1 + \\frac{i}{n}\\right)^n - 1"
+  },
+  {
+    id: "fin-7",
+    name: "Rule of 72",
+    category: "Financial Math",
+    formula: "t \\approx \\frac{72}{r}"
+  },
+
+  // Advanced Calculus
+  {
+    id: "adv-calc-1",
+    name: "Taylor Series Definition",
+    category: "Advanced Calculus",
+    formula: "f(x) = \\sum_{n=0}^{\\infty} \\frac{f^{(n)}(a)}{n!} (x - a)^n"
+  },
+  {
+    id: "adv-calc-2",
+    name: "Maclaurin Series Definition",
+    category: "Advanced Calculus",
+    formula: "f(x) = \\sum_{n=0}^{\\infty} \\frac{f^{(n)}(0)}{n!} x^n"
+  },
+  {
+    id: "adv-calc-3",
+    name: "Laplace Transform Definition",
+    category: "Advanced Calculus",
+    formula: "\\mathcal{L}\\{f(t)\\} = \\int_0^\\infty e^{-st} f(t) \\, dt"
+  },
+  {
+    id: "adv-calc-4",
+    name: "Laplace Transform: 1",
+    category: "Advanced Calculus",
+    formula: "\\mathcal{L}\\{1\\} = \\frac{1}{s}"
+  },
+  {
+    id: "adv-calc-5",
+    name: "Laplace Transform: t^n",
+    category: "Advanced Calculus",
+    formula: "\\mathcal{L}\\{t^n\\} = \\frac{n!}{s^{n+1}}"
+  },
+  {
+    id: "adv-calc-6",
+    name: "Laplace Transform: e^{at}",
+    category: "Advanced Calculus",
+    formula: "\\mathcal{L}\\{e^{at}\\} = \\frac{1}{s - a}"
+  },
+  {
+    id: "adv-calc-7",
+    name: "Laplace Transform: sin(at)",
+    category: "Advanced Calculus",
+    formula: "\\mathcal{L}\\{\\sin(at)\\} = \\frac{a}{s^2 + a^2}"
+  },
+  {
+    id: "adv-calc-8",
+    name: "Laplace Transform: cos(at)",
+    category: "Advanced Calculus",
+    formula: "\\mathcal{L}\\{\\cos(at)\\} = \\frac{s}{s^2 + a^2}"
+  },
+  {
+    id: "adv-calc-9",
+    name: "Integration by Substitution",
+    category: "Advanced Calculus",
+    formula: "\\int f(g(x))g'(x) \\, dx = \\int f(u) \\, du"
+  },
+  {
+    id: "adv-calc-10",
+    name: "Fundamental Theorem of Calculus",
+    category: "Advanced Calculus",
+    formula: "\\int_a^b f(x) \\, dx = F(b) - F(a)"
+  },
+  {
+    id: "adv-calc-11",
+    name: "Arc Length",
+    category: "Advanced Calculus",
+    formula: "L = \\int_a^b \\sqrt{1 + [f'(x)]^2} \\, dx"
+  },
+  {
+    id: "adv-calc-12",
+    name: "Surface Area of Revolution",
+    category: "Advanced Calculus",
+    formula: "S = \\int_a^b 2\\pi f(x) \\sqrt{1 + [f'(x)]^2} \\, dx"
+  },
+  {
+    id: "adv-calc-13",
+    name: "Volume of Revolution (Disk Method)",
+    category: "Advanced Calculus",
+    formula: "V = \\pi \\int_a^b [f(x)]^2 \\, dx"
+  },
+  {
+    id: "adv-calc-14",
+    name: "Volume of Revolution (Washer Method)",
+    category: "Advanced Calculus",
+    formula: "V = \\pi \\int_a^b ([R(x)]^2 - [r(x)]^2) \\, dx"
+  },
+  {
+    id: "adv-calc-15",
+    name: "Divergence Theorem",
+    category: "Advanced Calculus",
+    formula: "\\iint_S \\mathbf{F} \\cdot d\\mathbf{S} = \\iiint_V \\nabla \\cdot \\mathbf{F} \\, dV"
+  },
+  {
+    id: "adv-calc-16",
+    name: "Stokes' Theorem",
+    category: "Advanced Calculus",
+    formula: "\\oint_C \\mathbf{F} \\cdot d\\mathbf{r} = \\iint_S (\\nabla \\times \\mathbf{F}) \\cdot d\\mathbf{S}"
+  },
+  {
+    id: "adv-calc-17",
+    name: "Green's Theorem",
+    category: "Advanced Calculus",
+    formula: "\\oint_C (P \\, dx + Q \\, dy) = \\iint_D \\left(\\frac{\\partial Q}{\\partial x} - \\frac{\\partial P}{\\partial y}\\right) \\, dA"
   }
 ];

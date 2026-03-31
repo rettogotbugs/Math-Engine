@@ -54,62 +54,118 @@ export const calculusTools: MathTool[] = [
         id: "expr",
         label: "Function f(x)",
         type: "text",
-        placeholder: "(x^2 - 9)/(x - 3)",
-        defaultValue: "(x^2 - 9)/(x - 3)"
+        placeholder: "(x^2 - 1)/(x - 1)",
+        defaultValue: "(x^2 - 1)/(x - 1)"
       },
-      { id: "val", label: "Approaches (a)", type: "number", placeholder: "3", defaultValue: "3" },
+      { id: "var", label: "Variable", type: "text", placeholder: "x", defaultValue: "x" },
+      { id: "val", label: "Approaches (a)", type: "text", placeholder: "1", defaultValue: "1" },
+    ],
+    calculate: (values) => {
+      try {
+        const nerdamer = require("nerdamer");
+        require("nerdamer/Calculus");
+        const expr = values.expr;
+        const variable = values.var || "x";
+        const val = values.val;
+        
+        const limitExpr = nerdamer(`limit(${expr}, ${variable}, ${val})`);
+        const result = limitExpr.toTeX();
+        
+        return {
+          result: `$$${result}$$`,
+          steps: [
+            `Evaluate limit of $${nerdamer(expr).toTeX()}$ as $${variable} \\to ${val}$`,
+            `$$\\lim_{${variable} \\to ${val}} ${nerdamer(expr).toTeX()} = ${result}$$`
+          ]
+        };
+      } catch (e) {
+        return { result: "Invalid input", steps: ["Could not evaluate limit."] };
+      }
+    },
+  },
+  {
+    id: "taylor_series",
+    name: "Taylor Series Expansion",
+    category: "Calculus",
+    classLevel: "Class 11-12",
+    description: "Find the Taylor series expansion of a function around a specific point.",
+    inputs: [
+      { id: "expr", label: "Function f(x)", type: "text", placeholder: "sin(x)", defaultValue: "sin(x)" },
+      { id: "var", label: "Variable", type: "text", placeholder: "x", defaultValue: "x" },
+      { id: "val", label: "Center Point (a)", type: "number", placeholder: "0", defaultValue: "0" },
+      { id: "order", label: "Order/Degree", type: "number", placeholder: "5", defaultValue: "5" },
     ],
     calculate: (values) => {
       try {
         const math = require("mathjs");
-        const a = parseFloat(values.val);
-        const expr = math.parse(values.expr);
-        
-        // Try direct substitution
-        try {
-          const direct = expr.evaluate({ x: a });
-          if (isFinite(direct) && !isNaN(direct)) {
-            return {
-              result: `$${direct}$`,
-              steps: [
-                `Evaluate limit of $${expr.toTex()}$ as $x \\to ${a}$`,
-                `Direct substitution: $f(${a}) = ${direct}$`,
-                `$\\text{Limit} = ${direct}$`
-              ]
-            };
-          }
-        } catch (e) {}
+        const expr = values.expr;
+        const variable = values.var || "x";
+        const a = parseFloat(values.val) || 0;
+        const order = parseInt(values.order) || 5;
 
-        // If direct substitution fails (e.g. 0/0), use L'Hopital's approximation or numerical approach
-        const delta = 0.000001;
-        const left = expr.evaluate({ x: a - delta });
-        const right = expr.evaluate({ x: a + delta });
-        
-        if (Math.abs(left - right) < 0.01) {
-          const approx = ((left + right) / 2).toFixed(4);
-          return {
-            result: `$\\approx ${approx}$`,
-            steps: [
-              `Evaluate limit of $${expr.toTex()}$ as $x \\to ${a}$`,
-              `Direct substitution results in an indeterminate form.`,
-              `Approaching from left ($x = ${a - delta}$): $f(x) \\approx ${left.toFixed(4)}$`,
-              `Approaching from right ($x = ${a + delta}$): $f(x) \\approx ${right.toFixed(4)}$`,
-              `$\\text{Limit} \\approx ${approx}$`
-            ]
-          };
-        } else {
-          return {
-            result: "Limit may not exist",
-            steps: [
-              `Evaluate limit of $${expr.toTex()}$ as $x \\to ${a}$`,
-              `Approaching from left ($x = ${a - delta}$): $f(x) \\approx ${left.toFixed(4)}$`,
-              `Approaching from right ($x = ${a + delta}$): $f(x) \\approx ${right.toFixed(4)}$`,
-              `Left and right limits do not match. Limit may not exist.`
-            ]
-          };
+        let currentDeriv = expr;
+        let expansion = "";
+        let steps = [
+          `Find the Taylor series expansion of $f(${variable}) = ${math.parse(expr).toTex()}$ around $${variable} = ${a}$ up to order $${order}$`,
+          `Formula: $$f(${variable}) \\approx \\sum_{n=0}^{${order}} \\frac{f^{(n)}(${a})}{n!} (${variable} - ${a})^n$$`
+        ];
+
+        for (let n = 0; n <= order; n++) {
+          let valAtA;
+          try {
+            valAtA = math.evaluate(currentDeriv, { [variable]: a });
+          } catch (e) {
+            valAtA = 0;
+          }
+          
+          const fact = math.factorial(n);
+          const coeff = valAtA / fact;
+          
+          if (Math.abs(coeff) > 1e-10) {
+            let term = "";
+            let varPart = "";
+            if (n > 0) {
+              varPart = a === 0 ? variable : `(${variable} - ${a})`;
+              if (n > 1) varPart += `^${n}`;
+            }
+            
+            if (n === 0) {
+              term = `${coeff}`;
+            } else if (coeff === 1) {
+              term = varPart;
+            } else if (coeff === -1) {
+              term = `-${varPart}`;
+            } else {
+              term = `${coeff} \\cdot ${varPart}`;
+            }
+            
+            if (expansion === "") {
+              expansion = term;
+            } else if (coeff > 0) {
+              expansion += ` + ${term}`;
+            } else {
+              expansion += ` - ${term.substring(1)}`;
+            }
+          }
+          
+          steps.push(`$n=${n}$: $f^{(${n})}(${variable}) = ${math.parse(currentDeriv).toTex()}$, $f^{(${n})}(${a}) = ${valAtA}$`);
+          
+          if (n < order) {
+            currentDeriv = math.derivative(currentDeriv, variable).toString();
+          }
         }
+        
+        if (expansion === "") expansion = "0";
+        
+        const texResult = math.parse(expansion).toTex();
+        steps.push(`Result: $$${texResult}$$`);
+        
+        return {
+          result: `$$${texResult}$$`,
+          steps
+        };
       } catch (e) {
-        return { result: "Invalid input", steps: ["Could not evaluate limit."] };
+        return { result: "Invalid input", steps: ["Could not calculate Taylor series."] };
       }
     },
   },

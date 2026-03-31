@@ -82,18 +82,18 @@ export const statisticsTools: MathTool[] = [
         );
 
         const steps = [
-          `Data set: $[${data.join(", ")}]$`,
+          `Data set: $$[${data.join(", ")}]$$`,
           `Count ($n$) = $${data.length}$`,
           `Sum = $${math.sum(data)}$`,
-          `$\\text{Mean} = \\frac{\\text{Sum}}{n} = ${mean}$`,
-          `$\\text{Median (middle value)} = ${median}$`,
-          `$\\text{Mode (most frequent)} = ${mode.join(", ")}$`,
-          `$\\text{Range} = \\text{Max} - \\text{Min} = ${max} - ${min} = ${range}$`,
+          `$$\\text{Mean} = \\frac{\\text{Sum}}{n} = ${mean}$$`,
+          `$$\\text{Median} = ${median}$$`,
+          `$$\\text{Mode} = ${mode.join(", ")}$$`,
+          `$$\\text{Range} = \\text{Max} - \\text{Min} = ${max} - ${min} = ${range}$$`,
           ...(data.length > 1 ? [
-            `$\\text{Population Variance} (\\sigma^2) = ${variancePop}$`,
-            `$\\text{Population Std Dev} (\\sigma) = \\sqrt{\\sigma^2} = ${stdPop}$`,
-            `$\\text{Sample Variance} (s^2) = ${varianceSamp}$`,
-            `$\\text{Sample Std Dev} (s) = \\sqrt{s^2} = ${stdSamp}$`,
+            `$$\\text{Population Variance } (\\sigma^2) = ${variancePop}$$`,
+            `$$\\text{Population Std Dev } (\\sigma) = \\sqrt{\\sigma^2} = ${stdPop}$$`,
+            `$$\\text{Sample Variance } (s^2) = ${varianceSamp}$$`,
+            `$$\\text{Sample Std Dev } (s) = \\sqrt{s^2} = ${stdSamp}$$`,
           ] : [])
         ];
 
